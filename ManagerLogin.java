@@ -49,7 +49,7 @@ public class ManagerLogin extends javax.swing.JFrame {
         mgrRegHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
         mgrRegHeader.setForeground(new java.awt.Color(0, 0, 0));
         mgrRegHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mgrRegHeader.setText("MANAGER REGISTRATION");
+        mgrRegHeader.setText("MANAGER LOGIN");
         mgrRegHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
@@ -242,13 +242,13 @@ public class ManagerLogin extends javax.swing.JFrame {
             Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        FileHandling custFile = new FileHandling();
+        FileHandling mgrFile = new FileHandling();
         File file = new File("mgrAccount.txt");
         
         try {
-            if (!"NA".equals(custFile.locateInFile(mgr.getUserID(), file))){
-                if (!"NA".equals(custFile.locateInFile(mgr.getUserPassword(), file))){
-                    JOptionPane.showMessageDialog(null, "Login Successful");
+            if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), file, 0))){
+                if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserPassword(), file, 2))){
+                    JOptionPane.showMessageDialog(null, "Login Successful!");
                     ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
                     mgrLogin.setVisible(true);
                     this.dispose();
@@ -271,7 +271,8 @@ public class ManagerLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_mgrIDFieldActionPerformed
 
     private void mgrClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrClearBtnActionPerformed
-        
+        mgrIDField.setText(null);
+        mgrPasswordField.setText(null);
     }//GEN-LAST:event_mgrClearBtnActionPerformed
 
     /**

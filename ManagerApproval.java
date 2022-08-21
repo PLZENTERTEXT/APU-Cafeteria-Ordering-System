@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 
-
 public class ManagerApproval extends javax.swing.JFrame {
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
@@ -32,8 +31,9 @@ public class ManagerApproval extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         mgr.setUserID(userID);
+        loadManagerTable();
     }
-
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,7 +49,6 @@ public class ManagerApproval extends javax.swing.JFrame {
         mgrBackBtn = new javax.swing.JButton();
         mgrRejectBtn = new javax.swing.JButton();
         mgrApprovalBtn = new javax.swing.JButton();
-        mgrLoadTableBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,7 +94,15 @@ public class ManagerApproval extends javax.swing.JFrame {
             new String [] {
                 "Manager ID", "Name", "Email", "Approval Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(mgrApprovalTable);
 
         mgrBackBtn.setBackground(new java.awt.Color(0, 48, 73));
@@ -128,16 +135,6 @@ public class ManagerApproval extends javax.swing.JFrame {
             }
         });
 
-        mgrLoadTableBtn.setBackground(new java.awt.Color(0, 48, 73));
-        mgrLoadTableBtn.setFont(new java.awt.Font("SF Pro Text", 1, 20)); // NOI18N
-        mgrLoadTableBtn.setForeground(new java.awt.Color(255, 255, 255));
-        mgrLoadTableBtn.setText("LOAD TABLE");
-        mgrLoadTableBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mgrLoadTableBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
@@ -148,35 +145,32 @@ public class ManagerApproval extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGap(166, 166, 166)
+                        .addComponent(mgrBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
-                    .addComponent(mgrBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mgrApprovalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mgrLoadTableBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mgrRejectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(mgrRejectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mgrApprovalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(mgrLoadTableBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(16, Short.MAX_VALUE))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mgrApprovalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(mgrRejectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(contentPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(mgrApprovalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(mgrRejectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)))
-                        .addComponent(mgrBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addComponent(mgrBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40))))))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -221,18 +215,25 @@ public class ManagerApproval extends javax.swing.JFrame {
     }//GEN-LAST:event_mgrBackBtnActionPerformed
 
     private void mgrRejectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrRejectBtnActionPerformed
-        
+        DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
+        String managerID;
+        managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
+        File file = new File(mgrFile);
+        fh.removeLine(file, 0, managerID);
+        loadManagerTable();
     }//GEN-LAST:event_mgrRejectBtnActionPerformed
 
     private void mgrApprovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrApprovalBtnActionPerformed
         DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
         String managerID;
-        managerID = (mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0)).toString();
+        managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
         File file = new File(mgrFile);
-        fh.rewriteContent(file, 4, managerID, "APPROVED");
+        fh.rewriteContent(file, 0, managerID, "APPROVED");
+        loadManagerTable();
     }//GEN-LAST:event_mgrApprovalBtnActionPerformed
 
-    private void mgrLoadTableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrLoadTableBtnActionPerformed
+    public void loadManagerTable() {
+        //Creating object for the JTable
         DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
         mgrApprovalTableModel.setRowCount(0);
         File file = new File(mgrFile);
@@ -241,9 +242,8 @@ public class ManagerApproval extends javax.swing.JFrame {
             String line;
             BufferedReader br = new BufferedReader(new FileReader(file));
             try{
-                while((line = br.readLine()) != null){
-                    String data[] = line.split("\\|");
-                    
+                while((line = br.readLine()) != null){  
+                    String data[] = line.split("\\|");       
                     mgrApprovalTableModel.addRow(new Object[] {data[0], data[1], data[3], data[4]});
                 }
                 br.close();
@@ -253,8 +253,7 @@ public class ManagerApproval extends javax.swing.JFrame {
         }catch (FileNotFoundException e){
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
-    }//GEN-LAST:event_mgrLoadTableBtnActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
@@ -266,7 +265,6 @@ public class ManagerApproval extends javax.swing.JFrame {
     private javax.swing.JButton mgrApprovalBtn;
     private javax.swing.JTable mgrApprovalTable;
     private javax.swing.JButton mgrBackBtn;
-    private javax.swing.JButton mgrLoadTableBtn;
     private javax.swing.JButton mgrRejectBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -237,8 +237,8 @@ public class CustomerLogin extends javax.swing.JFrame {
         File file = new File("custAccount.txt");
         
         try {
-            if (!"NA".equals(custFile.locateInFile(cust.getUserID(), file))){
-                if (!"NA".equals(custFile.locateInFile(cust.getUserPassword(), file))){
+            if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), file, 0))){
+                if (!"NA".equals(custFile.locateItemInFile(cust.getUserPassword(), file, 2))){
                     JOptionPane.showMessageDialog(null, "Login Successful");
                     CustomerHome custLogin = new CustomerHome(cust.getUserID());
                     custLogin.setVisible(true);
