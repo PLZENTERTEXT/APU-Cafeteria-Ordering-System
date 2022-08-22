@@ -27,40 +27,39 @@ public class FileHandling {
                 return line; 
             }
         }
+        
         return "NA";
     }
     
+     // Read through the specified file for a specified string by comparing tokens, and return the line
     public static String locateItemInFile(String query, File file, int sectionNumber) throws FileNotFoundException, IOException {
         
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
         String [] lineArray;
   
-        while ((line = br.readLine()) != null){   
-           
+        while ((line = br.readLine()) != null){    
             lineArray = line.split("\\|");
-            
             if (lineArray[sectionNumber].equals(query)){
                 return line; 
             }
         }
         return "NA";
     }
-    
-    public static String locateItemInFile(String query, String query2, File file, 
-            int sectionNumber, int sectionNumber2) 
-            throws FileNotFoundException, IOException {
-        
+
+    // Read through the specified file for a specified string by comparing 2 tokens, and return the line
+    public static String locateItemInFile(String query, String query2, File file, int sectionNumber, int sectionNumber2) throws FileNotFoundException, IOException {
+
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
         String [] lineArray;
-  
-        while ((line = br.readLine()) != null){   
-           
+
+        while ((line = br.readLine()) != null){
+
             lineArray = line.split("\\|");
-            
+
             if (lineArray[sectionNumber].equals(query) && lineArray[sectionNumber2].equals(query2)){
-                return line; 
+                return line;
             }
         }
         return "NA";
@@ -156,38 +155,40 @@ public class FileHandling {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
-    }
+    }  
     
+    // Removing one line in the file (Rewriting an entire file)
     public void removeLine(File file, int sectionNumber, String query) {
-        
         try {
             // Stores all lines
             ArrayList<String> lines = new ArrayList<String>();
             
-            // Putting new and old lines into the array
+            // Putting old lines into the array
             for (int i = 0; i < numberOfLines(file); i++) {
                 String data = returnLines(file).get(i);
                 // Split the lines into tokens
                 String[] section = data.split("\\|");
                 
-                // If the query matches with a certain row, rewrite that row
+                // If the query matches with a certain row, don't write that row
                 if (!(section[sectionNumber]).equals(query)) {
                     String newLine = (section[0] + "|" + section[1] + "|" + section[2] + "|" + section[3] + "|" + section[4]);
                     lines.add(newLine);
-                // Else, rewrite the same line
                 }
             }
+            
             // Printing the lines into the file
             FileWriter fw = new FileWriter(file); 
             for (int i = 0; i < lines.size(); i++) {
                 fw.write(lines.get(i) + "\n");
             }
-            fw.close();        
+            fw.close();  
+            
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
-    }
+    }  
     
+    // Removing one line in the file (Rewriting an entire file)
     public void removeLine(File file, int sectionNumber1, int sectionNumber2, String query1, String query2) {
         try {
             // Stores all lines
@@ -216,6 +217,5 @@ public class FileHandling {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
-    } 
-    
+    }  
 }
