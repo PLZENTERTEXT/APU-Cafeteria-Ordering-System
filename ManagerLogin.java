@@ -88,6 +88,11 @@ public class ManagerLogin extends javax.swing.JFrame {
                 mgrPasswordFieldActionPerformed(evt);
             }
         });
+        mgrPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                mgrPasswordFieldKeyPressed(evt);
+            }
+        });
 
         mgrIDField.setBackground(new java.awt.Color(244, 244, 244));
         mgrIDField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -245,24 +250,37 @@ public class ManagerLogin extends javax.swing.JFrame {
         FileHandling mgrFile = new FileHandling();
         File file = new File("mgrAccount.txt");
         
-        try {
-            if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), file, 0))){
-                if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserPassword(), file, 2))){
-                    JOptionPane.showMessageDialog(null, "Login Successful!");
-                    ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
-                    mgrLogin.setVisible(true);
-                    this.dispose();
+        System.out.println(mgr.getUserPassword());
+        
+        if (mgr.getUserID().equals("admin") && mgr.getUserPassword().equals("240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9")){
+                JOptionPane.showMessageDialog(null, "Login Successful! Welcome, Administrator.");
+                ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
+                mgrLogin.setVisible(true);
+                this.dispose();
+            }
+        
+        else{
+            try {
+
+                if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), "APPROVED", file, 0, 4))){
+                    if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserPassword(), file, 2))){
+                        JOptionPane.showMessageDialog(null, "Login Successful!");
+                        ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
+                        mgrLogin.setVisible(true);
+                        this.dispose();
+                    }
+
+                    else{
+                        JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
+                    }   
                 }
-                
+
                 else{
-                    JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
-                }   
+                    JOptionPane.showMessageDialog(null, "Manager ID does not exist.");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Manager ID does not exist.");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mgrLoginBtnActionPerformed
 
@@ -274,6 +292,53 @@ public class ManagerLogin extends javax.swing.JFrame {
         mgrIDField.setText(null);
         mgrPasswordField.setText(null);
     }//GEN-LAST:event_mgrClearBtnActionPerformed
+
+    private void mgrPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mgrPasswordFieldKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            mgr.setUserID(mgrIDField.getText());
+        try {
+            mgr.setUserPassword(password.toHexString(password.getSHA(String.valueOf(mgrPasswordField.getPassword()))));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        FileHandling mgrFile = new FileHandling();
+        File file = new File("mgrAccount.txt");
+        
+        System.out.println(mgr.getUserPassword());
+        
+        if (mgr.getUserID().equals("admin") && mgr.getUserPassword().equals("240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9")){
+                JOptionPane.showMessageDialog(null, "Login Successful! Welcome, Administrator.");
+                ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
+                mgrLogin.setVisible(true);
+                this.dispose();
+            }
+        
+        else{
+            try {
+
+                if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), "APPROVED", file, 0, 4))){
+                    if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserPassword(), file, 2))){
+                        JOptionPane.showMessageDialog(null, "Login Successful!");
+                        ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
+                        mgrLogin.setVisible(true);
+                        this.dispose();
+                    }
+
+                    else{
+                        JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
+                    }   
+                }
+
+                else{
+                    JOptionPane.showMessageDialog(null, "Manager ID does not exist.");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        }
+    }//GEN-LAST:event_mgrPasswordFieldKeyPressed
 
     /**
      * @param args the command line arguments

@@ -96,6 +96,11 @@ public class CustomerLogin extends javax.swing.JFrame {
                 custPasswordFieldActionPerformed(evt);
             }
         });
+        custPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                custPasswordFieldKeyPressed(evt);
+            }
+        });
 
         custIDField.setBackground(new java.awt.Color(244, 244, 244));
         custIDField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -271,6 +276,40 @@ public class CustomerLogin extends javax.swing.JFrame {
     private void custIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custIDFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_custIDFieldActionPerformed
+
+    private void custPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_custPasswordFieldKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            cust.setUserID(custIDField.getText());
+            try {
+                cust.setUserPassword(password.toHexString(password.getSHA(String.valueOf(custPasswordField.getPassword()))));
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            FileHandling custFile = new FileHandling();
+            File file = new File("custAccount.txt");
+
+            try {
+                if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), file, 0))){
+                    if (!"NA".equals(custFile.locateItemInFile(cust.getUserPassword(), file, 2))){
+                        JOptionPane.showMessageDialog(null, "Login Successful");
+                        CustomerHome custLogin = new CustomerHome(cust.getUserID());
+                        custLogin.setVisible(true);
+                        this.dispose();
+                    }
+
+                    else{
+                        JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
+                    }   
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Customer ID does not exist.");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_custPasswordFieldKeyPressed
 
   
     public static void main(String args[]) {
