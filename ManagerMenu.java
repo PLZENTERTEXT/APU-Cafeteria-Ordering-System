@@ -121,7 +121,6 @@ public class ManagerMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
-        setMaximumSize(new java.awt.Dimension(1080, 600));
         setMinimumSize(new java.awt.Dimension(1080, 600));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -162,7 +161,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                 .addComponent(timeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(datetimeTF, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(609, Short.MAX_VALUE))
+                .addContainerGap(617, Short.MAX_VALUE))
             .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(topPanelLayout.createSequentialGroup()
                     .addGap(33, 33, 33)
@@ -342,7 +341,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         userIDTF.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
         userIDTF.setForeground(new java.awt.Color(0, 102, 155));
         userIDTF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        userIDTF.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        userIDTF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 120, 68));
 
         refreshButton.setBackground(new java.awt.Color(0, 48, 73));

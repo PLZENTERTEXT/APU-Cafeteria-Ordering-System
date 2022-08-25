@@ -396,10 +396,9 @@ public class CustomerMenu extends javax.swing.JFrame {
             .addGroup(menuInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuInputPanelLayout.createSequentialGroup()
-                        .addComponent(addTCButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(menuInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(foodQuantitySpinner)
                             .addComponent(deleteFCButton, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))))
@@ -408,7 +407,8 @@ public class CustomerMenu extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(menuInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(custFoodIDLabel)
-                    .addComponent(custFoodIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(custFoodIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addTCButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(foodQuantityLabel)
                 .addGap(145, 145, 145))
@@ -452,7 +452,7 @@ public class CustomerMenu extends javax.swing.JFrame {
                 .addGroup(menuInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalTF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(totalLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(proceedTCButton)
                 .addContainerGap())
         );
@@ -481,7 +481,7 @@ public class CustomerMenu extends javax.swing.JFrame {
         userIDTF.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
         userIDTF.setForeground(new java.awt.Color(0, 102, 155));
         userIDTF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        userIDTF.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        userIDTF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 120, 50));
 
         javax.swing.GroupLayout customerMenuPanelLayout = new javax.swing.GroupLayout(customerMenuPanel);
@@ -498,7 +498,7 @@ public class CustomerMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(menuInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
                     .addGroup(customerMenuPanelLayout.createSequentialGroup()
-                        .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                        .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))

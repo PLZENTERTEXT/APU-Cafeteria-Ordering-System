@@ -74,6 +74,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         mgrEmailLabel.setText("Email:");
 
         mgrPasswordField.setBackground(new java.awt.Color(244, 244, 244));
+        mgrPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrPasswordFieldActionPerformed(evt);
@@ -81,6 +82,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         });
 
         mgrEmailField.setBackground(new java.awt.Color(244, 244, 244));
+        mgrEmailField.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrEmailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrEmailFieldActionPerformed(evt);
@@ -88,6 +90,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         });
 
         mgrIDField.setBackground(new java.awt.Color(244, 244, 244));
+        mgrIDField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrIDFieldActionPerformed(evt);
@@ -95,6 +98,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         });
 
         mgrNameField.setBackground(new java.awt.Color(244, 244, 244));
+        mgrNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
 
         mgrRegisterBtn.setBackground(new java.awt.Color(0, 48, 73));
         mgrRegisterBtn.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -193,7 +197,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         mgrRegHeader.setForeground(new java.awt.Color(0, 0, 0));
         mgrRegHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mgrRegHeader.setText("MANAGER REGISTRATION");
-        mgrRegHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mgrRegHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);

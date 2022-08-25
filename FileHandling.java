@@ -16,7 +16,6 @@ public class FileHandling {
     int MAX_ARRAY_SIZE = 8; // A line in any file would only have 8 sections
     
     
-    // Read through the specified file for a specified string, and return the line
     public static String locateInFile(String query, File file) throws FileNotFoundException, IOException {
         
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -155,7 +154,8 @@ public class FileHandling {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
-    }  
+    }
+    
     
     // Removing one line in the file (Rewriting an entire file)
     public void removeLine(File file, int sectionNumber, String query) {
@@ -217,5 +217,6 @@ public class FileHandling {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
-    }  
+    }   
+    
 }

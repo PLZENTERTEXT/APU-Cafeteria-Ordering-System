@@ -31,7 +31,6 @@ public class WelcomePage extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1080, 640));
 
         WelcomePanel.setBackground(new java.awt.Color(244, 244, 244));
         WelcomePanel.setPreferredSize(new java.awt.Dimension(1080, 600));
@@ -42,7 +41,7 @@ public class WelcomePage extends javax.swing.JFrame {
         managerHeading.setForeground(new java.awt.Color(0, 0, 0));
         managerHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         managerHeading.setText("MANAGER");
-        managerHeading.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        managerHeading.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         mgrLoginOption.setBackground(new java.awt.Color(0, 48, 73));
         mgrLoginOption.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
@@ -117,7 +116,7 @@ public class WelcomePage extends javax.swing.JFrame {
         customerHeading.setForeground(new java.awt.Color(0, 0, 0));
         customerHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         customerHeading.setText("CUSTOMER");
-        customerHeading.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        customerHeading.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,7 +153,7 @@ public class WelcomePage extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("WELCOME");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -192,11 +191,11 @@ public class WelcomePage extends javax.swing.JFrame {
             .addGroup(WelcomePanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(WelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(9, 9, 9)
+                .addGroup(WelcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

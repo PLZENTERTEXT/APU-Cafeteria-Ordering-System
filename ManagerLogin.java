@@ -50,7 +50,7 @@ public class ManagerLogin extends javax.swing.JFrame {
         mgrRegHeader.setForeground(new java.awt.Color(0, 0, 0));
         mgrRegHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mgrRegHeader.setText("MANAGER LOGIN");
-        mgrRegHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mgrRegHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -83,6 +83,7 @@ public class ManagerLogin extends javax.swing.JFrame {
         mgrPasswordField.setBackground(new java.awt.Color(244, 244, 244));
         mgrPasswordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         mgrPasswordField.setForeground(new java.awt.Color(0, 0, 0));
+        mgrPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrPasswordFieldActionPerformed(evt);
@@ -97,6 +98,7 @@ public class ManagerLogin extends javax.swing.JFrame {
         mgrIDField.setBackground(new java.awt.Color(244, 244, 244));
         mgrIDField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         mgrIDField.setForeground(new java.awt.Color(0, 0, 0));
+        mgrIDField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrIDFieldActionPerformed(evt);
@@ -250,11 +252,10 @@ public class ManagerLogin extends javax.swing.JFrame {
         FileHandling mgrFile = new FileHandling();
         File file = new File("mgrAccount.txt");
         
-        System.out.println(mgr.getUserPassword());
         
         if (mgr.getUserID().equals("admin") && mgr.getUserPassword().equals("240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9")){
                 JOptionPane.showMessageDialog(null, "Login Successful! Welcome, Administrator.");
-                ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
+                ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                 mgrLogin.setVisible(true);
                 this.dispose();
             }
@@ -265,7 +266,7 @@ public class ManagerLogin extends javax.swing.JFrame {
                 if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), "APPROVED", file, 0, 4))){
                     if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserPassword(), file, 2))){
                         JOptionPane.showMessageDialog(null, "Login Successful!");
-                        ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
+                        ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                         mgrLogin.setVisible(true);
                         this.dispose();
                     }
@@ -305,11 +306,10 @@ public class ManagerLogin extends javax.swing.JFrame {
         FileHandling mgrFile = new FileHandling();
         File file = new File("mgrAccount.txt");
         
-        System.out.println(mgr.getUserPassword());
         
         if (mgr.getUserID().equals("admin") && mgr.getUserPassword().equals("240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9")){
                 JOptionPane.showMessageDialog(null, "Login Successful! Welcome, Administrator.");
-                ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
+                ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                 mgrLogin.setVisible(true);
                 this.dispose();
             }
@@ -320,7 +320,7 @@ public class ManagerLogin extends javax.swing.JFrame {
                 if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), "APPROVED", file, 0, 4))){
                     if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserPassword(), file, 2))){
                         JOptionPane.showMessageDialog(null, "Login Successful!");
-                        ManagerHome mgrLogin = new ManagerHome(mgr.getUserID());
+                        ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                         mgrLogin.setVisible(true);
                         this.dispose();
                     }

@@ -52,7 +52,7 @@ public class CustomerLogin extends javax.swing.JFrame {
         custRegHeader.setForeground(new java.awt.Color(0, 0, 0));
         custRegHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         custRegHeader.setText("CUSTOMER LOGIN");
-        custRegHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        custRegHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         custRegHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
@@ -88,9 +88,10 @@ public class CustomerLogin extends javax.swing.JFrame {
         custIDLabel.setForeground(new java.awt.Color(0, 0, 0));
         custIDLabel.setText("Customer ID:");
 
-        custPasswordField.setBackground(new java.awt.Color(244, 244, 244));
+        custPasswordField.setBackground(new java.awt.Color(255, 255, 255));
         custPasswordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         custPasswordField.setForeground(new java.awt.Color(0, 0, 0));
+        custPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         custPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custPasswordFieldActionPerformed(evt);
@@ -102,9 +103,10 @@ public class CustomerLogin extends javax.swing.JFrame {
             }
         });
 
-        custIDField.setBackground(new java.awt.Color(244, 244, 244));
+        custIDField.setBackground(new java.awt.Color(255, 255, 255));
         custIDField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         custIDField.setForeground(new java.awt.Color(0, 0, 0));
+        custIDField.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         custIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custIDFieldActionPerformed(evt);
@@ -245,7 +247,7 @@ public class CustomerLogin extends javax.swing.JFrame {
             if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), file, 0))){
                 if (!"NA".equals(custFile.locateItemInFile(cust.getUserPassword(), file, 2))){
                     JOptionPane.showMessageDialog(null, "Login Successful");
-                    CustomerHome custLogin = new CustomerHome(cust.getUserID());
+                    CustomerHome custLogin = new CustomerHome(cust.getUserID(), String.valueOf(custPasswordField.getPassword()));
                     custLogin.setVisible(true);
                     this.dispose();
                 }
@@ -293,7 +295,7 @@ public class CustomerLogin extends javax.swing.JFrame {
                 if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), file, 0))){
                     if (!"NA".equals(custFile.locateItemInFile(cust.getUserPassword(), file, 2))){
                         JOptionPane.showMessageDialog(null, "Login Successful");
-                        CustomerHome custLogin = new CustomerHome(cust.getUserID());
+                        CustomerHome custLogin = new CustomerHome(cust.getUserID(), String.valueOf(custPasswordField.getPassword()));
                         custLogin.setVisible(true);
                         this.dispose();
                     }

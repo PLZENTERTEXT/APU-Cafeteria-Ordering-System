@@ -1,15 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-
 import javax.swing.JFrame;
 
-/**
- *
- * @author darrs
- */
 public class CustomerHome extends javax.swing.JFrame {
 
     UserRegistrationInfo cust = new UserRegistrationInfo();
@@ -21,6 +11,16 @@ public class CustomerHome extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         cust.setUserID(userID);
+    }
+    
+    public CustomerHome(String userID, String userPassword) {
+        initComponents();
+        setTitle("APU Cafeteria Ordering System");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        cust.setUserID(userID);
+        cust.setUserPassword(userPassword);
     }
 
 
@@ -48,7 +48,7 @@ public class CustomerHome extends javax.swing.JFrame {
         custHomeHeader.setForeground(new java.awt.Color(0, 0, 0));
         custHomeHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         custHomeHeader.setText("HOME");
-        custHomeHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        custHomeHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         custHomeHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
@@ -196,13 +196,16 @@ public class CustomerHome extends javax.swing.JFrame {
     }//GEN-LAST:event_custLogoutBtnActionPerformed
 
     private void custProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custProfileBtnActionPerformed
-        CustomerProfile custProfile = new CustomerProfile(cust.getUserID());
+        CustomerProfile custProfile = new CustomerProfile(cust.getUserID(), String.valueOf(cust.getUserPassword()));
         custProfile.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_custProfileBtnActionPerformed
 
     private void custOrderHistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custOrderHistoryBtnActionPerformed
-        // TODO add your handling code here:
+        CustomerOrderHistory custOrderHistory = new CustomerOrderHistory(cust.getUserID());
+        custOrderHistory.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_custOrderHistoryBtnActionPerformed
 
     private void custMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custMenuBtnActionPerformed

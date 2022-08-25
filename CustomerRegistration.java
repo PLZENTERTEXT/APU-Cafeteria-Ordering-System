@@ -76,32 +76,37 @@ public class CustomerRegistration extends javax.swing.JFrame {
         custEmailLabel.setForeground(new java.awt.Color(0, 0, 0));
         custEmailLabel.setText("Email:");
 
-        custPasswordField.setBackground(new java.awt.Color(244, 244, 244));
+        custPasswordField.setBackground(new java.awt.Color(255, 255, 255));
         custPasswordField.setForeground(new java.awt.Color(0, 0, 0));
+        custPasswordField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        custPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         custPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custPasswordFieldActionPerformed(evt);
             }
         });
 
-        custEmailField.setBackground(new java.awt.Color(244, 244, 244));
+        custEmailField.setBackground(new java.awt.Color(255, 255, 255));
         custEmailField.setForeground(new java.awt.Color(0, 0, 0));
+        custEmailField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         custEmailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custEmailFieldActionPerformed(evt);
             }
         });
 
-        custIDField.setBackground(new java.awt.Color(244, 244, 244));
+        custIDField.setBackground(new java.awt.Color(255, 255, 255));
         custIDField.setForeground(new java.awt.Color(0, 0, 0));
+        custIDField.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         custIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custIDFieldActionPerformed(evt);
             }
         });
 
-        custNameField.setBackground(new java.awt.Color(244, 244, 244));
+        custNameField.setBackground(new java.awt.Color(255, 255, 255));
         custNameField.setForeground(new java.awt.Color(0, 0, 0));
+        custNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         custNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custNameFieldActionPerformed(evt);
@@ -208,7 +213,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
         custRegHeader.setForeground(new java.awt.Color(0, 0, 0));
         custRegHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         custRegHeader.setText("CUSTOMER REGISTRATION");
-        custRegHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        custRegHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
