@@ -293,11 +293,11 @@ public class ManagerRegistration extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "All text fields must be filled out.");
             }
             
-            else if (!"NA".equals(mgrFile.locateInFile(mgr.getUserID(), file))){
+            else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), file, 0))){
                 JOptionPane.showMessageDialog(null, "Manager ID already exists.");
             }
             
-            else if (!"NA".equals(mgrFile.locateInFile(mgr.getUserEmail(), file))){
+            else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserEmail(), file, 3))){
                 JOptionPane.showMessageDialog(null, "Manager Email already exists.");
             }
             

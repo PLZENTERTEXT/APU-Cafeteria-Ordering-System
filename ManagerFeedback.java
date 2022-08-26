@@ -3,17 +3,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
-public class ManagerOrderHistory extends javax.swing.JFrame {
+public class ManagerFeedback extends javax.swing.JFrame {
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
-    String completedOrdersFile = "completedOrders.txt";
+    String customerReviewsFile = "customerReviews.txt";
     
-    public ManagerOrderHistory(String userID) {
+    public ManagerFeedback(String userID) {
         initComponents();
         setTitle("APU Cafeteria Ordering System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,6 +22,15 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
         setVisible(true);
         mgr.setUserID(userID);
         loadOrderHistoryTable();
+        
+        // Set some text fields to empty when the window loads
+        orderIDTF.setText("");
+        foodIDTF.setText("");
+        foodTF.setText("");
+        orderDateTF.setText("");
+        
+        // Set a placeholder text for feedbackTA
+        feedbackTA.setText("-- Select one of the Order ID in the table at the left to display the feedback provided --");
     }
 
     /**
@@ -40,6 +50,19 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
         custBackBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         custOrderHistoryTable = new javax.swing.JTable();
+        feedbackLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        feedbackTA = new javax.swing.JTextArea();
+        orderIDLabel = new javax.swing.JLabel();
+        orderIDTF = new javax.swing.JTextField();
+        foodIDLabel = new javax.swing.JLabel();
+        foodIDTF = new javax.swing.JTextField();
+        foodLabel = new javax.swing.JLabel();
+        foodTF = new javax.swing.JTextField();
+        custIDLabel = new javax.swing.JLabel();
+        custIDTF = new javax.swing.JTextField();
+        orderDateLabel = new javax.swing.JLabel();
+        orderDateTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,7 +73,7 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
         custHomeHeader1.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
         custHomeHeader1.setForeground(new java.awt.Color(0, 0, 0));
         custHomeHeader1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        custHomeHeader1.setText("ORDER HISTORY");
+        custHomeHeader1.setText("FEEDBACK");
         custHomeHeader1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         custHomeHeader1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -88,7 +111,7 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
                 custBackBtnActionPerformed(evt);
             }
         });
-        contentPanel.add(custBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 410, 95, 40));
+        contentPanel.add(custBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 440, 100, 30));
 
         custOrderHistoryTable.setFont(new java.awt.Font("SF Pro Text", 0, 11)); // NOI18N
         custOrderHistoryTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -96,11 +119,11 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Order ID", "Customer ID", "Food ID", "Food", "Price", "Quantity", "Total Price", "Ordered Date"
+                "Order ID", "Customer ID", "Food ID", "Ordered Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -112,6 +135,9 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 custOrderHistoryTableMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                custOrderHistoryTableMousePressed(evt);
+            }
         });
         jScrollPane2.setViewportView(custOrderHistoryTable);
         if (custOrderHistoryTable.getColumnModel().getColumnCount() > 0) {
@@ -119,7 +145,96 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
             custOrderHistoryTable.getColumnModel().getColumn(1).setPreferredWidth(100);
         }
 
-        contentPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 12, 950, 395));
+        contentPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 12, 470, 420));
+
+        feedbackLabel.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        feedbackLabel.setForeground(new java.awt.Color(18, 18, 18));
+        feedbackLabel.setText("Feedback");
+        contentPanel.add(feedbackLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, -1, 30));
+
+        feedbackTA.setEditable(false);
+        feedbackTA.setColumns(20);
+        feedbackTA.setFont(new java.awt.Font("SF Pro Text", 0, 11)); // NOI18N
+        feedbackTA.setRows(5);
+        feedbackTA.setText("-- Select one of the Order ID in the table at the left to display the feedback provided --");
+        jScrollPane1.setViewportView(feedbackTA);
+
+        contentPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 460, 190));
+
+        orderIDLabel.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        orderIDLabel.setForeground(new java.awt.Color(18, 18, 18));
+        orderIDLabel.setText("Order ID:");
+        contentPanel.add(orderIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, 30));
+
+        orderIDTF.setEditable(false);
+        orderIDTF.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
+        orderIDTF.setFocusable(false);
+        orderIDTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderIDTFActionPerformed(evt);
+            }
+        });
+        contentPanel.add(orderIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 330, 32));
+
+        foodIDLabel.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        foodIDLabel.setForeground(new java.awt.Color(18, 18, 18));
+        foodIDLabel.setText("Food ID:");
+        contentPanel.add(foodIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, 30));
+
+        foodIDTF.setEditable(false);
+        foodIDTF.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
+        foodIDTF.setFocusable(false);
+        foodIDTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foodIDTFActionPerformed(evt);
+            }
+        });
+        contentPanel.add(foodIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, 330, 32));
+
+        foodLabel.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        foodLabel.setForeground(new java.awt.Color(18, 18, 18));
+        foodLabel.setText("Food:");
+        contentPanel.add(foodLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, -1, 30));
+
+        foodTF.setEditable(false);
+        foodTF.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
+        foodTF.setFocusable(false);
+        foodTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foodTFActionPerformed(evt);
+            }
+        });
+        contentPanel.add(foodTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 330, 32));
+
+        custIDLabel.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        custIDLabel.setForeground(new java.awt.Color(18, 18, 18));
+        custIDLabel.setText("Customer ID:");
+        contentPanel.add(custIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, 30));
+
+        custIDTF.setEditable(false);
+        custIDTF.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
+        custIDTF.setFocusable(false);
+        custIDTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                custIDTFActionPerformed(evt);
+            }
+        });
+        contentPanel.add(custIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, 330, 32));
+
+        orderDateLabel.setFont(new java.awt.Font("SF Pro Text", 0, 18)); // NOI18N
+        orderDateLabel.setForeground(new java.awt.Color(18, 18, 18));
+        orderDateLabel.setText("Ordered Date:");
+        contentPanel.add(orderDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, 30));
+
+        orderDateTF.setEditable(false);
+        orderDateTF.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
+        orderDateTF.setFocusable(false);
+        orderDateTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderDateTFActionPerformed(evt);
+            }
+        });
+        contentPanel.add(orderDateTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 330, 32));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,8 +253,8 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(headerPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,10 +281,65 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
 
     }//GEN-LAST:event_custOrderHistoryTableMouseClicked
 
+    private void orderIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderIDTFActionPerformed
+
+    }//GEN-LAST:event_orderIDTFActionPerformed
+
+    private void foodIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodIDTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_foodIDTFActionPerformed
+
+    private void foodTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_foodTFActionPerformed
+
+    private void custIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custIDTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_custIDTFActionPerformed
+
+    private void orderDateTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderDateTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orderDateTFActionPerformed
+
+    private void custOrderHistoryTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custOrderHistoryTableMousePressed
+        DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
+        orderIDTF.setText(orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(),0).toString());
+        custIDTF.setText(orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(),1).toString());
+        foodIDTF.setText(orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(),2).toString());
+        orderDateTF.setText(orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(),3).toString());
+        
+        File file = new File(customerReviewsFile);
+        FileHandling fh = new FileHandling();
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            try {
+                if (!"NA".equals(fh.locateItemInFile(orderIDTF.getText(), foodIDTF.getText(), file, 0, 2))) {
+                    // Get the data that is clicked on and obtain its respective information from customerReviews.txt
+                    String line = fh.locateItemInFile(orderIDTF.getText(), foodIDTF.getText(), file, 0, 2);
+                    
+                    // Strip the line into tokens
+                    String[] lineArray = line.split("\\|");
+                       
+                    // Match the tokens to their respective text field
+                    foodTF.setText(lineArray[3]);
+
+                    feedbackTA.setText(lineArray[5]);
+                }
+                br.close();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Error: File does not exist!");
+        }
+    }//GEN-LAST:event_custOrderHistoryTableMousePressed
+
     private void loadOrderHistoryTable(){
         DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
-        // menuTableModel.setRowCount(0);
-        File file = new File(completedOrdersFile);
+
+        
+        File file = new File(customerReviewsFile);
         
         try {
             String str;
@@ -180,14 +350,7 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
                     String data[] = str.split("\\|");
                     // Only adding the users orders in the order history
                     // Adding the data into the order history table
-                    Double totalPrice;
-                    totalPrice = Double.parseDouble(data[4]) * Integer.parseInt(data[5]);
-                    totalPrice = Math.round(totalPrice * 100.0) / 100.0;
-                    String totalPriceStr;
-                    totalPriceStr = totalPrice.toString();
-                    orderHistoryTableModel.addRow(new Object[]{data[0], data[1], data[2], data[3], 
-                                            data[4], data[5], totalPriceStr, idToDateConversion(data[0])});
-                    
+                    orderHistoryTableModel.addRow(new Object[]{data[0], data[1], data[2], data[4]});
                 }
                 br.close();
             } catch (IOException e) {
@@ -197,17 +360,7 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error: File does not exist!");
         }
     }
-    
-    public String idToDateConversion(String orderID) {
-        
-        String day = orderID.substring(0, 2);
-        String month = orderID.substring(2,4);
-        String year = orderID.substring(4,8);         
-        String date = day + "-" + month + "-" + year;
-
-        return date;
-    }
-
+  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -244,10 +397,23 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton custBackBtn;
     private javax.swing.JLabel custHomeHeader1;
+    private javax.swing.JLabel custIDLabel;
+    private javax.swing.JTextField custIDTF;
     private javax.swing.JTable custOrderHistoryTable;
+    private javax.swing.JLabel feedbackLabel;
+    private javax.swing.JTextArea feedbackTA;
+    private javax.swing.JLabel foodIDLabel;
+    private javax.swing.JTextField foodIDTF;
+    private javax.swing.JLabel foodLabel;
+    private javax.swing.JTextField foodTF;
     private javax.swing.JPanel headerPanel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel orderDateLabel;
+    private javax.swing.JTextField orderDateTF;
+    private javax.swing.JLabel orderIDLabel;
+    private javax.swing.JTextField orderIDTF;
     // End of variables declaration//GEN-END:variables
 }

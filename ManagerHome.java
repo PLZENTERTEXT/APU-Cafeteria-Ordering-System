@@ -272,7 +272,9 @@ public class ManagerHome extends javax.swing.JFrame {
     }//GEN-LAST:event_custLogoutBtnActionPerformed
 
     private void mgrFeedbackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrFeedbackBtnActionPerformed
-        // TODO add your handling code here:
+        ManagerFeedback mgrFeedback = new ManagerFeedback(mgr.getUserID());
+        mgrFeedback.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_mgrFeedbackBtnActionPerformed
 
     private void mgrUpdateMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrUpdateMenuBtnActionPerformed

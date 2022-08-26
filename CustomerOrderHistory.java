@@ -51,13 +51,8 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         reviewTextArea = new javax.swing.JTextArea();
         custSubmitReviewBtn = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jSlider2 = new javax.swing.JSlider();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1080, 640));
 
         jPanel1.setBackground(new java.awt.Color(244, 244, 244));
 
@@ -198,43 +193,6 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(244, 244, 244));
-        jPanel4.setForeground(new java.awt.Color(0, 0, 0));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("5");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("1");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addGap(38, 38, 38))
-        );
-
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
@@ -243,8 +201,8 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(458, 458, 458)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(450, 450, 450)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(contentPanelLayout.createSequentialGroup()
@@ -257,14 +215,9 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                     .addGap(267, 267, 267)
                                     .addComponent(jLabel2)))
-                            .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                                    .addGap(20, 20, 20)
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(2, 2, 2))))
+                            .addGap(20, 20, 20)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE))))
                 .addGap(14, 14, 14))
         );
         contentPanelLayout.setVerticalGroup(
@@ -277,16 +230,14 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addGap(190, 190, 190)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(141, 141, 141))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)))
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(custBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(custSubmitReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -340,13 +291,14 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
     
     //Appends customer review into the text file
     private void custSubmitReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custSubmitReviewBtnActionPerformed
-        FileHandling fh = new FileHandling();
+       FileHandling fh = new FileHandling();
         File reviewFile = new File("customerReviews.txt");
         DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
         
         try {
-            if (!"NA".equals(fh.locateInFile(orderHistoryTableModel.getValueAt(
-                            custOrderHistoryTable.getSelectedRow(), 0).toString(), reviewFile))){
+            if (!"NA".equals(fh.locateItemInFile(orderHistoryTableModel.getValueAt(
+                            custOrderHistoryTable.getSelectedRow(), 0).toString(), orderHistoryTableModel.getValueAt(
+                            custOrderHistoryTable.getSelectedRow(), 0).toString(), reviewFile, 0, 1))){
                 javax.swing.JOptionPane.showMessageDialog(null, "Order has already been reviewed.");
                 reviewTextArea.setText(null);
             }
@@ -357,9 +309,12 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                 }
                 
                 else if (reviewTextArea.getText().length()<300||reviewTextArea.getText().length()>4){
-                    String reviewContents = orderHistoryTableModel.getValueAt(
-                            custOrderHistoryTable.getSelectedRow(), 0).toString() +
-                            "|" + cust.getUserID() + "|" + reviewTextArea.getText();
+                    String reviewContents = orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 0).toString() 
+                            + "|" + cust.getUserID()
+                            + "|" + orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 1).toString()
+                            + "|" + orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 2).toString()
+                            + "|" + orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 6).toString()
+                            + "|" + reviewTextArea.getText();
                     reviewTextArea.setText(null);
                     try {
                         fh.appendToFile(reviewContents, reviewFile);
@@ -461,16 +416,12 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
     private javax.swing.JTable custOrderHistoryTable;
     private javax.swing.JButton custSubmitReviewBtn;
     private javax.swing.JPanel headerPanel1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSlider jSlider2;
     private javax.swing.JLabel orderHistoryLabel;
     private javax.swing.JLabel orderHistoryLabel1;
     private javax.swing.JTextArea reviewTextArea;
