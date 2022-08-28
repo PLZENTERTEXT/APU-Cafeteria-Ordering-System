@@ -1,3 +1,6 @@
+package General;
+
+import General.UserRegistrationInfo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,13 +16,14 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     String completedOrdersFile = "completedOrders.txt";
     
-    public ManagerOrderHistory(String userID) {
+    public ManagerOrderHistory(String userID, String userPassword) {
         initComponents();
         setTitle("APU Cafeteria Ordering System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
         mgr.setUserID(userID);
+        mgr.setUserPassword(userPassword);
         loadOrderHistoryTable();
     }
 
@@ -157,9 +161,10 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void custBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custBackBtnActionPerformed
-        ManagerHome mgrBack = new ManagerHome(mgr.getUserID());
+        ManagerHome mgrBack = new ManagerHome(mgr.getUserID(), mgr.getUserPassword());
         mgrBack.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_custBackBtnActionPerformed
 
     private void custOrderHistoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custOrderHistoryTableMouseClicked

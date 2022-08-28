@@ -1,17 +1,14 @@
+package General;
+
 import javax.swing.JFrame;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CustomerHome extends javax.swing.JFrame {
 
     UserRegistrationInfo cust = new UserRegistrationInfo();
+    private static Logger logger = LogManager.getLogger();
     
-    public CustomerHome(String userID) {
-        initComponents();
-        setTitle("APU Cafeteria Ordering System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        cust.setUserID(userID);
-    }
     
     public CustomerHome(String userID, String userPassword) {
         initComponents();
@@ -192,26 +189,29 @@ public class CustomerHome extends javax.swing.JFrame {
     private void custLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLogoutBtnActionPerformed
         WelcomePage custBack = new WelcomePage();
         custBack.setVisible(true);
-        this.dispose(); 
+        this.dispose();
+        logger.info("User " + cust.getUserID() + " has logged out of the system.");
     }//GEN-LAST:event_custLogoutBtnActionPerformed
 
     private void custProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custProfileBtnActionPerformed
         CustomerProfile custProfile = new CustomerProfile(cust.getUserID(), String.valueOf(cust.getUserPassword()));
         custProfile.setVisible(true);
         this.dispose();
+        logger.info("User " + cust.getUserID() + " has attempted to view Customer Profile page.");
     }//GEN-LAST:event_custProfileBtnActionPerformed
 
     private void custOrderHistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custOrderHistoryBtnActionPerformed
-        CustomerOrderHistory custOrderHistory = new CustomerOrderHistory(cust.getUserID());
+        CustomerOrderHistory custOrderHistory = new CustomerOrderHistory(cust.getUserID(), cust.getUserPassword());
         custOrderHistory.setVisible(true);
         this.dispose();
-        
+        logger.info("User " + cust.getUserID() + " has attempted to view Customer Order History page.");
     }//GEN-LAST:event_custOrderHistoryBtnActionPerformed
 
     private void custMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custMenuBtnActionPerformed
-        CustomerMenu custMenu = new CustomerMenu(cust.getUserID());
+        CustomerMenu custMenu = new CustomerMenu(cust.getUserID(), cust.getUserPassword());
         custMenu.setVisible(true);
         this.dispose();
+        logger.info("User " + cust.getUserID() + " has attempted to view Customer Menu page.");
     }//GEN-LAST:event_custMenuBtnActionPerformed
 
 

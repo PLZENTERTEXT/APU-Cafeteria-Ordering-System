@@ -1,3 +1,5 @@
+package General;
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 // All file related actions
@@ -30,7 +34,19 @@ public class FileHandling {
         return "NA";
     }
     
-     // Read through the specified file for a specified string by comparing tokens, and return the line
+    // Filter lines that contains the query if it matches the entire word
+    public static String filterLines(String query, String line) throws FileNotFoundException, IOException {
+
+        Pattern pattern = Pattern.compile(query, Pattern.LITERAL);
+        Matcher matcher = pattern.matcher(line);
+        boolean matchFound = matcher.find();
+        if (matchFound) {
+            return line;
+        }
+        return "NA";
+    }
+    
+    // Read through the specified file for a specified string by comparing tokens, and return the line
     public static String locateItemInFile(String query, File file, int sectionNumber) throws FileNotFoundException, IOException {
         
         BufferedReader br = new BufferedReader(new FileReader(file));

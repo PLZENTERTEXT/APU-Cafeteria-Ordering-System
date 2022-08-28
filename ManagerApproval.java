@@ -1,15 +1,15 @@
+package General;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class ManagerApproval extends javax.swing.JFrame {
@@ -17,17 +17,41 @@ public class ManagerApproval extends javax.swing.JFrame {
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     FileHandling fh  = new FileHandling();
     String mgrFile = "mgrAccount.txt";
+    private static Logger logger = LogManager.getLogger();
 
-    public ManagerApproval(String userID) {
+    public ManagerApproval(String userID, String userPassword) {
         initComponents();
         setTitle("APU Cafeteria Ordering System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
         mgr.setUserID(userID);
+        mgr.setUserPassword(userPassword);
         loadManagerTable();
     }
     
+    public void loadManagerTable() {
+        //Creating object for the JTable
+        DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
+        mgrApprovalTableModel.setRowCount(0);
+        File file = new File(mgrFile);
+        
+        try {
+            String line;
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            try{
+                while((line = br.readLine()) != null){  
+                    String data[] = line.split("\\|");       
+                    mgrApprovalTableModel.addRow(new Object[] {data[0], data[1], data[3], data[4]});
+                }
+                br.close();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
+            }            
+        }catch (FileNotFoundException e){
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -202,9 +226,10 @@ public class ManagerApproval extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mgrBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrBackBtnActionPerformed
-        ManagerHome mgrBack = new ManagerHome(mgr.getUserID());
+        ManagerHome mgrBack = new ManagerHome(mgr.getUserID(), mgr.getUserPassword());
         mgrBack.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Home page.");
     }//GEN-LAST:event_mgrBackBtnActionPerformed
 
     private void mgrRejectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrRejectBtnActionPerformed
@@ -214,6 +239,7 @@ public class ManagerApproval extends javax.swing.JFrame {
         File file = new File(mgrFile);
         fh.removeLine(file, 0, managerID);
         loadManagerTable();
+        logger.info("Manager " + mgr.getUserID() + " has rejected Manager " + managerID + ".");
     }//GEN-LAST:event_mgrRejectBtnActionPerformed
 
     private void mgrApprovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrApprovalBtnActionPerformed
@@ -223,30 +249,8 @@ public class ManagerApproval extends javax.swing.JFrame {
         File file = new File(mgrFile);
         fh.rewriteContent(file, 0, managerID, "APPROVED");
         loadManagerTable();
+        logger.info("Manager " + mgr.getUserID() + " has approved Manager " + managerID + ".");
     }//GEN-LAST:event_mgrApprovalBtnActionPerformed
-
-    public void loadManagerTable() {
-        //Creating object for the JTable
-        DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
-        mgrApprovalTableModel.setRowCount(0);
-        File file = new File(mgrFile);
-        
-        try {
-            String line;
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            try{
-                while((line = br.readLine()) != null){  
-                    String data[] = line.split("\\|");       
-                    mgrApprovalTableModel.addRow(new Object[] {data[0], data[1], data[3], data[4]});
-                }
-                br.close();
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
-            }            
-        }catch (FileNotFoundException e){
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;

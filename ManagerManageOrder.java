@@ -1,31 +1,29 @@
+package General;
+
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ManagerManageOrder extends javax.swing.JFrame {
 
-    private String foodID;
-    private String food;
-    private Double price;
-    private String type;
-    private String status;
     String POfile = "pendingOrders.txt";
     String COfile = "completedOrders.txt";
     
     UserRegistrationInfo mgr = new UserRegistrationInfo();
+    private static Logger logger = LogManager.getLogger();
     
     // Create new form "ManagerMenu"
-    public ManagerManageOrder(String userID) {
+    public ManagerManageOrder(String userID, String userPassword) {
         initComponents();
         setContentPane(mainPanel);
         setTitle("APU Cafeteria Ordering System");
@@ -37,6 +35,7 @@ public class ManagerManageOrder extends javax.swing.JFrame {
 
         // Set the user ID
         mgr.setUserID(userID);
+        mgr.setUserPassword(userPassword);
         userIDTF.setText(userID);
 
         // Load the menu as soon as the window loads
@@ -65,11 +64,13 @@ public class ManagerManageOrder extends javax.swing.JFrame {
                     POTableModel.addRow(new Object[]{data[0], data[1], data[2], data[3], data[4], data[5]});
                 }
                 br.close();
-            } catch (IOException ex) {
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
+                logger.error("Exception occurred - " + e.toString());
             }
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error: File does not exist!");
+            logger.error("Exception occurred - " + e.toString());
         }
     }
 
@@ -278,9 +279,10 @@ public class ManagerManageOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        ManagerHome mgrHome = new ManagerHome(mgr.getUserID());
+        ManagerHome mgrHome = new ManagerHome(mgr.getUserID(), mgr.getUserPassword());
         mgrHome.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Home page.");
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void datetimeTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datetimeTFActionPerformed
@@ -313,11 +315,14 @@ public class ManagerManageOrder extends javax.swing.JFrame {
             String fileData = section[0] + "|" + section[1] + "|" + section[2] + "|" + section[3] + "|" + section[4] + "|" + section[5];
             fh.appendToFile(fileData, COFile);
         } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
             throw new IllegalArgumentException("File does not exist!");
         }
         
         // Reloading the table
         loadMenu();
+        
+        logger.info("Order ID " + orderID + " with Food ID " + foodID + " has been marked completed by Manager " + mgr.getUserID() + ".");
     }//GEN-LAST:event_orderCompleteButtonActionPerformed
 
     /**

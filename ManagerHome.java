@@ -1,27 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
+package General;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-/**
- *
- * @author darrs
- */
 public class ManagerHome extends javax.swing.JFrame {
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
-    
-    public ManagerHome(String userID) {
-        initComponents();
-        setTitle("APU Cafeteria Ordering System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-        setLocationRelativeTo(null);
-        mgr.setUserID(userID);
-    }
+    private static Logger logger = LogManager.getLogger();
     
     public ManagerHome(String userID, String userPassword) {
         initComponents();
@@ -31,8 +18,13 @@ public class ManagerHome extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         mgr.setUserID(userID);
         mgr.setUserPassword(userPassword);
+        
+        if (userID.equals("admin")){
+            mgrHomeHeader.setText("ADMIN HOME");
+        } else {
+            mgrHomeHeader.setText("MANAGER HOME");
+        }
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -40,7 +32,7 @@ public class ManagerHome extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         headerPanel = new javax.swing.JPanel();
-        custHomeHeader = new javax.swing.JLabel();
+        mgrHomeHeader = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         custLogoutBtn = new javax.swing.JButton();
@@ -51,6 +43,7 @@ public class ManagerHome extends javax.swing.JFrame {
         mgrFeedbackBtn = new javax.swing.JButton();
         mgrOrderHistoryBtn = new javax.swing.JButton();
         mgrManageOrderBtn = new javax.swing.JButton();
+        AuditLogBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,12 +52,12 @@ public class ManagerHome extends javax.swing.JFrame {
 
         headerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        custHomeHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
-        custHomeHeader.setForeground(new java.awt.Color(0, 0, 0));
-        custHomeHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        custHomeHeader.setText("HOME");
-        custHomeHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        custHomeHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        mgrHomeHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
+        mgrHomeHeader.setForeground(new java.awt.Color(0, 0, 0));
+        mgrHomeHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mgrHomeHeader.setText("MANAGER HOME");
+        mgrHomeHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        mgrHomeHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -72,14 +65,14 @@ public class ManagerHome extends javax.swing.JFrame {
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custHomeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
+                .addComponent(mgrHomeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
                 .addContainerGap())
         );
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custHomeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(mgrHomeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -174,6 +167,17 @@ public class ManagerHome extends javax.swing.JFrame {
             }
         });
 
+        AuditLogBtn.setBackground(new java.awt.Color(0, 48, 73));
+        AuditLogBtn.setFont(new java.awt.Font("SF Pro Text", 1, 24)); // NOI18N
+        AuditLogBtn.setForeground(new java.awt.Color(255, 255, 255));
+        AuditLogBtn.setText("Audit Log");
+        AuditLogBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AuditLogBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AuditLogBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
@@ -193,9 +197,7 @@ public class ManagerHome extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2)
                                 .addGap(38, 38, 38)
-                                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(mgrAccountApprovalBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(mgrSalesReportBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(mgrSalesReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(contentPanelLayout.createSequentialGroup()
                                 .addGap(44, 44, 44)
                                 .addComponent(mgrOrderHistoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -204,6 +206,12 @@ public class ManagerHome extends javax.swing.JFrame {
                             .addComponent(mgrManageOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(mgrFeedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
+            .addGroup(contentPanelLayout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(mgrAccountApprovalBtn)
+                .addGap(51, 51, 51)
+                .addComponent(AuditLogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +232,9 @@ public class ManagerHome extends javax.swing.JFrame {
                             .addComponent(mgrSalesReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(mgrFeedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(mgrAccountApprovalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mgrAccountApprovalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AuditLogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(custLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -269,58 +279,78 @@ public class ManagerHome extends javax.swing.JFrame {
         WelcomePage mgrLogout = new WelcomePage();
         mgrLogout.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Welcome page.");
     }//GEN-LAST:event_custLogoutBtnActionPerformed
 
     private void mgrFeedbackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrFeedbackBtnActionPerformed
-        ManagerFeedback mgrFeedback = new ManagerFeedback(mgr.getUserID());
+        ManagerFeedback mgrFeedback = new ManagerFeedback(mgr.getUserID(), mgr.getUserPassword());
         mgrFeedback.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Feedback page.");
     }//GEN-LAST:event_mgrFeedbackBtnActionPerformed
 
     private void mgrUpdateMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrUpdateMenuBtnActionPerformed
-        ManagerMenu mgrMenu = new ManagerMenu(mgr.getUserID());
+        ManagerMenu mgrMenu = new ManagerMenu(mgr.getUserID(), mgr.getUserPassword());
         mgrMenu.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Menu page.");
     }//GEN-LAST:event_mgrUpdateMenuBtnActionPerformed
 
     private void mgrOrderHistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrOrderHistoryBtnActionPerformed
-        ManagerOrderHistory mgrOrderHistory = new ManagerOrderHistory(mgr.getUserID());
+        ManagerOrderHistory mgrOrderHistory = new ManagerOrderHistory(mgr.getUserID(), mgr.getUserPassword());
         mgrOrderHistory.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Order History page.");
     }//GEN-LAST:event_mgrOrderHistoryBtnActionPerformed
 
     private void mgrProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrProfileBtnActionPerformed
         ManagerProfile mgrProfile = new ManagerProfile(mgr.getUserID(), mgr.getUserPassword());
         mgrProfile.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Profile page.");
     }//GEN-LAST:event_mgrProfileBtnActionPerformed
 
     private void mgrSalesReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrSalesReportBtnActionPerformed
-        // TODO add your handling code here:
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Sales Report page.");
     }//GEN-LAST:event_mgrSalesReportBtnActionPerformed
 
-    private void mgrAccountApprovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrAccountApprovalBtnActionPerformed
-        ManagerApproval mgrBack = new ManagerApproval(mgr.getUserID());
-        mgrBack.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_mgrAccountApprovalBtnActionPerformed
-
     private void mgrManageOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrManageOrderBtnActionPerformed
-        ManagerManageOrder mgrManageOrder = new ManagerManageOrder(mgr.getUserID());
+        ManagerManageOrder mgrManageOrder = new ManagerManageOrder(mgr.getUserID(), mgr.getUserPassword());
         mgrManageOrder.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Manage Order page.");
     }//GEN-LAST:event_mgrManageOrderBtnActionPerformed
+
+    private void mgrAccountApprovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrAccountApprovalBtnActionPerformed
+        if (mgr.getUserID().equals("admin")){    
+            ManagerApproval mgrApproval = new ManagerApproval(mgr.getUserID(),mgr.getUserPassword());
+            mgrApproval.setVisible(true);
+            this.dispose();
+            logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Account Approval page.");
+        } else {
+            logger.info("Manager " + mgr.getUserID() + " that did not have admin level access has attempted to view Manager Account Approval page.");
+            JOptionPane.showMessageDialog(null, "Page requires admin level access.");
+        }
+    }//GEN-LAST:event_mgrAccountApprovalBtnActionPerformed
+
+    private void AuditLogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuditLogBtnActionPerformed
+        ManagerAuditLog mgrAuditLog  = new ManagerAuditLog (mgr.getUserID(), mgr.getUserPassword());
+        mgrAuditLog.setVisible(true);
+        this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Audit Log page.");
+    }//GEN-LAST:event_AuditLogBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AuditLogBtn;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JLabel custHomeHeader;
     private javax.swing.JButton custLogoutBtn;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton mgrAccountApprovalBtn;
     private javax.swing.JButton mgrFeedbackBtn;
+    private javax.swing.JLabel mgrHomeHeader;
     private javax.swing.JButton mgrManageOrderBtn;
     private javax.swing.JButton mgrOrderHistoryBtn;
     private javax.swing.JButton mgrProfileBtn;

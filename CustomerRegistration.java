@@ -1,10 +1,10 @@
-
+package General;
 
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -13,6 +13,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
     UserRegistrationInfo cust = new UserRegistrationInfo();
     PasswordHashing password = new PasswordHashing();
+    private static Logger logger = LogManager.getLogger();
     
     public CustomerRegistration() {
         initComponents();
@@ -79,7 +80,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
         custPasswordField.setBackground(new java.awt.Color(255, 255, 255));
         custPasswordField.setForeground(new java.awt.Color(0, 0, 0));
         custPasswordField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        custPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        custPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
         custPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custPasswordFieldActionPerformed(evt);
@@ -88,7 +89,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
         custEmailField.setBackground(new java.awt.Color(255, 255, 255));
         custEmailField.setForeground(new java.awt.Color(0, 0, 0));
-        custEmailField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        custEmailField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
         custEmailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custEmailFieldActionPerformed(evt);
@@ -106,7 +107,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
         custNameField.setBackground(new java.awt.Color(255, 255, 255));
         custNameField.setForeground(new java.awt.Color(0, 0, 0));
-        custNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        custNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
         custNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custNameFieldActionPerformed(evt);
@@ -268,15 +269,15 @@ public class CustomerRegistration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void custPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custPasswordFieldActionPerformed
-        // TODO add your handling code here:
+  
     }//GEN-LAST:event_custPasswordFieldActionPerformed
 
     private void custEmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custEmailFieldActionPerformed
-        // TODO add your handling code here:
+  
     }//GEN-LAST:event_custEmailFieldActionPerformed
 
     private void custIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custIDFieldActionPerformed
-        // TODO add your handling code here:
+   
     }//GEN-LAST:event_custIDFieldActionPerformed
 
     private void custClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custClearBtnActionPerformed
@@ -284,10 +285,11 @@ public class CustomerRegistration extends javax.swing.JFrame {
         custNameField.setText(null);
         custPasswordField.setText(null);
         custEmailField.setText(null);
+        logger.info("A user has cleared the fields in Customer Registration page.");
     }//GEN-LAST:event_custClearBtnActionPerformed
 
     private void custNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custNameFieldActionPerformed
-        // TODO add your handling code here:
+ 
     }//GEN-LAST:event_custNameFieldActionPerformed
 
     private void custRegisterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custRegisterBtnActionPerformed
@@ -296,11 +298,12 @@ public class CustomerRegistration extends javax.swing.JFrame {
         cust.setUserName(custNameField.getText().toUpperCase());
         try {
             cust.setUserPassword(password.toHexString(password.getSHA(String.valueOf(custPasswordField.getPassword()))));
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
         cust.setUserEmail(custEmailField.getText());
 
+        // Setting the default blance among users
         String custRegCredentials = cust.concatenateCredentials() + "|50.0";
             
         FileHandling custFile = new FileHandling();
@@ -309,26 +312,31 @@ public class CustomerRegistration extends javax.swing.JFrame {
         try {
             if (cust.getUserID().equals("")||cust.getUserName().equals("")||
                 cust.getUserPassword().equals("")||cust.getUserEmail().equals("")){
+                    logger.error("A user did not enter all data fields.");
                     JOptionPane.showMessageDialog(null, "All text fields must be filled out.");
             }
             
             else if (!"NA".equals(custFile.locateInFile(cust.getUserID(), file))){
+                logger.error("A user entered an existing Customer ID.");
                 JOptionPane.showMessageDialog(null, "Customer ID already exists.");
             }
             
             else if (!"NA".equals(custFile.locateInFile(cust.getUserEmail(), file))){
+                logger.error("A user entered an existing Email.");
                 JOptionPane.showMessageDialog(null, "Customer Email already exists.");
             }
             
-            else{
+            else {
                 custFile.appendToFile(custRegCredentials, file);
+                logger.info("User " + cust.getUserID() + " has been registered successfully.");
                 WelcomePage custBack = new WelcomePage();
                 custBack.setVisible(true);
                 this.dispose();
+                logger.info("User " + custIDField.getText().toUpperCase() + " has attempted to view Welcome page.");
             }
             
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
         }        
     }//GEN-LAST:event_custRegisterBtnActionPerformed
 
@@ -336,6 +344,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
         WelcomePage custBack = new WelcomePage();
         custBack.setVisible(true);
         this.dispose();
+        logger.info("A user has attempted to view Welcome page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 
     /**

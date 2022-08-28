@@ -1,14 +1,16 @@
+package General;
+
 
 import java.io.File;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.swing.JFrame;
 
 public class ManagerProfile extends javax.swing.JFrame {
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
+    private static Logger logger = LogManager.getLogger();
     
     public ManagerProfile(String userID, String userPassword) {
         initComponents();
@@ -25,8 +27,8 @@ public class ManagerProfile extends javax.swing.JFrame {
         File file = new File("mgrAccount.txt");
         try {
             line = custFile.locateItemInFile(mgr.getUserID(), file, 0);
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
         String [] section = line.split("\\|");
         mgrID.setText(userID);
@@ -135,23 +137,23 @@ public class ManagerProfile extends javax.swing.JFrame {
         mgrID.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
         mgrID.setForeground(new java.awt.Color(0, 0, 0));
         mgrID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        mgrID.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrID.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
 
         mgrName.setBackground(new java.awt.Color(244, 244, 244));
         mgrName.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
         mgrName.setForeground(new java.awt.Color(0, 0, 0));
         mgrName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        mgrName.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrName.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
 
         mgrEmail.setBackground(new java.awt.Color(244, 244, 244));
         mgrEmail.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
         mgrEmail.setForeground(new java.awt.Color(0, 0, 0));
         mgrEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        mgrEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
 
         mgrPassword.setBackground(new java.awt.Color(244, 244, 244));
         mgrPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        mgrPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
 
         showPassword.setText("Show Password");
         showPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -257,12 +259,13 @@ public class ManagerProfile extends javax.swing.JFrame {
         ManagerHome mgrBack = new ManagerHome(mgr.getUserID(), mgr.getUserPassword());
         mgrBack.setVisible(true);
         this.dispose();
+        logger.info("User " + mgr.getUserID() + " has attempted to view Manager Home page.");
     }//GEN-LAST:event_mgrBackBtnActionPerformed
 
     private void showPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswordActionPerformed
         if(showPassword.isSelected()){
             mgrPassword.setEchoChar((char)0); 
-        }else{
+        } else {
             mgrPassword.setEchoChar('*');
         }
     }//GEN-LAST:event_showPasswordActionPerformed

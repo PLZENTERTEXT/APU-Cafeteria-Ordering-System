@@ -1,7 +1,9 @@
+package General;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -9,6 +11,7 @@ import javax.swing.JOptionPane;
 public class CustomerProfile extends javax.swing.JFrame {
 
     UserRegistrationInfo cust = new UserRegistrationInfo();
+    private static Logger logger = LogManager.getLogger();
     
     public CustomerProfile(String userID, String userPassword) {
         initComponents();
@@ -25,8 +28,8 @@ public class CustomerProfile extends javax.swing.JFrame {
         File file = new File("custAccount.txt");
         try {
             line = custFile.locateItemInFile(cust.getUserID(), file, 0);
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
         String [] section = line.split("\\|");
         custID.setText(cust.getUserID());
@@ -207,23 +210,23 @@ public class CustomerProfile extends javax.swing.JFrame {
         custID.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
         custID.setForeground(new java.awt.Color(0, 0, 0));
         custID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        custID.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        custID.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
 
         custName.setBackground(new java.awt.Color(244, 244, 244));
         custName.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
         custName.setForeground(new java.awt.Color(0, 0, 0));
         custName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        custName.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        custName.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
 
         custPassword.setBackground(new java.awt.Color(244, 244, 244));
         custPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        custPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        custPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
 
         custEmail.setBackground(new java.awt.Color(244, 244, 244));
         custEmail.setFont(new java.awt.Font("SF Pro Text", 0, 12)); // NOI18N
         custEmail.setForeground(new java.awt.Color(0, 0, 0));
         custEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        custEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        custEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
 
         showPassword.setText("Show Password");
         showPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -343,9 +346,10 @@ public class CustomerProfile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void custBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custBackBtnActionPerformed
-        CustomerHome mgrBack = new CustomerHome(cust.getUserID());
+        CustomerHome mgrBack = new CustomerHome(cust.getUserID(), cust.getUserPassword());
         mgrBack.setVisible(true);
         this.dispose();
+        logger.info("User " + cust.getUserID() + " has attempted to view Customer Home page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 
     private void mgrTopUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrTopUpBtnActionPerformed
@@ -353,30 +357,33 @@ public class CustomerProfile extends javax.swing.JFrame {
             FileHandling custFile = new FileHandling();
             File file = new File("custAccount.txt");
 
-            try{
-            Double topUpAmount;
-            topUpAmount = Double.parseDouble(topUpInput.getText());
-
-            if (topUpAmount > 100 || topUpAmount < 0){
-                JOptionPane.showMessageDialog(null, "Please input an amount between RM 1 and RM 100.");
-                topUpInput.setText("");
-                topUpAmount = 0.0;
-            }
-
-            Double newAmount = topUpAmount + Double.parseDouble(currentBalance.getText().replace("RM ", ""));
-            custFile.rewriteContent(file, 0, custID.getText(), String.valueOf(newAmount));
-            
             try {
-                line = custFile.locateItemInFile(cust.getUserID(), file, 0);
-            } catch (IOException ex) {
-                Logger.getLogger(CustomerProfile.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                Double topUpAmount;
+                topUpAmount = Double.parseDouble(topUpInput.getText());
+
+                if (topUpAmount > 100 || topUpAmount < 0){
+                    JOptionPane.showMessageDialog(null, "Please input an amount between RM 1 and RM 100.");
+                    topUpInput.setText("");
+                    topUpAmount = 0.0;
+                }
+
+                Double newAmount = topUpAmount + Double.parseDouble(currentBalance.getText().replace("RM ", ""));
+                custFile.rewriteContent(file, 0, custID.getText(), String.valueOf(newAmount));
+                logger.info("User " + cust.getUserID() + " has topped up RM" + topUpAmount + "to his/her account. User " 
+                        + cust.getUserID() + " current balance is RM" + newAmount);
+            
+                try {
+                    line = custFile.locateItemInFile(cust.getUserID(), file, 0);
+                } catch (IOException e) {
+                    logger.error("Exception occurred - " + e.toString());
+                }
             String [] section = line.split("\\|");
             currentBalance.setText("RM " + section[4]);
 
             topUpInput.setText("");
         
         }catch (NumberFormatException e){
+            logger.error("Exception occurred - " + e.toString());
             JOptionPane.showMessageDialog(null, "Please input a valid amount to top up.");
         }
     }//GEN-LAST:event_mgrTopUpBtnActionPerformed
@@ -388,7 +395,7 @@ public class CustomerProfile extends javax.swing.JFrame {
     private void showPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswordActionPerformed
         if(showPassword.isSelected()){
             custPassword.setEchoChar((char)0); 
-        }else{
+        } else {
             custPassword.setEchoChar('*');
         }
     }//GEN-LAST:event_showPasswordActionPerformed

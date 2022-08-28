@@ -1,18 +1,18 @@
-
+package General;
 
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ManagerLogin extends javax.swing.JFrame {
     
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     PasswordHashing password = new PasswordHashing();
+    private static Logger logger = LogManager.getLogger();
 
     public ManagerLogin() {
         initComponents();
@@ -29,7 +29,7 @@ public class ManagerLogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         headerPanel = new javax.swing.JPanel();
-        mgrRegHeader = new javax.swing.JLabel();
+        mgrLoginHeader = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         mgrIDLabel = new javax.swing.JLabel();
@@ -46,11 +46,11 @@ public class ManagerLogin extends javax.swing.JFrame {
 
         headerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        mgrRegHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
-        mgrRegHeader.setForeground(new java.awt.Color(0, 0, 0));
-        mgrRegHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mgrRegHeader.setText("MANAGER LOGIN");
-        mgrRegHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        mgrLoginHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
+        mgrLoginHeader.setForeground(new java.awt.Color(0, 0, 0));
+        mgrLoginHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mgrLoginHeader.setText("MANAGER LOGIN");
+        mgrLoginHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -58,14 +58,14 @@ public class ManagerLogin extends javax.swing.JFrame {
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mgrRegHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mgrLoginHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mgrRegHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(mgrLoginHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -83,7 +83,7 @@ public class ManagerLogin extends javax.swing.JFrame {
         mgrPasswordField.setBackground(new java.awt.Color(244, 244, 244));
         mgrPasswordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         mgrPasswordField.setForeground(new java.awt.Color(0, 0, 0));
-        mgrPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrPasswordFieldActionPerformed(evt);
@@ -98,7 +98,7 @@ public class ManagerLogin extends javax.swing.JFrame {
         mgrIDField.setBackground(new java.awt.Color(244, 244, 244));
         mgrIDField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         mgrIDField.setForeground(new java.awt.Color(0, 0, 0));
-        mgrIDField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrIDField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrIDFieldActionPerformed(evt);
@@ -232,21 +232,22 @@ public class ManagerLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mgrPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrPasswordFieldActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_mgrPasswordFieldActionPerformed
 
     private void mgrBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrBackBtnActionPerformed
         WelcomePage mgrBack = new WelcomePage();
         mgrBack.setVisible(true);
         this.dispose();
+        logger.info("A user has attempted to view Welcome page.");
     }//GEN-LAST:event_mgrBackBtnActionPerformed
 
     private void mgrLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrLoginBtnActionPerformed
         mgr.setUserID(mgrIDField.getText());
         try {
             mgr.setUserPassword(password.toHexString(password.getSHA(String.valueOf(mgrPasswordField.getPassword()))));
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
         
         FileHandling mgrFile = new FileHandling();
@@ -258,9 +259,7 @@ public class ManagerLogin extends javax.swing.JFrame {
                 ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                 mgrLogin.setVisible(true);
                 this.dispose();
-            }
-        
-        else{
+        } else {
             try {
 
                 if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), "APPROVED", file, 0, 4))){
@@ -269,29 +268,30 @@ public class ManagerLogin extends javax.swing.JFrame {
                         ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                         mgrLogin.setVisible(true);
                         this.dispose();
-                    }
-
-                    else{
+                        logger.info("Manager " + mgr.getUserID() + " has logged in successfully.");
+                        
+                    } else {
                         JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
+                        logger.error("A user has failed to login with an incorrect ID or Password.");
                     }   
-                }
-
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Manager ID does not exist.");
+                    logger.error("A user has typed in a Manager ID that does not exist.");
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
             }
         }
     }//GEN-LAST:event_mgrLoginBtnActionPerformed
 
     private void mgrIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrIDFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_mgrIDFieldActionPerformed
 
     private void mgrClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrClearBtnActionPerformed
         mgrIDField.setText(null);
         mgrPasswordField.setText(null);
+        logger.info("A user has cleared the fields in Customer Login page.");
     }//GEN-LAST:event_mgrClearBtnActionPerformed
 
     private void mgrPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mgrPasswordFieldKeyPressed
@@ -299,8 +299,8 @@ public class ManagerLogin extends javax.swing.JFrame {
             mgr.setUserID(mgrIDField.getText());
         try {
             mgr.setUserPassword(password.toHexString(password.getSHA(String.valueOf(mgrPasswordField.getPassword()))));
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
         
         FileHandling mgrFile = new FileHandling();
@@ -312,6 +312,7 @@ public class ManagerLogin extends javax.swing.JFrame {
                 ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                 mgrLogin.setVisible(true);
                 this.dispose();
+                logger.info("Admin " + mgr.getUserID() + " has logged in successfully.");
             }
         
         else{
@@ -323,18 +324,21 @@ public class ManagerLogin extends javax.swing.JFrame {
                         ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                         mgrLogin.setVisible(true);
                         this.dispose();
+                        logger.info("User " + mgr.getUserID() + " has logged in successfully.");
                     }
 
                     else{
                         JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
+                        logger.error("A user has failed to login with an incorrect ID or Password.");
                     }   
                 }
 
                 else{
                     JOptionPane.showMessageDialog(null, "Manager ID does not exist.");
+                    logger.error("A user has typed in a Manager ID that does not exist.");
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
             }
         }
         }
@@ -385,8 +389,8 @@ public class ManagerLogin extends javax.swing.JFrame {
     private javax.swing.JTextField mgrIDField;
     private javax.swing.JLabel mgrIDLabel;
     private javax.swing.JButton mgrLoginBtn;
+    private javax.swing.JLabel mgrLoginHeader;
     private javax.swing.JPasswordField mgrPasswordField;
     private javax.swing.JLabel mgrPasswordLabel;
-    private javax.swing.JLabel mgrRegHeader;
     // End of variables declaration//GEN-END:variables
 }

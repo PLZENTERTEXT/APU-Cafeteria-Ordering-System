@@ -1,36 +1,81 @@
+package General;
+
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.System.Logger.Level;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class CustomerOrderHistory extends javax.swing.JFrame {
 
     UserRegistrationInfo cust = new UserRegistrationInfo();
     String completedOrdersFile = "completedOrders.txt";
+    private static Logger logger = LogManager.getLogger();
     
-    public CustomerOrderHistory(String userID) {
+    public CustomerOrderHistory(String userID, String userPassword) {
         initComponents();
         setTitle("APU Cafeteria Ordering System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
         cust.setUserID(userID);
+        cust.setUserPassword(userPassword);
         loadOrderHistoryTable();
         reviewTextArea.setLineWrap(true);
         reviewTextArea.setWrapStyleWord(true);
     }
+    
+    // Loads the order history of completed orders in the JTable
+    private void loadOrderHistoryTable(){
+        DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
+        File file = new File(completedOrdersFile);
+        
+        try {
+            String str;
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            try {
+                while((str = br.readLine()) != null){
+                    // Spliting the data into different section using the | delimeter
+                    String data[] = str.split("\\|");
+                    // Only adding the users orders in the order history
+                    if (data[1].equals(cust.getUserID())) {
+                        // Adding the data into the order history table
+                        
+                        Double totalPrice;
+                        totalPrice = Double.parseDouble(data[4]) * Integer.parseInt(data[5]);
+                        totalPrice = Math.round(totalPrice * 100.0) / 100.0;
+                        String totalPriceStr;
+                        totalPriceStr = totalPrice.toString();
+                        orderHistoryTableModel.addRow(new Object[]{data[0], data[2], data[3], 
+                                                data[4], data[5], totalPriceStr, idToDateConversion(data[0])});
+                    }
+                }
+                br.close();
+            } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
+            }
+        } catch (FileNotFoundException e) {
+            logger.error("Exception occurred - " + e.toString());
+            JOptionPane.showMessageDialog(null, "Error: File does not exist!");
+        }
+    }
+    
+    public String idToDateConversion(String orderID) {
+        
+        String day = orderID.substring(0, 2);
+        String month = orderID.substring(2,4);
+        String year = orderID.substring(4,8);         
+        String date = day + "-" + month + "-" + year;
 
+        return date;
+    }
  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -280,9 +325,10 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void custBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custBackBtnActionPerformed
-        CustomerHome mgrBack = new CustomerHome(cust.getUserID());
+        CustomerHome mgrBack = new CustomerHome(cust.getUserID(), cust.getUserPassword());
         mgrBack.setVisible(true);
         this.dispose();
+        logger.info("User " + cust.getUserID() + " has attempted to view Customer Home page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 
     private void custOrderHistoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custOrderHistoryTableMouseClicked
@@ -291,7 +337,7 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
     
     //Appends customer review into the text file
     private void custSubmitReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custSubmitReviewBtnActionPerformed
-       FileHandling fh = new FileHandling();
+        FileHandling fh = new FileHandling();
         File reviewFile = new File("customerReviews.txt");
         DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
         
@@ -318,8 +364,10 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                     reviewTextArea.setText(null);
                     try {
                         fh.appendToFile(reviewContents, reviewFile);
+                        logger.info("User " + cust.getUserID() + " has submitted a review for Order ID " + orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 0).toString());
                         javax.swing.JOptionPane.showMessageDialog(null, "Order review submitted.");
-                    } catch (IOException ex) {
+                    } catch (IOException e) {
+                        logger.error("Exception occurred - " + e.toString());
                         javax.swing.JOptionPane.showMessageDialog(null, "File cannot be opened.");
                     }
                 }
@@ -327,55 +375,12 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                     javax.swing.JOptionPane.showMessageDialog(null, "Maximum of 300 characters.");
                 }
             }
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerOrderHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
     }//GEN-LAST:event_custSubmitReviewBtnActionPerformed
 
-    //Loads the order history of completed orders in the JTable
-    private void loadOrderHistoryTable(){
-        DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
-        // menuTableModel.setRowCount(0);
-        File file = new File(completedOrdersFile);
-        
-        try {
-            String str;
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            try {
-                while((str = br.readLine()) != null){
-                    // Spliting the data into different section using the | delimeter
-                    String data[] = str.split("\\|");
-                    // Only adding the users orders in the order history
-                    if (data[1].equals(cust.getUserID())) {
-                        // Adding the data into the order history table
-                        
-                        Double totalPrice;
-                        totalPrice = Double.parseDouble(data[4]) * Integer.parseInt(data[5]);
-                        totalPrice = Math.round(totalPrice * 100.0) / 100.0;
-                        String totalPriceStr;
-                        totalPriceStr = totalPrice.toString();
-                        orderHistoryTableModel.addRow(new Object[]{data[0], data[2], data[3], 
-                                                data[4], data[5], totalPriceStr, idToDateConversion(data[0])});
-                    }
-                }
-                br.close();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
-            }
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Error: File does not exist!");
-        }
-    }
     
-    public String idToDateConversion(String orderID) {
-        
-        String day = orderID.substring(0, 2);
-        String month = orderID.substring(2,4);
-        String year = orderID.substring(4,8);         
-        String date = day + "-" + month + "-" + year;
-
-        return date;
-    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

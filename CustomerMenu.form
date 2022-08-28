@@ -56,7 +56,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="tablePanel" min="-2" pref="435" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="menuInputPanel" pref="492" max="32767" attributes="0"/>
+                          <Component id="menuInputPanel" pref="493" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="userPanel" pref="147" max="32767" attributes="0"/>
@@ -353,7 +353,7 @@
                           <Component id="totalTF" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="totalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
                       <Component id="proceedTCButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

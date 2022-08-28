@@ -1,26 +1,31 @@
+package General;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class ManagerFeedback extends javax.swing.JFrame {
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     String customerReviewsFile = "customerReviews.txt";
+    private static Logger logger = LogManager.getLogger();
     
-    public ManagerFeedback(String userID) {
+    public ManagerFeedback(String userID, String userPassword) {
         initComponents();
         setTitle("APU Cafeteria Ordering System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
         mgr.setUserID(userID);
+        mgr.setUserPassword(userPassword);
         loadOrderHistoryTable();
         
         // Set some text fields to empty when the window loads
@@ -33,6 +38,32 @@ public class ManagerFeedback extends javax.swing.JFrame {
         feedbackTA.setText("-- Select one of the Order ID in the table at the left to display the feedback provided --");
     }
 
+    private void loadOrderHistoryTable(){
+        DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
+        File file = new File(customerReviewsFile);
+        
+        try {
+            String str;
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            try {
+                while((str = br.readLine()) != null){
+                    // Spliting the data into different section using the | delimeter
+                    String data[] = str.split("\\|");
+                    // Only adding the users orders in the order history
+                    // Adding the data into the order history table
+                    orderHistoryTableModel.addRow(new Object[]{data[0], data[1], data[2], data[4]});
+                }
+                br.close();
+            } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
+            }
+        } catch (FileNotFoundException e) {
+            logger.error("Exception occurred - " + e.toString());
+            JOptionPane.showMessageDialog(null, "Error: File does not exist!");
+        }
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -272,9 +303,10 @@ public class ManagerFeedback extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void custBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custBackBtnActionPerformed
-        ManagerHome mgrBack = new ManagerHome(mgr.getUserID());
+        ManagerHome mgrBack = new ManagerHome(mgr.getUserID(),mgr.getUserPassword());
         mgrBack.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Home page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 
     private void custOrderHistoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custOrderHistoryTableMouseClicked
@@ -286,19 +318,19 @@ public class ManagerFeedback extends javax.swing.JFrame {
     }//GEN-LAST:event_orderIDTFActionPerformed
 
     private void foodIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodIDTFActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_foodIDTFActionPerformed
 
     private void foodTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodTFActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_foodTFActionPerformed
 
     private void custIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custIDTFActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_custIDTFActionPerformed
 
     private void orderDateTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderDateTFActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_orderDateTFActionPerformed
 
     private void custOrderHistoryTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custOrderHistoryTableMousePressed
@@ -327,40 +359,18 @@ public class ManagerFeedback extends javax.swing.JFrame {
                     feedbackTA.setText(lineArray[5]);
                 }
                 br.close();
+                logger.info("Manager " + mgr.getUserID() + " has attempted to view the feedback of Order ID " + orderIDTF.getText() 
+                        + "with Food ID " + foodIDTF.getText() + ".");
             } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
                 JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
             }
         } catch (FileNotFoundException e) {
+            logger.error("Exception occurred - " + e.toString());
             JOptionPane.showMessageDialog(null, "Error: File does not exist!");
         }
     }//GEN-LAST:event_custOrderHistoryTableMousePressed
 
-    private void loadOrderHistoryTable(){
-        DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
-
-        
-        File file = new File(customerReviewsFile);
-        
-        try {
-            String str;
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            try {
-                while((str = br.readLine()) != null){
-                    // Spliting the data into different section using the | delimeter
-                    String data[] = str.split("\\|");
-                    // Only adding the users orders in the order history
-                    // Adding the data into the order history table
-                    orderHistoryTableModel.addRow(new Object[]{data[0], data[1], data[2], data[4]});
-                }
-                br.close();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
-            }
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Error: File does not exist!");
-        }
-    }
-  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -1,3 +1,5 @@
+package General;
+
 
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
@@ -13,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CustomerMenu extends javax.swing.JFrame {
 
@@ -30,9 +34,10 @@ public class CustomerMenu extends javax.swing.JFrame {
     String pendingOrderFile = "pendingOrders.txt";
     
     UserRegistrationInfo cust = new UserRegistrationInfo();
+    private static Logger logger = LogManager.getLogger();
     
     // Create new form "CustomerMenu"
-    public CustomerMenu(String userID) {
+    public CustomerMenu(String userID, String userPassword) {
         initComponents();
         setContentPane(customerMenuPanel);
         setTitle("APU Cafeteria Ordering System");
@@ -44,6 +49,7 @@ public class CustomerMenu extends javax.swing.JFrame {
        
         // Set the user ID
         cust.setUserID(userID);
+        cust.setUserPassword(userPassword);
         userIDTF.setText(userID);
         
         // Load the menu as soon as the window loads from "CustomerMenu" class
@@ -87,9 +93,11 @@ public class CustomerMenu extends javax.swing.JFrame {
                 br.close();
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
+                logger.error("IOException occured: " + e.getMessage());
             }
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error: File does not exist!");
+            logger.error("FileNotFoundException occured: " + e.getMessage());
         }
     }
     
@@ -142,6 +150,7 @@ public class CustomerMenu extends javax.swing.JFrame {
             generatedMessage += ("\nTransaction Successful!"
                     + "\nYour order will be ready in a few minutes."
                     + "\nYour current balance is: RM" + difference);
+            
         } else {
             generatedMessage += ("\nInsufficient balance!\nPlease top up at the nearest kiosk.");
         }
@@ -524,9 +533,10 @@ public class CustomerMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        CustomerHome custHome = new CustomerHome(cust.getUserID());
+        CustomerHome custHome = new CustomerHome(cust.getUserID(), cust.getUserPassword());
         custHome.setVisible(true);
         this.dispose();
+        logger.info("User " + cust.getUserID() + " has attempted to view Customer Home page.");
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void datetimeTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datetimeTFActionPerformed
@@ -549,18 +559,21 @@ public class CustomerMenu extends javax.swing.JFrame {
         // Getting user input
         foodID = custFoodIDTF.getText().toUpperCase();
         try {
-             // If the text field is left blank then show a message, if not, ??????? put it into menu.txt & menu
+             // If the text field is left blank then show a message, if not, put it into menu.txt & menu
             if(custFoodIDTF.getText().equals("")) {
                 // If the text fields is left blank then show a message
+                logger.error("IllegalArgumentException occured: User " + cust.getUserID() + " did not enter all data fields.");
                 throw new IllegalArgumentException("Please enter all data fields!");
             } else {
                 // If the Food ID does not exist, show error
                 if (checkValueExistsInTable(menuTableModel, custMenuTable, foodID) == 0) {
+                    logger.error("IllegalArgumentException occured: User " + cust.getUserID() + " entered an invalid Food ID.");
                     throw new IllegalArgumentException("Food ID does not exist.");
                 // If the Food ID exists, add the quantity amount
                 } else if (checkValueExistsInTable(orderItemTableModel, orderItemTable, foodID) == 1) {
                     quantity = (int) foodQuantitySpinner.getValue();
                     
+                    // Add on the quantity to the existing quantity in the table with the same FoodID
                     for(int row = 0; row < orderItemTableModel.getRowCount(); row++) {
                         if (orderItemTableModel.getValueAt(row,0).equals(foodID)) {
                             String strOriQuantity = (String) orderItemTableModel.getValueAt(row,3);
@@ -570,6 +583,7 @@ public class CustomerMenu extends javax.swing.JFrame {
                         }
                     }
                     JOptionPane.showMessageDialog(null, "Item added successfully!");
+                    logger.info("User " + cust.getUserID() + " has added " + quantity + " Food ID " + foodID + " into orderItemTable.");
                     
                     // Display total value
                     calculateAndDisplayTotal();
@@ -594,6 +608,7 @@ public class CustomerMenu extends javax.swing.JFrame {
                     col[3] = String.valueOf(quantity);
                     orderItemTableModel.addRow(col);
                     JOptionPane.showMessageDialog(null, "Item added successfully!");
+                    logger.info("User " + cust.getUserID() + " has added " + quantity + " Food ID " + foodID + " into orderItemTable.");
                     
                     // Display total value
                     calculateAndDisplayTotal();
@@ -603,12 +618,13 @@ public class CustomerMenu extends javax.swing.JFrame {
                 }
             }
         } catch (HeadlessException | IllegalArgumentException e) {
+            logger.error("Exception occurred - " + e.toString());
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_addTCButtonActionPerformed
 
     private void deleteFCButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFCButtonActionPerformed
-        DefaultTableModel  orderItemTableModel = (DefaultTableModel) orderItemTable.getModel();
+        DefaultTableModel orderItemTableModel = (DefaultTableModel) orderItemTable.getModel();
 
         if (orderItemTable.getSelectedRowCount() >= 1) {
             orderItemTableModel.removeRow(orderItemTable.getSelectedRow());
@@ -623,6 +639,8 @@ public class CustomerMenu extends javax.swing.JFrame {
         
         // Clearing the input for the menu
         refreshMenuSelection();
+        
+        logger.info("User " + cust.getUserID() + " has deleted a row in orderItemTable.");
     }//GEN-LAST:event_deleteFCButtonActionPerformed
 
     private void orderItemTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderItemTableMouseClicked
@@ -648,6 +666,7 @@ public class CustomerMenu extends javax.swing.JFrame {
         try {
             userIDLine = fh.locateInFile(cust.getUserID(), CAfile);
         } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
         
@@ -658,6 +677,7 @@ public class CustomerMenu extends javax.swing.JFrame {
         if (currentBalance >= totalPrice) {
             // Show the prompt that the transaction was a success
             newBalance = showBalancePrompt(currentBalance, totalPrice, 1);
+            
             // Modify new balance into the file
             fh.rewriteContent(CAfile, 0, cust.getUserID(), String.valueOf(newBalance));
             // Add into new system balance
@@ -691,20 +711,26 @@ public class CustomerMenu extends javax.swing.JFrame {
                 // REMEMBER TO CLOSE BufferedWriter FIRST !
                 bw.close();
                 fw.close();
+                logger.info("User " + cust.getUserID() + " has completed a transaction successfully with the Order ID: " + orderID);
+            
                 
             } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
                 JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+                
             }
 
         } else {
             // Show the prompt that there is insufficient balance
             showBalancePrompt(currentBalance, totalPrice, 0);
+            logger.info("User " + cust.getUserID() + " has insufficient balance. Transaction was unsuccessful.");
         }
         
         // Return to customer Home Page
-        CustomerHome custHome = new CustomerHome(cust.getUserID());
+        CustomerHome custHome = new CustomerHome(cust.getUserID(), cust.getUserPassword());
         custHome.setVisible(true);
         this.dispose();
+        logger.info("User " + cust.getUserID() + " has attempted to view Customer Home page.");
     }//GEN-LAST:event_proceedTCButtonActionPerformed
 
     private void totalTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTFActionPerformed

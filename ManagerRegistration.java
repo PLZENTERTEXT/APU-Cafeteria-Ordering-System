@@ -1,10 +1,10 @@
-
+package General;
 
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,6 +12,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     PasswordHashing password = new PasswordHashing();
+    private static Logger logger = LogManager.getLogger();
     
     public ManagerRegistration() {
         initComponents();
@@ -74,7 +75,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         mgrEmailLabel.setText("Email:");
 
         mgrPasswordField.setBackground(new java.awt.Color(244, 244, 244));
-        mgrPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrPasswordFieldActionPerformed(evt);
@@ -82,7 +83,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         });
 
         mgrEmailField.setBackground(new java.awt.Color(244, 244, 244));
-        mgrEmailField.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrEmailField.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrEmailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrEmailFieldActionPerformed(evt);
@@ -90,7 +91,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         });
 
         mgrIDField.setBackground(new java.awt.Color(244, 244, 244));
-        mgrIDField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrIDField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
         mgrIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mgrIDFieldActionPerformed(evt);
@@ -98,7 +99,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         });
 
         mgrNameField.setBackground(new java.awt.Color(244, 244, 244));
-        mgrNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
+        mgrNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
 
         mgrRegisterBtn.setBackground(new java.awt.Color(0, 48, 73));
         mgrRegisterBtn.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -252,15 +253,15 @@ public class ManagerRegistration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mgrPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrPasswordFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_mgrPasswordFieldActionPerformed
 
     private void mgrEmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrEmailFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_mgrEmailFieldActionPerformed
 
     private void mgrIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrIDFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_mgrIDFieldActionPerformed
 
     private void mgrClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrClearBtnActionPerformed
@@ -268,6 +269,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         mgrNameField.setText(null);
         mgrPasswordField.setText(null);
         mgrEmailField.setText(null);
+        logger.info("A user has cleared the fields in Customer Registration page.");
     }//GEN-LAST:event_mgrClearBtnActionPerformed
 
     private void mgrRegisterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrRegisterBtnActionPerformed
@@ -276,8 +278,8 @@ public class ManagerRegistration extends javax.swing.JFrame {
         mgr.setUserName(mgrNameField.getText().toUpperCase());
         try {
             mgr.setUserPassword(password.toHexString(password.getSHA(String.valueOf(mgrPasswordField.getPassword()))));
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
         mgr.setUserEmail(mgrEmailField.getText());
 
@@ -289,27 +291,31 @@ public class ManagerRegistration extends javax.swing.JFrame {
         try {
             if (mgr.getUserID().equals("")||mgr.getUserName().equals("")||
                 mgr.getUserPassword().equals("")||mgr.getUserEmail().equals("")){
-                
+                logger.error("A user did not enter all data fields.");
                 JOptionPane.showMessageDialog(null, "All text fields must be filled out.");
             }
             
             else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), file, 0))){
+                logger.error("A user entered an existing Manager ID.");
                 JOptionPane.showMessageDialog(null, "Manager ID already exists.");
             }
             
             else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserEmail(), file, 3))){
+                logger.error("A user entered an existing Email.");
                 JOptionPane.showMessageDialog(null, "Manager Email already exists.");
             }
             
-            else{
+            else {
                 mgrFile.appendToFile(mgrRegCredentials, file);
+                logger.info("Manager " + mgr.getUserID() + " has been registered successfully.");
                 WelcomePage mgrBack = new WelcomePage();
                 mgrBack.setVisible(true);
                 this.dispose();
+                logger.info("Manager " + mgrIDField.getText().toUpperCase() + " has attempted to view Welcome page.");
             }
             
-        } catch (IOException ex) {
-            Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
     }//GEN-LAST:event_mgrRegisterBtnActionPerformed
 
@@ -317,6 +323,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         WelcomePage mgrBack = new WelcomePage();
         mgrBack.setVisible(true);
         this.dispose();
+        logger.info("A user has attempted to view Welcome page.");
     }//GEN-LAST:event_mgrBackBtnActionPerformed
 
     /**

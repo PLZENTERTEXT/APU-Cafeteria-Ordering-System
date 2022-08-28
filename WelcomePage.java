@@ -1,7 +1,12 @@
+package General;
+
 import javax.swing.JFrame;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class WelcomePage extends javax.swing.JFrame {
 
+    private static Logger logger = LogManager.getLogger();
     
     public WelcomePage() {
         initComponents();
@@ -26,7 +31,7 @@ public class WelcomePage extends javax.swing.JFrame {
         custRegOption = new javax.swing.JButton();
         customerHeading = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        welcomeHeader = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -149,11 +154,11 @@ public class WelcomePage extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("WELCOME");
-        jLabel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        welcomeHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
+        welcomeHeader.setForeground(new java.awt.Color(0, 0, 0));
+        welcomeHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        welcomeHeader.setText("WELCOME");
+        welcomeHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -161,14 +166,14 @@ public class WelcomePage extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+                .addComponent(welcomeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addComponent(welcomeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -216,24 +221,28 @@ public class WelcomePage extends javax.swing.JFrame {
         CustomerLogin custLogin = new CustomerLogin();
         custLogin.setVisible(true);
         this.dispose();
+        logger.info("A user has attempted to view Customer Login page.");
     }//GEN-LAST:event_custLoginOptionActionPerformed
 
     private void custRegOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custRegOptionActionPerformed
         CustomerRegistration custRegister = new CustomerRegistration();
         custRegister.setVisible(true);
         this.dispose();
+        logger.info("A user has attempted to view Customer Registration page.");
     }//GEN-LAST:event_custRegOptionActionPerformed
 
     private void mgrRegOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrRegOptionActionPerformed
         ManagerRegistration mgrRegister = new ManagerRegistration();
         mgrRegister.setVisible(true);
         this.dispose();
+        logger.info("A user has attempted to view Manager Registration page.");
     }//GEN-LAST:event_mgrRegOptionActionPerformed
 
     private void mgrLoginOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrLoginOptionActionPerformed
         ManagerLogin mgrLogin = new ManagerLogin();
         mgrLogin.setVisible(true);
         this.dispose();
+        logger.info("A user has attempted to view Manager Login page.");
     }//GEN-LAST:event_mgrLoginOptionActionPerformed
 
     /**
@@ -277,12 +286,12 @@ public class WelcomePage extends javax.swing.JFrame {
     private javax.swing.JButton custRegOption;
     private javax.swing.JLabel customerHeading;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel managerHeading;
     private javax.swing.JButton mgrLoginOption;
     private javax.swing.JButton mgrRegOption;
+    private javax.swing.JLabel welcomeHeader;
     // End of variables declaration//GEN-END:variables
 }

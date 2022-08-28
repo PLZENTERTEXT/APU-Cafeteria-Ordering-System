@@ -1,3 +1,5 @@
+package General;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,7 +26,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     
     // Create new form "ManagerMenu"
-    public ManagerMenu(String userID) {
+    public ManagerMenu(String userID, String userPassword) {
         initComponents();
         setContentPane(mainPanel);
         setTitle("APU Cafeteria Ordering System");
@@ -36,6 +38,7 @@ public class ManagerMenu extends javax.swing.JFrame {
 
         // Set the user ID
         mgr.setUserID(userID);
+        mgr.setUserPassword(userPassword);
         userIDTF.setText(userID);
 
         // Load the menu as soon as the window loads
@@ -403,7 +406,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        ManagerHome mgrHome = new ManagerHome(mgr.getUserID());
+        ManagerHome mgrHome = new ManagerHome(mgr.getUserID(), mgr.getUserPassword());
         mgrHome.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed

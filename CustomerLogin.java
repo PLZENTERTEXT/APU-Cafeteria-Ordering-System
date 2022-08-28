@@ -1,10 +1,10 @@
-
+package General;
 
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -13,6 +13,7 @@ public class CustomerLogin extends javax.swing.JFrame {
 
     UserRegistrationInfo cust = new UserRegistrationInfo();
     PasswordHashing password = new PasswordHashing();
+    private static Logger logger = LogManager.getLogger();
     
     public CustomerLogin() {
         initComponents();
@@ -29,7 +30,7 @@ public class CustomerLogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         headerPanel = new javax.swing.JPanel();
-        custRegHeader = new javax.swing.JLabel();
+        custLoginHeader = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         custPasswordLabel = new javax.swing.JLabel();
@@ -48,12 +49,12 @@ public class CustomerLogin extends javax.swing.JFrame {
 
         headerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        custRegHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
-        custRegHeader.setForeground(new java.awt.Color(0, 0, 0));
-        custRegHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        custRegHeader.setText("CUSTOMER LOGIN");
-        custRegHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        custRegHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        custLoginHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
+        custLoginHeader.setForeground(new java.awt.Color(0, 0, 0));
+        custLoginHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        custLoginHeader.setText("CUSTOMER LOGIN");
+        custLoginHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        custLoginHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -61,14 +62,14 @@ public class CustomerLogin extends javax.swing.JFrame {
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custRegHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(custLoginHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custRegHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(custLoginHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -229,15 +230,15 @@ public class CustomerLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void custPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custPasswordFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_custPasswordFieldActionPerformed
 
     private void custLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLoginBtnActionPerformed
         cust.setUserID(custIDField.getText());
         try {
             cust.setUserPassword(password.toHexString(password.getSHA(String.valueOf(custPasswordField.getPassword()))));
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
         
         FileHandling custFile = new FileHandling();
@@ -250,17 +251,20 @@ public class CustomerLogin extends javax.swing.JFrame {
                     CustomerHome custLogin = new CustomerHome(cust.getUserID(), String.valueOf(custPasswordField.getPassword()));
                     custLogin.setVisible(true);
                     this.dispose();
+                    logger.info("User " + cust.getUserID() + " has logged in successfully.");
                 }
                 
                 else{
                     JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
+                    logger.error("A user has failed to login with an incorrect ID or Password.");
                 }   
             }
             else{
                 JOptionPane.showMessageDialog(null, "Customer ID does not exist.");
+                logger.error("A user has typed in a Customer ID that does not exist.");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
         }
     }//GEN-LAST:event_custLoginBtnActionPerformed
 
@@ -268,15 +272,17 @@ public class CustomerLogin extends javax.swing.JFrame {
         WelcomePage custBack = new WelcomePage();
         custBack.setVisible(true);
         this.dispose();
+        logger.info("A user has attempted to view Welcome page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 
     private void custClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custClearBtnActionPerformed
         custIDField.setText(null);
         custPasswordField.setText(null);
+        logger.info("A user has cleared the fields in Customer Login page.");
     }//GEN-LAST:event_custClearBtnActionPerformed
 
     private void custIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custIDFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_custIDFieldActionPerformed
 
     private void custPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_custPasswordFieldKeyPressed
@@ -284,8 +290,8 @@ public class CustomerLogin extends javax.swing.JFrame {
             cust.setUserID(custIDField.getText());
             try {
                 cust.setUserPassword(password.toHexString(password.getSHA(String.valueOf(custPasswordField.getPassword()))));
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(ManagerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException e) {
+                logger.error("Exception occurred - " + e.toString());
             }
 
             FileHandling custFile = new FileHandling();
@@ -298,17 +304,20 @@ public class CustomerLogin extends javax.swing.JFrame {
                         CustomerHome custLogin = new CustomerHome(cust.getUserID(), String.valueOf(custPasswordField.getPassword()));
                         custLogin.setVisible(true);
                         this.dispose();
+                        logger.info("User " + cust.getUserID() + " has logged in successfully.");
                     }
 
                     else{
                         JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
+                        logger.error("A user has failed to login with an incorrect ID or Password.");
                     }   
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Customer ID does not exist.");
+                    logger.error("A user has typed in a Customer ID that does not exist.");
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(CustomerLogin.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
             }
         }
     }//GEN-LAST:event_custPasswordFieldKeyPressed
@@ -327,15 +336,11 @@ public class CustomerLogin extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.error("Exception occurred - " + ex.toString());
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -353,9 +358,9 @@ public class CustomerLogin extends javax.swing.JFrame {
     private javax.swing.JTextField custIDField;
     private javax.swing.JLabel custIDLabel;
     private javax.swing.JButton custLoginBtn;
+    private javax.swing.JLabel custLoginHeader;
     private javax.swing.JPasswordField custPasswordField;
     private javax.swing.JLabel custPasswordLabel;
-    private javax.swing.JLabel custRegHeader;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
