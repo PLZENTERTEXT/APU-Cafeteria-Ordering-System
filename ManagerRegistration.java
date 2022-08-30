@@ -299,18 +299,18 @@ public class ManagerRegistration extends javax.swing.JFrame {
             if (mgr.getUserID().equals("")||mgr.getUserName().equals("")||
                 mgr.getUserPassword().equals("")||mgr.getUserEmail().equals("")){
                 logger.error("A user did not enter all data fields.");
-                JOptionPane.showMessageDialog(null, "All text fields must be filled out.");
+                JOptionPane.showMessageDialog(null, "Error: All text fields must be filled out.");
             }
             // If the manager ID exists within the text file, an error message will be shown
             else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), file, 0))){
                 logger.error("A user entered an existing Manager ID.");
-                JOptionPane.showMessageDialog(null, "Manager ID already exists.");
+                JOptionPane.showMessageDialog(null, "Error: Manager ID already exists.");
             }
             
             //If the user entered an existing email within the text file, an error message will be shown
             else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserEmail(), file, 3))){
                 logger.error("A user entered an existing Email.");
-                JOptionPane.showMessageDialog(null, "Manager Email already exists.");
+                JOptionPane.showMessageDialog(null, "Error: Manager Email already exists.");
             }
             
             //If all the other conditions are met then the user will be registered successfully

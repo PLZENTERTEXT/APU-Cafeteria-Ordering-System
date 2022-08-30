@@ -24,8 +24,12 @@ public class ManagerFeedback extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        // Set the user ID
         mgr.setUserID(userID);
         mgr.setUserPassword(userPassword);
+        userIDTF.setText(userID);
+        
         loadOrderHistoryTable();
         
         // Set some text fields to empty when the window loads
@@ -94,6 +98,9 @@ public class ManagerFeedback extends javax.swing.JFrame {
         custIDTF = new javax.swing.JTextField();
         orderDateLabel = new javax.swing.JLabel();
         orderDateTF = new javax.swing.JTextField();
+        userPanel1 = new javax.swing.JPanel();
+        userDisplayLabel1 = new javax.swing.JLabel();
+        userIDTF1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,7 +121,7 @@ public class ManagerFeedback extends javax.swing.JFrame {
             headerPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
                 .addContainerGap())
         );
         headerPanel1Layout.setVerticalGroup(
@@ -267,25 +274,47 @@ public class ManagerFeedback extends javax.swing.JFrame {
         });
         contentPanel.add(orderDateTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 330, 32));
 
+        userPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        userPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userDisplayLabel1.setBackground(new java.awt.Color(18, 18, 18));
+        userDisplayLabel1.setFont(new java.awt.Font("SF Pro Text", 1, 24)); // NOI18N
+        userDisplayLabel1.setForeground(new java.awt.Color(18, 18, 18));
+        userDisplayLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userDisplayLabel1.setText("USER ID");
+        userPanel1.add(userDisplayLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 40));
+
+        userIDTF1.setBackground(new java.awt.Color(18, 18, 18));
+        userIDTF1.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
+        userIDTF1.setForeground(new java.awt.Color(0, 102, 155));
+        userIDTF1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userIDTF1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        userPanel1.add(userIDTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 120, 70));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(userPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(headerPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(headerPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(userPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -425,5 +454,11 @@ public class ManagerFeedback extends javax.swing.JFrame {
     private javax.swing.JTextField orderDateTF;
     private javax.swing.JLabel orderIDLabel;
     private javax.swing.JTextField orderIDTF;
+    private javax.swing.JLabel userDisplayLabel;
+    private javax.swing.JLabel userDisplayLabel1;
+    private javax.swing.JLabel userIDTF;
+    private javax.swing.JLabel userIDTF1;
+    private javax.swing.JPanel userPanel;
+    private javax.swing.JPanel userPanel1;
     // End of variables declaration//GEN-END:variables
 }

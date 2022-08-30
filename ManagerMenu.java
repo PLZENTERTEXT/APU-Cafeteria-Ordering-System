@@ -1,6 +1,7 @@
 package General;
 
 
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,6 +14,8 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ManagerMenu extends javax.swing.JFrame {
 
@@ -24,6 +27,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     String fileName = "menu.txt";
     
     UserRegistrationInfo mgr = new UserRegistrationInfo();
+    private static Logger logger = LogManager.getLogger();
     
     // Create new form "ManagerMenu"
     public ManagerMenu(String userID, String userPassword) {
@@ -448,7 +452,8 @@ public class ManagerMenu extends javax.swing.JFrame {
         foodID = foodIDTF.getText().toUpperCase();
         try {
             // If the Food ID already exists, show error
-            if (!"NA".equals(fh.locateInFile(foodID, file))) {
+            if (!"NA".equals(fh.locateItemInFile(foodID, file, 0))) {
+                logger.error("IllegalArgumentException occurred - Food ID must be unique.");
                 throw new IllegalArgumentException("Food ID must be unique.");
             // If the Food ID doesn't exist, proceed
             } else {
@@ -459,6 +464,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                     price = Math.round(price * 100.0) / 100.0;
                 } catch (NumberFormatException e){
                     // Throw error if it can't be converted to double
+                    logger.error("IllegalArgumentException occurred - " + e.toString());
                     throw new IllegalArgumentException("Please insert numbers only.");
                 }
                 type = typeDDL.getSelectedItem().toString().toUpperCase();
@@ -469,6 +475,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                 if(foodIDTF.getText().equals("") || foodTF.getText().equals("") || priceTF.getText().equals("") || 
                     typeDDL.getSelectedItem().toString().equals("Select type") || statusDDL.getSelectedItem().toString().equals("Select type")) {
                     // If any of the 5 fields is left blank then show a message
+                    logger.error("IllegalArgumentException occurred - User did not enter all data fields!");
                     throw new IllegalArgumentException("Please enter all data fields!");
                 } else {
                     DefaultTableModel menuTableModel = (DefaultTableModel) menuTable.getModel();
@@ -478,6 +485,7 @@ public class ManagerMenu extends javax.swing.JFrame {
 
                     // Add string array data to menu
                     menuTableModel.addRow(data);
+                    logger.info("User " + mgr.getUserID() + " has added Food ID " + foodIDTF.getText() + "into the Menu.");
                     JOptionPane.showMessageDialog(null,"Data added successfully!");
 
                     // Add string data to menu.txt
@@ -485,6 +493,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                         String fileData = foodID + "|" + food + "|" + price + "|" + type + "|" + status;
                         fh.appendToFile(fileData, file);
                     } catch (IOException e) {
+                        logger.error("Exception occurred - " + e.toString());
                         throw new IllegalArgumentException("File does not exist!");
                     }
 

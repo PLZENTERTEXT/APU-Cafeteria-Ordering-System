@@ -664,7 +664,7 @@ public class CustomerMenu extends javax.swing.JFrame {
         
         // Finding the line in the file which matches the current user ID
         try {
-            userIDLine = fh.locateInFile(cust.getUserID(), CAfile);
+            userIDLine = fh.locateItemInFile(cust.getUserID(), CAfile, 0);
         } catch (IOException e) {
             logger.error("Exception occurred - " + e.toString());
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());

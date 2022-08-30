@@ -9,30 +9,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 // All file related actions
 public class FileHandling {
     
-    int MAX_ARRAY_SIZE = 8; // A line in any file would only have 8 sections
-    
-    
-    public static String locateInFile(String query, File file) throws FileNotFoundException, IOException {
-        
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String line;
-  
-        while ((line = br.readLine()) != null){   
-            if (line.contains(query)){
-                return line; 
-            }
-        }
-        
-        return "NA";
-    }
+    private static Logger logger = LogManager.getLogger();
     
     // Filter lines that contains the query if it matches the entire word
     public static String filterLines(String query, String line) throws FileNotFoundException, IOException {
@@ -82,26 +69,7 @@ public class FileHandling {
         }
         return "NA";
     }
-    
-    
-    // THIS IS NOT WORKING
-    // Spliting the line into tokens -> Returns a particular section from the line/array
-    public String tokenFinder(String line, File file, int section) throws FileNotFoundException, IOException {
-        // To contain the tokens of the line
-        String[] inputArray = new String[MAX_ARRAY_SIZE];
-        
-        // Create input file
-        Scanner inputFile = new Scanner(file);
-     
-        // Returns true if the scanner has another token in its input
-        while (inputFile.hasNext()) {
-            StringTokenizer str = new StringTokenizer(line, "|");
-            for (int i = 0; i < MAX_ARRAY_SIZE; i++) {
-                inputArray[i] = str.nextToken();
-            }
-        }
-        return inputArray[section];
-    }
+   
     
     // Appending data to file
      public static void appendToFile(String line, File file) throws IOException {
@@ -124,6 +92,7 @@ public class FileHandling {
             sc.close();
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error: File does not exist!");
+            logger.error("Exception occurred - " + e.toString());
         }
         return count;
     }
@@ -173,6 +142,7 @@ public class FileHandling {
             fw.close();             
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            logger.error("Exception occurred - " + e.toString());
         }
     }
     
@@ -205,6 +175,7 @@ public class FileHandling {
             
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            logger.error("Exception occurred - " + e.toString());
         }
     }  
     
@@ -236,7 +207,7 @@ public class FileHandling {
             
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            logger.error("Exception occurred - " + e.toString());
         }
     }   
-    
 }

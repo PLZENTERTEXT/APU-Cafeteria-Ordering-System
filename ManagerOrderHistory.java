@@ -22,8 +22,12 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        // Set the user ID
         mgr.setUserID(userID);
         mgr.setUserPassword(userPassword);
+        userIDTF.setText(userID);
+        
         loadOrderHistoryTable();
     }
 
@@ -41,6 +45,9 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
         custBackBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         custOrderHistoryTable = new javax.swing.JTable();
+        userPanel = new javax.swing.JPanel();
+        userDisplayLabel1 = new javax.swing.JLabel();
+        userIDTF = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,25 +129,47 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
 
         contentPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 12, 950, 395));
 
+        userPanel.setBackground(new java.awt.Color(255, 255, 255));
+        userPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userDisplayLabel1.setBackground(new java.awt.Color(18, 18, 18));
+        userDisplayLabel1.setFont(new java.awt.Font("SF Pro Text", 1, 24)); // NOI18N
+        userDisplayLabel1.setForeground(new java.awt.Color(18, 18, 18));
+        userDisplayLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userDisplayLabel1.setText("USER ID");
+        userPanel.add(userDisplayLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 40));
+
+        userIDTF.setBackground(new java.awt.Color(18, 18, 18));
+        userIDTF.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
+        userIDTF.setForeground(new java.awt.Color(0, 102, 155));
+        userIDTF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userIDTF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 120, 70));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(headerPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(headerPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,5 +282,8 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel userDisplayLabel1;
+    private javax.swing.JLabel userIDTF;
+    private javax.swing.JPanel userPanel;
     // End of variables declaration//GEN-END:variables
 }

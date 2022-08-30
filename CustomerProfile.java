@@ -368,7 +368,8 @@ public class CustomerProfile extends javax.swing.JFrame {
                 
                 //If the top up amount does not meet the condition an error message is shown
                 if (topUpAmount > 100 || topUpAmount < 0){
-                    JOptionPane.showMessageDialog(null, "Please input an amount between RM 1 and RM 100.");
+                    logger.error("Customer " + cust.getUserID() + " has inputted a top up amount outside the range.");
+                    JOptionPane.showMessageDialog(null, "Error: Please input an amount between RM 1 and RM 100.");
                     topUpInput.setText("");
                     topUpAmount = 0.0;
                 }
@@ -397,7 +398,7 @@ public class CustomerProfile extends javax.swing.JFrame {
         
         }catch (NumberFormatException e){
             logger.error("Exception occurred - " + e.toString());
-            JOptionPane.showMessageDialog(null, "Please input a valid amount to top up.");
+            JOptionPane.showMessageDialog(null, "Error: Please input a valid amount to top up.");
         }
     }//GEN-LAST:event_mgrTopUpBtnActionPerformed
 

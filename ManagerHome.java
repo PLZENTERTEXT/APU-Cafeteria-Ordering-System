@@ -18,8 +18,12 @@ public class ManagerHome extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
+        
+        // Set the user ID
         mgr.setUserID(userID);
         mgr.setUserPassword(userPassword);
+        userIDTF.setText(userID);
+        
         
         if (userID.equals("admin")){
             mgrHomeHeader.setText("ADMIN HOME");
@@ -33,8 +37,9 @@ public class ManagerHome extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        headerPanel = new javax.swing.JPanel();
-        mgrHomeHeader = new javax.swing.JLabel();
+        userPanel = new javax.swing.JPanel();
+        userDisplayLabel1 = new javax.swing.JLabel();
+        userIDTF = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         custLogoutBtn = new javax.swing.JButton();
@@ -46,37 +51,30 @@ public class ManagerHome extends javax.swing.JFrame {
         mgrOrderHistoryBtn = new javax.swing.JButton();
         mgrManageOrderBtn = new javax.swing.JButton();
         AuditLogBtn = new javax.swing.JButton();
+        headerPanel = new javax.swing.JPanel();
+        mgrHomeHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(244, 244, 244));
         jPanel1.setForeground(new java.awt.Color(244, 244, 244));
 
-        headerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        userPanel.setBackground(new java.awt.Color(255, 255, 255));
+        userPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        mgrHomeHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
-        mgrHomeHeader.setForeground(new java.awt.Color(0, 0, 0));
-        mgrHomeHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mgrHomeHeader.setText("MANAGER HOME");
-        mgrHomeHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        mgrHomeHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        userDisplayLabel1.setBackground(new java.awt.Color(18, 18, 18));
+        userDisplayLabel1.setFont(new java.awt.Font("SF Pro Text", 1, 24)); // NOI18N
+        userDisplayLabel1.setForeground(new java.awt.Color(18, 18, 18));
+        userDisplayLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userDisplayLabel1.setText("USER ID");
+        userPanel.add(userDisplayLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 40));
 
-        javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
-        headerPanel.setLayout(headerPanelLayout);
-        headerPanelLayout.setHorizontalGroup(
-            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mgrHomeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        headerPanelLayout.setVerticalGroup(
-            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mgrHomeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        userIDTF.setBackground(new java.awt.Color(18, 18, 18));
+        userIDTF.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
+        userIDTF.setForeground(new java.awt.Color(0, 102, 155));
+        userIDTF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userIDTF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 120, 70));
 
         contentPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -190,7 +188,7 @@ public class ManagerHome extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(custLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addGap(65, 65, 65)
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(mgrUpdateMenuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                             .addComponent(mgrProfileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -242,25 +240,56 @@ public class ManagerHome extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        headerPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        mgrHomeHeader.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
+        mgrHomeHeader.setForeground(new java.awt.Color(0, 0, 0));
+        mgrHomeHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mgrHomeHeader.setText("MANAGER HOME");
+        mgrHomeHeader.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        mgrHomeHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
+        headerPanel.setLayout(headerPanelLayout);
+        headerPanelLayout.setHorizontalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mgrHomeHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        headerPanelLayout.setVerticalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mgrHomeHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(76, 76, 76))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -366,5 +395,8 @@ public class ManagerHome extends javax.swing.JFrame {
     private javax.swing.JButton mgrProfileBtn;
     private javax.swing.JButton mgrSalesReportBtn;
     private javax.swing.JButton mgrUpdateMenuBtn;
+    private javax.swing.JLabel userDisplayLabel1;
+    private javax.swing.JLabel userIDTF;
+    private javax.swing.JPanel userPanel;
     // End of variables declaration//GEN-END:variables
 }

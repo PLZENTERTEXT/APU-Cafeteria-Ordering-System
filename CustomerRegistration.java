@@ -317,19 +317,19 @@ public class CustomerRegistration extends javax.swing.JFrame {
             if (cust.getUserID().equals("")||cust.getUserName().equals("")||
                 cust.getUserPassword().equals("")||cust.getUserEmail().equals("")){
                     logger.error("A user did not enter all data fields.");
-                    JOptionPane.showMessageDialog(null, "All text fields must be filled out.");
+                    JOptionPane.showMessageDialog(null, "Error: Please fill out all text fields.");
             }
             
             // If the manager ID exists within the text file, an error message will be shown
-            else if (!"NA".equals(custFile.locateInFile(cust.getUserID(), file))){
+            else if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), file, 0))){
                 logger.error("A user entered an existing Customer ID.");
-                JOptionPane.showMessageDialog(null, "Customer ID already exists.");
+                JOptionPane.showMessageDialog(null, "Error: Customer ID already exists.");
             }
 
             //If the user entered an existing email within the text file, an error message will be shown
-            else if (!"NA".equals(custFile.locateInFile(cust.getUserEmail(), file))){
+            else if (!"NA".equals(custFile.locateItemInFile(cust.getUserEmail(), file, 3))){
                 logger.error("A user entered an existing Email.");
-                JOptionPane.showMessageDialog(null, "Customer Email already exists.");
+                JOptionPane.showMessageDialog(null, "Error: Customer Email already exists.");
             }
             
             //If all the other conditions are met then the user will be registered successfully

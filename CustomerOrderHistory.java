@@ -29,6 +29,11 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
         loadOrderHistoryTable();
         reviewTextArea.setLineWrap(true);
         reviewTextArea.setWrapStyleWord(true);
+        
+        // Set the user ID
+        cust.setUserID(userID);
+        cust.setUserPassword(userPassword);
+        userIDTF.setText(userID);
     }
     
     // Loads the order history of completed orders in the JTable
@@ -97,6 +102,9 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         reviewTextArea = new javax.swing.JTextArea();
         custSubmitReviewBtn = new javax.swing.JButton();
+        userPanel = new javax.swing.JPanel();
+        userDisplayLabel = new javax.swing.JLabel();
+        userIDTF = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -264,7 +272,7 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                             .addGap(20, 20, 20)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE))))
-                .addGap(14, 14, 14))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,25 +298,47 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        userPanel.setBackground(new java.awt.Color(255, 255, 255));
+        userPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userDisplayLabel.setBackground(new java.awt.Color(18, 18, 18));
+        userDisplayLabel.setFont(new java.awt.Font("SF Pro Text", 1, 24)); // NOI18N
+        userDisplayLabel.setForeground(new java.awt.Color(18, 18, 18));
+        userDisplayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userDisplayLabel.setText("USER ID");
+        userPanel.add(userDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 40));
+
+        userIDTF.setBackground(new java.awt.Color(18, 18, 18));
+        userIDTF.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
+        userIDTF.setForeground(new java.awt.Color(0, 102, 155));
+        userIDTF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userIDTF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 120, 70));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
+                .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                    .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(headerPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -357,7 +387,7 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                 
                 //If the length of the review is less than 4 characters it will show an error
                 if(reviewTextArea.getText().length()<4){
-                    javax.swing.JOptionPane.showMessageDialog(null, "Minimum of 4 characters.");
+                    javax.swing.JOptionPane.showMessageDialog(null, "Error: Please enter a minimum of 4 characters.");
                 }
                 
                 //If length of the review is between 4 and 300 characters in length it will store the data the table line into a variable
@@ -383,7 +413,7 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                     }
                 }
                 else{
-                    javax.swing.JOptionPane.showMessageDialog(null, "Maximum of 300 characters.");
+                    javax.swing.JOptionPane.showMessageDialog(null, "Error: Only a maximum of 300 characters.");
                 }
             }
         } catch (IOException e) {
@@ -441,5 +471,8 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
     private javax.swing.JLabel orderHistoryLabel;
     private javax.swing.JLabel orderHistoryLabel1;
     private javax.swing.JTextArea reviewTextArea;
+    private javax.swing.JLabel userDisplayLabel;
+    private javax.swing.JLabel userIDTF;
+    private javax.swing.JPanel userPanel;
     // End of variables declaration//GEN-END:variables
 }

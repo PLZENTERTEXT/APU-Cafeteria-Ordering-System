@@ -261,13 +261,13 @@ public class CustomerLogin extends javax.swing.JFrame {
                 
                 //If the password does not match the user ID or password, then the user won't be logged in and an error message is shown
                 else{
-                    JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
+                    JOptionPane.showMessageDialog(null, "Error: Login Unsuccessful. Incorrect ID or Password.");
                     logger.error("A user has failed to login with an incorrect ID or Password.");
                 }   
             }
             //If the customer ID is not found in the manager text file then it will show an error
             else{
-                JOptionPane.showMessageDialog(null, "Customer ID does not exist.");
+                JOptionPane.showMessageDialog(null, "Error: Customer ID does not exist.");
                 logger.error("A user has typed in a Customer ID that does not exist.");
             }
         } catch (IOException e) {
@@ -317,12 +317,12 @@ public class CustomerLogin extends javax.swing.JFrame {
                     }
 
                     else{
-                        JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
+                        JOptionPane.showMessageDialog(null, "Error: Login Unsuccessful. Incorrect ID or Password.");
                         logger.error("A user has failed to login with an incorrect ID or Password.");
                     }   
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Customer ID does not exist.");
+                    JOptionPane.showMessageDialog(null, "Error: Customer ID does not exist.");
                     logger.error("A user has typed in a Customer ID that does not exist.");
                 }
             } catch (IOException e) {
