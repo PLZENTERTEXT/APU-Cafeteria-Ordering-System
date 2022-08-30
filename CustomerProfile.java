@@ -31,13 +31,18 @@ public class CustomerProfile extends javax.swing.JFrame {
         } catch (IOException e) {
             logger.error("Exception occurred - " + e.toString());
         }
+        
+        //Splits line into multiple sections
         String [] section = line.split("\\|");
+        
+        //Sets the customer credentials iwthin the text fields
         custID.setText(cust.getUserID());
         custName.setText(section[1]);
         custPassword.setText(cust.getUserPassword());
         custEmail.setText(section[3]);
         currentBalance.setText("RM " + section[4]);
         
+        //Ensures textfields cannot be edited
         custID.setEditable(false);
         custName.setEditable(false);
         custPassword.setEditable(false);
@@ -360,26 +365,34 @@ public class CustomerProfile extends javax.swing.JFrame {
             try {
                 Double topUpAmount;
                 topUpAmount = Double.parseDouble(topUpInput.getText());
-
+                
+                //If the top up amount does not meet the condition an error message is shown
                 if (topUpAmount > 100 || topUpAmount < 0){
                     JOptionPane.showMessageDialog(null, "Please input an amount between RM 1 and RM 100.");
                     topUpInput.setText("");
                     topUpAmount = 0.0;
                 }
-
+                
+                //Adds the top up amount with the previous value from the line within the text file
                 Double newAmount = topUpAmount + Double.parseDouble(currentBalance.getText().replace("RM ", ""));
+                
+                //Rewrites the line with the new top up amount back into the text file
                 custFile.rewriteContent(file, 0, custID.getText(), String.valueOf(newAmount));
                 logger.info("User " + cust.getUserID() + " has topped up RM" + topUpAmount + "to his/her account. User " 
                         + cust.getUserID() + " current balance is RM" + newAmount);
             
                 try {
+                    //Stores the line from the customer file 
                     line = custFile.locateItemInFile(cust.getUserID(), file, 0);
                 } catch (IOException e) {
                     logger.error("Exception occurred - " + e.toString());
                 }
+            
+            //Splits the line into multiple sections and sets the current balance text area to the new value 
             String [] section = line.split("\\|");
             currentBalance.setText("RM " + section[4]);
-
+            
+            //Resets the top up input text field to blank again
             topUpInput.setText("");
         
         }catch (NumberFormatException e){
@@ -391,7 +404,8 @@ public class CustomerProfile extends javax.swing.JFrame {
     private void topUpInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topUpInputActionPerformed
        
     }//GEN-LAST:event_topUpInputActionPerformed
-
+    
+    //Check box button to show and hide the password
     private void showPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswordActionPerformed
         if(showPassword.isSelected()){
             custPassword.setEchoChar((char)0); 

@@ -232,7 +232,8 @@ public class CustomerLogin extends javax.swing.JFrame {
     private void custPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custPasswordFieldActionPerformed
 
     }//GEN-LAST:event_custPasswordFieldActionPerformed
-
+        
+    //Gets the user ID and password from the text fields and converts the password to SHA-256 format
     private void custLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLoginBtnActionPerformed
         cust.setUserID(custIDField.getText());
         try {
@@ -245,8 +246,12 @@ public class CustomerLogin extends javax.swing.JFrame {
         File file = new File("custAccount.txt");
         
         try {
+            
+            //The customer file is first checked if the user ID is present and the if the account is set to APPROVED
             if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), file, 0))){
-                if (!"NA".equals(custFile.locateItemInFile(cust.getUserPassword(), file, 2))){
+                
+                //Next, if the password is equivalent to the password within the same line it will log the user in
+                if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), cust.getUserPassword(), file, 0,2))){
                     JOptionPane.showMessageDialog(null, "Login Successful");
                     CustomerHome custLogin = new CustomerHome(cust.getUserID(), String.valueOf(custPasswordField.getPassword()));
                     custLogin.setVisible(true);
@@ -254,11 +259,13 @@ public class CustomerLogin extends javax.swing.JFrame {
                     logger.info("User " + cust.getUserID() + " has logged in successfully.");
                 }
                 
+                //If the password does not match the user ID or password, then the user won't be logged in and an error message is shown
                 else{
                     JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
                     logger.error("A user has failed to login with an incorrect ID or Password.");
                 }   
             }
+            //If the customer ID is not found in the manager text file then it will show an error
             else{
                 JOptionPane.showMessageDialog(null, "Customer ID does not exist.");
                 logger.error("A user has typed in a Customer ID that does not exist.");
@@ -286,6 +293,8 @@ public class CustomerLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_custIDFieldActionPerformed
 
     private void custPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_custPasswordFieldKeyPressed
+       
+        //Code is identical to the login button above with one added feature of pressing the Enter key to log in
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
             cust.setUserID(custIDField.getText());
             try {
@@ -299,7 +308,7 @@ public class CustomerLogin extends javax.swing.JFrame {
 
             try {
                 if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), file, 0))){
-                    if (!"NA".equals(custFile.locateItemInFile(cust.getUserPassword(), file, 2))){
+                    if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), cust.getUserPassword(), file, 0,2))){
                         JOptionPane.showMessageDialog(null, "Login Successful");
                         CustomerHome custLogin = new CustomerHome(cust.getUserID(), String.valueOf(custPasswordField.getPassword()));
                         custLogin.setVisible(true);

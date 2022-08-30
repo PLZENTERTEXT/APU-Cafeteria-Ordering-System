@@ -1,5 +1,7 @@
 package General;
 
+import java.io.IOException;
+import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
@@ -311,6 +313,14 @@ public class ManagerHome extends javax.swing.JFrame {
     }//GEN-LAST:event_mgrProfileBtnActionPerformed
 
     private void mgrSalesReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrSalesReportBtnActionPerformed
+        ManagerSalesReport mgrSalesReport;
+        try {
+            mgrSalesReport = new ManagerSalesReport(mgr.getUserID(), mgr.getUserPassword());
+            mgrSalesReport.setVisible(true);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(ManagerHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
         logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Sales Report page.");
     }//GEN-LAST:event_mgrSalesReportBtnActionPerformed
 

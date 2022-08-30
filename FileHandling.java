@@ -53,8 +53,11 @@ public class FileHandling {
         String line;
         String [] lineArray;
   
-        while ((line = br.readLine()) != null){    
+        while ((line = br.readLine()) != null){
+            // Split the lines into tokens
             lineArray = line.split("\\|");
+            
+            // Only returns line when condition is met
             if (lineArray[sectionNumber].equals(query)){
                 return line; 
             }
@@ -68,17 +71,18 @@ public class FileHandling {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
         String [] lineArray;
-
         while ((line = br.readLine()) != null){
-
+            // Split the lines into tokens
             lineArray = line.split("\\|");
 
+            // Only returns line when condition is met
             if (lineArray[sectionNumber].equals(query) && lineArray[sectionNumber2].equals(query2)){
                 return line;
             }
         }
         return "NA";
     }
+    
     
     // THIS IS NOT WORKING
     // Spliting the line into tokens -> Returns a particular section from the line/array

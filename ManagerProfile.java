@@ -26,16 +26,22 @@ public class ManagerProfile extends javax.swing.JFrame {
         FileHandling custFile = new FileHandling();
         File file = new File("mgrAccount.txt");
         try {
+            //Locates line in file and stores in variable
             line = custFile.locateItemInFile(mgr.getUserID(), file, 0);
         } catch (IOException e) {
             logger.error("Exception occurred - " + e.toString());
         }
+        
+        //Splits line into multiple sections
         String [] section = line.split("\\|");
+        
+        //Sets the manager credentials iwthin the text fields
         mgrID.setText(userID);
         mgrName.setText(section[1]);
         mgrPassword.setText(userPassword);
         mgrEmail.setText(section[3]);
         
+        //Ensures textfields cannot be edited
         mgrID.setEditable(false);
         mgrName.setEditable(false);
         mgrPassword.setEditable(false);
@@ -262,6 +268,7 @@ public class ManagerProfile extends javax.swing.JFrame {
         logger.info("User " + mgr.getUserID() + " has attempted to view Manager Home page.");
     }//GEN-LAST:event_mgrBackBtnActionPerformed
 
+    //Check box button to show and hide the password
     private void showPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswordActionPerformed
         if(showPassword.isSelected()){
             mgrPassword.setEchoChar((char)0); 

@@ -45,8 +45,8 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                     String data[] = str.split("\\|");
                     // Only adding the users orders in the order history
                     if (data[1].equals(cust.getUserID())) {
-                        // Adding the data into the order history table
                         
+                        // Calculating the total price and add the data into the order history table
                         Double totalPrice;
                         totalPrice = Double.parseDouble(data[4]) * Integer.parseInt(data[5]);
                         totalPrice = Math.round(totalPrice * 100.0) / 100.0;
@@ -69,6 +69,7 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
     
     public String idToDateConversion(String orderID) {
         
+        //Extracts the date from the order ID and converts it into a date format
         String day = orderID.substring(0, 2);
         String month = orderID.substring(2,4);
         String year = orderID.substring(4,8);         
@@ -342,6 +343,8 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
         DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
         
         try {
+            
+            //Searches the text file to see if a review has already been submitted
             if (!"NA".equals(fh.locateItemInFile(orderHistoryTableModel.getValueAt(
                             custOrderHistoryTable.getSelectedRow(), 0).toString(), orderHistoryTableModel.getValueAt(
                             custOrderHistoryTable.getSelectedRow(), 0).toString(), reviewFile, 0, 1))){
@@ -349,11 +352,15 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                 reviewTextArea.setText(null);
             }
             
+            //If the feedback for a particular order is not in the text file it will proceed to add it in
             else if(custOrderHistoryTable.getSelectedRowCount() == 1){
+                
+                //If the length of the review is less than 4 characters it will show an error
                 if(reviewTextArea.getText().length()<4){
-                    javax.swing.JOptionPane.showMessageDialog(null, "Minimum of 10 characters.");
+                    javax.swing.JOptionPane.showMessageDialog(null, "Minimum of 4 characters.");
                 }
                 
+                //If length of the review is between 4 and 300 characters in length it will store the data the table line into a variable
                 else if (reviewTextArea.getText().length()<300||reviewTextArea.getText().length()>4){
                     String reviewContents = orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 0).toString() 
                             + "|" + cust.getUserID()
@@ -361,11 +368,15 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
                             + "|" + orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 2).toString()
                             + "|" + orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 6).toString()
                             + "|" + reviewTextArea.getText();
-                    reviewTextArea.setText(null);
+                    reviewTextArea.setText(null); // Text area is set back to null for user to provide next review
                     try {
+                        
+                        // Appends the contents of the review into the file again
                         fh.appendToFile(reviewContents, reviewFile);
-                        logger.info("User " + cust.getUserID() + " has submitted a review for Order ID " + orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 0).toString());
+                        logger.info("User " + cust.getUserID() + " has submitted a review for Order ID " 
+                                + orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(), 0).toString());
                         javax.swing.JOptionPane.showMessageDialog(null, "Order review submitted.");
+                        
                     } catch (IOException e) {
                         logger.error("Exception occurred - " + e.toString());
                         javax.swing.JOptionPane.showMessageDialog(null, "File cannot be opened.");

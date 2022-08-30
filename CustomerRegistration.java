@@ -280,6 +280,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
    
     }//GEN-LAST:event_custIDFieldActionPerformed
 
+    //Clears the text fields to null upon click
     private void custClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custClearBtnActionPerformed
         custIDField.setText(null);
         custNameField.setText(null);
@@ -294,6 +295,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
     private void custRegisterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custRegisterBtnActionPerformed
         
+        //Converts UserID and UserName to UpperCase
         cust.setUserID(custIDField.getText().toUpperCase());
         cust.setUserName(custNameField.getText().toUpperCase());
         try {
@@ -303,29 +305,34 @@ public class CustomerRegistration extends javax.swing.JFrame {
         }
         cust.setUserEmail(custEmailField.getText());
 
-        // Setting the default blance among users
+        // Setting the default balance among users
         String custRegCredentials = cust.concatenateCredentials() + "|50.0";
             
+        //Create FileHandling object and file object to store data into the the customer account text file
         FileHandling custFile = new FileHandling();
         File file = new File("custAccount.txt");
         
         try {
+            //If any of the text fields are blank then an error message is shown
             if (cust.getUserID().equals("")||cust.getUserName().equals("")||
                 cust.getUserPassword().equals("")||cust.getUserEmail().equals("")){
                     logger.error("A user did not enter all data fields.");
                     JOptionPane.showMessageDialog(null, "All text fields must be filled out.");
             }
             
+            // If the manager ID exists within the text file, an error message will be shown
             else if (!"NA".equals(custFile.locateInFile(cust.getUserID(), file))){
                 logger.error("A user entered an existing Customer ID.");
                 JOptionPane.showMessageDialog(null, "Customer ID already exists.");
             }
-            
+
+            //If the user entered an existing email within the text file, an error message will be shown
             else if (!"NA".equals(custFile.locateInFile(cust.getUserEmail(), file))){
                 logger.error("A user entered an existing Email.");
                 JOptionPane.showMessageDialog(null, "Customer Email already exists.");
             }
             
+            //If all the other conditions are met then the user will be registered successfully
             else {
                 custFile.appendToFile(custRegCredentials, file);
                 logger.info("User " + cust.getUserID() + " has been registered successfully.");

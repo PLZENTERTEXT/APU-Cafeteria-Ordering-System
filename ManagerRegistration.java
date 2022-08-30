@@ -274,37 +274,46 @@ public class ManagerRegistration extends javax.swing.JFrame {
 
     private void mgrRegisterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrRegisterBtnActionPerformed
         
+        //Converts UserID and UserName to UpperCase
         mgr.setUserID(mgrIDField.getText().toUpperCase());
         mgr.setUserName(mgrNameField.getText().toUpperCase());
+        
+        //Converts password into hash format of SHA-256
         try {
             mgr.setUserPassword(password.toHexString(password.getSHA(String.valueOf(mgrPasswordField.getPassword()))));
         } catch (NoSuchAlgorithmException e) {
             logger.error("Exception occurred - " + e.toString());
         }
         mgr.setUserEmail(mgrEmailField.getText());
-
+        
+        //Stores contents string of credentials into variable to be appended into the file later
         String mgrRegCredentials = mgr.concatenateCredentials() + "|TO BE APPROVED";
-            
+        
+        //Create FileHandling object and file object to store data into the the manager account text file    
         FileHandling mgrFile = new FileHandling();
         File file = new File("mgrAccount.txt");
         
         try {
+            
+            //If any of the text fields are blank then an error message is shown
             if (mgr.getUserID().equals("")||mgr.getUserName().equals("")||
                 mgr.getUserPassword().equals("")||mgr.getUserEmail().equals("")){
                 logger.error("A user did not enter all data fields.");
                 JOptionPane.showMessageDialog(null, "All text fields must be filled out.");
             }
-            
+            // If the manager ID exists within the text file, an error message will be shown
             else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), file, 0))){
                 logger.error("A user entered an existing Manager ID.");
                 JOptionPane.showMessageDialog(null, "Manager ID already exists.");
             }
             
+            //If the user entered an existing email within the text file, an error message will be shown
             else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserEmail(), file, 3))){
                 logger.error("A user entered an existing Email.");
                 JOptionPane.showMessageDialog(null, "Manager Email already exists.");
             }
             
+            //If all the other conditions are met then the user will be registered successfully
             else {
                 mgrFile.appendToFile(mgrRegCredentials, file);
                 logger.info("Manager " + mgr.getUserID() + " has been registered successfully.");

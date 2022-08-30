@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 
 public class ManagerApproval extends javax.swing.JFrame {
-
+    
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     FileHandling fh  = new FileHandling();
     String mgrFile = "mgrAccount.txt";
@@ -30,10 +30,11 @@ public class ManagerApproval extends javax.swing.JFrame {
         loadManagerTable();
     }
     
+    //Used to load the mannager accounts table
     public void loadManagerTable() {
         //Creating object for the JTable
         DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
-        mgrApprovalTableModel.setRowCount(0);
+        mgrApprovalTableModel.setRowCount(0); //Setting the row count back to 0
         File file = new File(mgrFile);
         
         try {
@@ -41,7 +42,10 @@ public class ManagerApproval extends javax.swing.JFrame {
             BufferedReader br = new BufferedReader(new FileReader(file));
             try{
                 while((line = br.readLine()) != null){  
-                    String data[] = line.split("\\|");       
+                    
+                    //Splits the line into multiple sections
+                    String data[] = line.split("\\|");     
+                    //Adds each line into the table row by row
                     mgrApprovalTableModel.addRow(new Object[] {data[0], data[1], data[3], data[4]});
                 }
                 br.close();
@@ -232,22 +236,36 @@ public class ManagerApproval extends javax.swing.JFrame {
         logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Home page.");
     }//GEN-LAST:event_mgrBackBtnActionPerformed
 
+    //Removes managers credentials from both the table and the text file
     private void mgrRejectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrRejectBtnActionPerformed
         DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
         String managerID;
+        
+        //Uses the selected row from the table and stores it in a variable
         managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
         File file = new File(mgrFile);
+        
+        //Removes the selected row from the file entirely
         fh.removeLine(file, 0, managerID);
+        
+        //Loads the manager table again
         loadManagerTable();
         logger.info("Manager " + mgr.getUserID() + " has rejected Manager " + managerID + ".");
     }//GEN-LAST:event_mgrRejectBtnActionPerformed
 
+    //Edits the managers approval status to "APPROVED"
     private void mgrApprovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrApprovalBtnActionPerformed
         DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
         String managerID;
+        
+        //Uses the selected row from the table and stores it in a variable
         managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
         File file = new File(mgrFile);
+        
+        //Rewrites the contents of the file with the new editted line for the manager to be "APPROVED"
         fh.rewriteContent(file, 0, managerID, "APPROVED");
+        
+        //Loads the manager table again
         loadManagerTable();
         logger.info("Manager " + mgr.getUserID() + " has approved Manager " + managerID + ".");
     }//GEN-LAST:event_mgrApprovalBtnActionPerformed

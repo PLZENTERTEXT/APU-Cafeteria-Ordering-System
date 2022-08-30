@@ -243,6 +243,8 @@ public class ManagerLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_mgrBackBtnActionPerformed
 
     private void mgrLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrLoginBtnActionPerformed
+        
+        //Gets the user ID and password from the text fields and converts the password to SHA-256 format
         mgr.setUserID(mgrIDField.getText());
         try {
             mgr.setUserPassword(password.toHexString(password.getSHA(String.valueOf(mgrPasswordField.getPassword()))));
@@ -253,27 +255,35 @@ public class ManagerLogin extends javax.swing.JFrame {
         FileHandling mgrFile = new FileHandling();
         File file = new File("mgrAccount.txt");
         
-        
+        //If the user ID keyed in is admin and the password is "admin123" it will be logged in as the administrator
         if (mgr.getUserID().equals("admin") && mgr.getUserPassword().equals("240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9")){
                 JOptionPane.showMessageDialog(null, "Login Successful! Welcome, Administrator.");
                 ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                 mgrLogin.setVisible(true);
-                this.dispose();
-        } else {
+                this.dispose();        
+        } 
+        
+        //If it's not the admin id and password the login will be as a manager account 
+        else {
             try {
-
+                //The manager file is first checked if the user ID is present and the if the account is set to APPROVED
                 if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), "APPROVED", file, 0, 4))){
-                    if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserPassword(), file, 2))){
+                    
+                    //Next, if the password is equivalent to the password within the same line it will log the user in
+                    if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), mgr.getUserPassword(), file, 0,2))){
                         JOptionPane.showMessageDialog(null, "Login Successful!");
                         ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                         mgrLogin.setVisible(true);
                         this.dispose();
                         logger.info("Manager " + mgr.getUserID() + " has logged in successfully.");
-                        
+                     
+                    //If the password does not match the user ID or password, then the user won't be logged in and an error message is shown
                     } else {
                         JOptionPane.showMessageDialog(null, "Login Unsuccessful. Incorrect ID or Password.");
                         logger.error("A user has failed to login with an incorrect ID or Password.");
                     }   
+                    
+                //If the manager ID is not found in the manager text file then it will show an error
                 } else {
                     JOptionPane.showMessageDialog(null, "Manager ID does not exist.");
                     logger.error("A user has typed in a Manager ID that does not exist.");
@@ -295,6 +305,8 @@ public class ManagerLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_mgrClearBtnActionPerformed
 
     private void mgrPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mgrPasswordFieldKeyPressed
+        
+        //Code is identical to the login button above with one added feature of pressing the Enter key to log in
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
             mgr.setUserID(mgrIDField.getText());
         try {
@@ -319,7 +331,7 @@ public class ManagerLogin extends javax.swing.JFrame {
             try {
 
                 if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), "APPROVED", file, 0, 4))){
-                    if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserPassword(), file, 2))){
+                    if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), mgr.getUserPassword(), file, 0,2))){
                         JOptionPane.showMessageDialog(null, "Login Successful!");
                         ManagerHome mgrLogin = new ManagerHome(mgr.getUserID(), String.valueOf(mgrPasswordField.getPassword()));
                         mgrLogin.setVisible(true);
