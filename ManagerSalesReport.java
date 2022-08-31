@@ -1,17 +1,22 @@
 package General;
 
+import java.awt.print.PrinterException;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 public class ManagerSalesReport extends javax.swing.JFrame{
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     SalesReportCalculations report = new SalesReportCalculations() {};
     FileHandling fh = new FileHandling();
+    private static Logger logger = LogManager.getLogger();
     
     public ManagerSalesReport(String userID, String userPassword) throws IOException {
         initComponents();
@@ -61,6 +66,7 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         dateSearchField = new javax.swing.JTextField();
         searchBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        printRptBtn = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         totalSalesLabel = new javax.swing.JLabel();
         totalSalesAmountLabel = new javax.swing.JLabel();
@@ -69,6 +75,7 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(244, 244, 244));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         userPanel.setBackground(new java.awt.Color(255, 255, 255));
         userPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -78,16 +85,19 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         userDisplayLabel.setForeground(new java.awt.Color(18, 18, 18));
         userDisplayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         userDisplayLabel.setText("USER ID");
-        userPanel.add(userDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, 40));
+        userPanel.add(userDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 10, 128, 40));
 
         userIDTF.setBackground(new java.awt.Color(18, 18, 18));
         userIDTF.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
         userIDTF.setForeground(new java.awt.Color(0, 102, 155));
         userIDTF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         userIDTF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 120, 68));
+        userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 56, 128, 56));
+
+        jPanel1.add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 17, -1, 124));
 
         headerPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        headerPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         custHomeHeader1.setFont(new java.awt.Font("SF Pro Text", 1, 48)); // NOI18N
         custHomeHeader1.setForeground(new java.awt.Color(0, 0, 0));
@@ -95,29 +105,17 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         custHomeHeader1.setText("SALES REPORT");
         custHomeHeader1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         custHomeHeader1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        headerPanel1.add(custHomeHeader1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 812, 100));
 
-        javax.swing.GroupLayout headerPanel1Layout = new javax.swing.GroupLayout(headerPanel1);
-        headerPanel1.setLayout(headerPanel1Layout);
-        headerPanel1Layout.setHorizontalGroup(
-            headerPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        headerPanel1Layout.setVerticalGroup(
-            headerPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel1.add(headerPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 17, -1, -1));
 
         contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        contentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        contentPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(985, 480, -1, 31));
 
         custBackBtn.setBackground(new java.awt.Color(0, 48, 73));
         custBackBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
@@ -128,6 +126,7 @@ public class ManagerSalesReport extends javax.swing.JFrame{
                 custBackBtnActionPerformed(evt);
             }
         });
+        contentPanel.add(custBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(865, 408, 100, 56));
 
         jPanel2.setBackground(new java.awt.Color(244, 244, 244));
         jPanel2.setForeground(new java.awt.Color(244, 244, 244));
@@ -168,6 +167,8 @@ public class ManagerSalesReport extends javax.swing.JFrame{
                 .addGap(20, 20, 20))
         );
 
+        contentPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 10, -1, -1));
+
         jPanel3.setBackground(new java.awt.Color(244, 244, 244));
         jPanel3.setForeground(new java.awt.Color(244, 244, 244));
         jPanel3.setToolTipText("");
@@ -203,6 +204,8 @@ public class ManagerSalesReport extends javax.swing.JFrame{
                 .addComponent(totalOrdersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
+
+        contentPanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 10, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(244, 244, 244));
         jPanel4.setForeground(new java.awt.Color(244, 244, 244));
@@ -241,6 +244,8 @@ public class ManagerSalesReport extends javax.swing.JFrame{
                 .addGap(16, 16, 16))
         );
 
+        contentPanel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(743, 6, -1, 115));
+
         salesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -264,6 +269,8 @@ public class ManagerSalesReport extends javax.swing.JFrame{
             salesTable.getColumnModel().getColumn(2).setResizable(false);
             salesTable.getColumnModel().getColumn(3).setResizable(false);
         }
+
+        contentPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 132, 720, 265));
 
         jPanel6.setBackground(new java.awt.Color(244, 244, 244));
         jPanel6.setForeground(new java.awt.Color(244, 244, 244));
@@ -298,30 +305,42 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Date format: dd-mm-yyyy");
 
+        printRptBtn.setBackground(new java.awt.Color(0, 48, 73));
+        printRptBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        printRptBtn.setForeground(new java.awt.Color(255, 255, 255));
+        printRptBtn.setText("PRINT REPORT");
+        printRptBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printRptBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34))))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dateSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(printRptBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,8 +348,12 @@ public class ManagerSalesReport extends javax.swing.JFrame{
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addGap(18, 18, 18)
+                .addComponent(printRptBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
+
+        contentPanel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 132, -1, -1));
 
         jPanel5.setBackground(new java.awt.Color(244, 244, 244));
         jPanel5.setForeground(new java.awt.Color(244, 244, 244));
@@ -367,83 +390,9 @@ public class ManagerSalesReport extends javax.swing.JFrame{
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGap(985, 985, 985)
-                        .addComponent(jLabel2))
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(contentPanelLayout.createSequentialGroup()
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(custBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1)
-                            .addGroup(contentPanelLayout.createSequentialGroup()
-                                .addGap(126, 126, 126)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(147, 147, 147)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(11, 11, 11)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(custBackBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(16, 16, 16)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        contentPanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 408, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(headerPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
+        jPanel1.add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 147, 994, 477));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -463,6 +412,7 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         ManagerHome mgrBack = new ManagerHome(mgr.getUserID(),mgr.getUserPassword());
         mgrBack.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Home page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 
     private void dateSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateSearchFieldActionPerformed
@@ -472,15 +422,17 @@ public class ManagerSalesReport extends javax.swing.JFrame{
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         DefaultTableModel salesTableModel = (DefaultTableModel) salesTable.getModel();
         salesTableModel.setRowCount(0); //Setting the row count to 0 each time the button is clicked
-        String orderDate = null; //Setting the orderDate back to null
+        
+        //Setting the orderDate back to null
+        String orderDate = null; 
         totalSalesAmountLabel.setText(null);
-        
-        
+
         try {
             //Validates date format 
             orderDate = report.dateValidation(dateSearchField.getText());
-        } catch (IOException ex) {
-            Logger.getLogger(ManagerSalesReport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
         if (orderDate != null){
             //itemDetails object reference created for storing item details from file
@@ -535,46 +487,38 @@ public class ManagerSalesReport extends javax.swing.JFrame{
                     //Calculates the total sales amount for that particular date
                     totalSalesAmountLabel.setText("RM " + String.valueOf(totalSales) + " ");
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(ManagerSalesReport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
             }
         }
     }//GEN-LAST:event_searchBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManagerSalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManagerSalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManagerSalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManagerSalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void printRptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printRptBtnActionPerformed
+        DefaultTableModel salesTableModel = (DefaultTableModel) salesTable.getModel();
+        if(salesTableModel.getRowCount() > 0){
+            // Set the header and the footer of the report
+            MessageFormat header = new MessageFormat("Daily Sales Report (" + dateSearchField.getText() + ")");
 
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ManagerSalesReport().setVisible(true);
-//            }
-//        });
-    }
+            try {
+                // Add the total row
+                salesTableModel.addRow(new Object[] {"", "", "", ""});
+                salesTableModel.addRow(new Object[] {"Total Sales", "", "", totalSalesAmountLabel.getText()});
+                
+                // Print the table as a report
+                salesTable.print(JTable.PrintMode.FIT_WIDTH, header, null); 
+                
+            } catch(PrinterException e) {
+                logger.error("Exception occurred - " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: No data to generate report!");
+        }
+
+        logger.info("Manager " + mgr.getUserID() + " has attempted to print the daily report of the date " + dateSearchField.getText() + ".");
+    }//GEN-LAST:event_printRptBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
@@ -595,6 +539,7 @@ public class ManagerSalesReport extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton printRptBtn;
     private javax.swing.JTable salesTable;
     private javax.swing.JButton searchBtn;
     private javax.swing.JLabel systemBalanceLabel;

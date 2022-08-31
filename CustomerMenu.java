@@ -18,11 +18,10 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class CustomerMenu extends javax.swing.JFrame {
+public class CustomerMenu extends javax.swing.JFrame implements Menu {
 
     private String foodID;
     private String food;
-    private String type;
     private double price;
     private int quantity;
     private double total;
@@ -74,7 +73,7 @@ public class CustomerMenu extends javax.swing.JFrame {
     // To load the menu by putting everything in menu.txt to menu table (Only AVAILABLE items)
     public void loadMenu() {
         DefaultTableModel menuTableModel = (DefaultTableModel) custMenuTable.getModel();
-        // menuTableModel.setRowCount(0);
+        menuTableModel.setRowCount(0);
         File file = new File(menuFile);
         
         try {
@@ -562,13 +561,13 @@ public class CustomerMenu extends javax.swing.JFrame {
              // If the text field is left blank then show a message, if not, put it into menu.txt & menu
             if(custFoodIDTF.getText().equals("")) {
                 // If the text fields is left blank then show a message
-                logger.error("IllegalArgumentException occured: User " + cust.getUserID() + " did not enter all data fields.");
-                throw new IllegalArgumentException("Please enter all data fields!");
+                logger.error("Exception occured: User " + cust.getUserID() + " did not enter all data fields.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter all data fields!.");
             } else {
                 // If the Food ID does not exist, show error
                 if (checkValueExistsInTable(menuTableModel, custMenuTable, foodID) == 0) {
-                    logger.error("IllegalArgumentException occured: User " + cust.getUserID() + " entered an invalid Food ID.");
-                    throw new IllegalArgumentException("Food ID does not exist.");
+                    logger.error("Exception occured: User " + cust.getUserID() + " entered an invalid Food ID.");
+                    JOptionPane.showMessageDialog(null, "Error: Food ID does not exist.");
                 // If the Food ID exists, add the quantity amount
                 } else if (checkValueExistsInTable(orderItemTableModel, orderItemTable, foodID) == 1) {
                     quantity = (int) foodQuantitySpinner.getValue();
@@ -737,43 +736,7 @@ public class CustomerMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_totalTFActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new CustomerMenu().setVisible(true);
-//            }
-//        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTCButton;

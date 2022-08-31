@@ -245,9 +245,7 @@ public class WelcomePage extends javax.swing.JFrame {
         logger.info("A user has attempted to view Manager Login page.");
     }//GEN-LAST:event_mgrLoginOptionActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ManagerMenu extends javax.swing.JFrame {
+public class ManagerMenu extends javax.swing.JFrame implements Menu {
 
     private String foodID;
     private String food;
@@ -80,11 +80,13 @@ public class ManagerMenu extends javax.swing.JFrame {
                     menuTableModel.addRow(new Object[]{data[0], data[1], data[2], data[3], data[4]});
                 }
                 br.close();
-            } catch (IOException ex) {
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
+                logger.error("IOException occured: " + e.getMessage());
             }
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error: File does not exist!");
+            logger.error("FileNotFoundException occured: " + e.getMessage());
         }
     }
 
@@ -413,6 +415,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         ManagerHome mgrHome = new ManagerHome(mgr.getUserID(), mgr.getUserPassword());
         mgrHome.setVisible(true);
         this.dispose();
+        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Home page.");
     }//GEN-LAST:event_backButtonActionPerformed
 
     // Putting everything from the menu table to menu.txt
@@ -436,6 +439,7 @@ public class ManagerMenu extends javax.swing.JFrame {
             bw.close();
             fw.close();
         } catch (IOException e) {
+            logger.error("Exception occurred - " + e.toString());
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
 
@@ -453,19 +457,21 @@ public class ManagerMenu extends javax.swing.JFrame {
         try {
             // If the Food ID already exists, show error
             if (!"NA".equals(fh.locateItemInFile(foodID, file, 0))) {
-                logger.error("IllegalArgumentException occurred - Food ID must be unique.");
-                throw new IllegalArgumentException("Food ID must be unique.");
+                logger.error("Exception occured: User " + mgr.getUserID() + " entered an existing Food ID.");
+                JOptionPane.showMessageDialog(null, "Error: Food ID already exist.");
+            
             // If the Food ID doesn't exist, proceed
             } else {
                 food = foodTF.getText().toUpperCase();
+                
                 try {
                     String strPrice = priceTF.getText();
                     price = Double.parseDouble(strPrice);
                     price = Math.round(price * 100.0) / 100.0;
                 } catch (NumberFormatException e){
                     // Throw error if it can't be converted to double
-                    logger.error("IllegalArgumentException occurred - " + e.toString());
-                    throw new IllegalArgumentException("Please insert numbers only.");
+                    logger.error("Exception occurred - " + e.toString());
+                    JOptionPane.showMessageDialog(null, "Please insert numbers only.");
                 }
                 type = typeDDL.getSelectedItem().toString().toUpperCase();
                 status = statusDDL.getSelectedItem().toString().toUpperCase();
@@ -475,8 +481,9 @@ public class ManagerMenu extends javax.swing.JFrame {
                 if(foodIDTF.getText().equals("") || foodTF.getText().equals("") || priceTF.getText().equals("") || 
                     typeDDL.getSelectedItem().toString().equals("Select type") || statusDDL.getSelectedItem().toString().equals("Select type")) {
                     // If any of the 5 fields is left blank then show a message
-                    logger.error("IllegalArgumentException occurred - User did not enter all data fields!");
-                    throw new IllegalArgumentException("Please enter all data fields!");
+                    logger.error("Exception occured: User " + mgr.getUserID() + " did not enter all data fields.");
+                    JOptionPane.showMessageDialog(null, "Error: Please enter all data fields!");
+ 
                 } else {
                     DefaultTableModel menuTableModel = (DefaultTableModel) menuTable.getModel();
 
@@ -494,14 +501,15 @@ public class ManagerMenu extends javax.swing.JFrame {
                         fh.appendToFile(fileData, file);
                     } catch (IOException e) {
                         logger.error("Exception occurred - " + e.toString());
-                        throw new IllegalArgumentException("File does not exist!");
+                        JOptionPane.showMessageDialog(null, "File does not exist!");
                     }
 
                     // Clearing the input for the menu
                     refreshMenuSelection();
                 }
             }
-        } catch (Exception e) {
+        } catch (HeadlessException | IOException e) {
+            logger.error("Exception occurred - " + e.toString());
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_addButtonActionPerformed
@@ -554,41 +562,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         statusDDL.setSelectedItem("Select type");
     }//GEN-LAST:event_menuTableMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
     
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManagerMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManagerMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManagerMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManagerMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ManagerMenu().setVisible(true);
-//            }
-//        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
