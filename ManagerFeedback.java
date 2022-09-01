@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 public class ManagerFeedback extends javax.swing.JFrame {
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
-    String customerReviewsFile = "customerReviews.txt";
+    String CRFILE = "customerReviews.txt";
     private static Logger logger = LogManager.getLogger();
     
     public ManagerFeedback(String userID, String userPassword) {
@@ -44,7 +44,7 @@ public class ManagerFeedback extends javax.swing.JFrame {
 
     private void loadOrderHistoryTable(){
         DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
-        File file = new File(customerReviewsFile);
+        File file = new File(CRFILE);
         
         try {
             String str;
@@ -100,7 +100,7 @@ public class ManagerFeedback extends javax.swing.JFrame {
         orderDateTF = new javax.swing.JTextField();
         userPanel1 = new javax.swing.JPanel();
         userDisplayLabel1 = new javax.swing.JLabel();
-        userIDTF1 = new javax.swing.JLabel();
+        userIDTF = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,7 +128,7 @@ public class ManagerFeedback extends javax.swing.JFrame {
             headerPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -284,12 +284,12 @@ public class ManagerFeedback extends javax.swing.JFrame {
         userDisplayLabel1.setText("USER ID");
         userPanel1.add(userDisplayLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 40));
 
-        userIDTF1.setBackground(new java.awt.Color(18, 18, 18));
-        userIDTF1.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
-        userIDTF1.setForeground(new java.awt.Color(0, 102, 155));
-        userIDTF1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        userIDTF1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        userPanel1.add(userIDTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 120, 70));
+        userIDTF.setBackground(new java.awt.Color(18, 18, 18));
+        userIDTF.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
+        userIDTF.setForeground(new java.awt.Color(0, 102, 155));
+        userIDTF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userIDTF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        userPanel1.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 120, 60));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -369,7 +369,7 @@ public class ManagerFeedback extends javax.swing.JFrame {
         foodIDTF.setText(orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(),2).toString());
         orderDateTF.setText(orderHistoryTableModel.getValueAt(custOrderHistoryTable.getSelectedRow(),3).toString());
         
-        File file = new File(customerReviewsFile);
+        File file = new File(CRFILE);
         FileHandling fh = new FileHandling();
         
         try {
@@ -423,11 +423,8 @@ public class ManagerFeedback extends javax.swing.JFrame {
     private javax.swing.JTextField orderDateTF;
     private javax.swing.JLabel orderIDLabel;
     private javax.swing.JTextField orderIDTF;
-    private javax.swing.JLabel userDisplayLabel;
     private javax.swing.JLabel userDisplayLabel1;
     private javax.swing.JLabel userIDTF;
-    private javax.swing.JLabel userIDTF1;
-    private javax.swing.JPanel userPanel;
     private javax.swing.JPanel userPanel1;
     // End of variables declaration//GEN-END:variables
 }

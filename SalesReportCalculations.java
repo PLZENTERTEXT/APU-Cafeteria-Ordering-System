@@ -9,8 +9,8 @@ public class SalesReportCalculations {
     FileHandling fh = new FileHandling();
     File file = new File("completedOrders.txt");
     
-    public Double calculateSystemBalance() throws IOException{
-        Double balance = 0.0;
+    public double calculateSystemBalance() throws IOException {
+        double balance = 0.0;
         
         //Iterate through each line of the file and adds the money
         for (int i = 0; i < fh.numberOfLines(file); i++){
@@ -45,8 +45,7 @@ public class SalesReportCalculations {
     }  
     
     //Finds all sales on a particular date within the text files and returns them in the form of an array list
-    public ArrayList<String> findAllSales(String orderDate) throws IOException{
-        int dailySales = 0;
+    public ArrayList<String> findAllSales(String orderDate) throws IOException {
         ArrayList<String> lines = new ArrayList<String>();
         
         
@@ -74,8 +73,6 @@ public class SalesReportCalculations {
     //Finds all sales on a particular date and item id in the text file and returns them in the form of an array list
     public ArrayList<String> findAllSales(String orderDate, String itemID) throws IOException{
         
-        
-        int dailySales = 0;
         ArrayList<String> lines = new ArrayList<String>();
         
         for (int i = 0; i < fh.numberOfLines(file); i++){
@@ -101,8 +98,7 @@ public class SalesReportCalculations {
     
     //Validates the date entered by the user by checking the text files to see if the date exists
     public String dateValidation(String orderDate) throws IOException{
-        int dailySales = 0;
-        
+
         //If the orderDate is blank, then it will immediately return a null value
         if (orderDate.equals("")){
                 return null;

@@ -18,13 +18,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ManagerMenu extends javax.swing.JFrame implements Menu {
-
+      
     private String foodID;
     private String food;
-    private Double price;
+    private double price;
     private String type;
     private String status;
-    String fileName = "menu.txt";
     
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     private static Logger logger = LogManager.getLogger();
@@ -56,6 +55,7 @@ public class ManagerMenu extends javax.swing.JFrame implements Menu {
     }
     
     // Clearing the input for the menu
+    @Override
     public void refreshMenuSelection() {
         foodIDTF.setText(null);
         foodTF.setText(null);
@@ -65,10 +65,11 @@ public class ManagerMenu extends javax.swing.JFrame implements Menu {
     }
 
     // To load the menu by putting everything in menu.txt to menu table
+    @Override
     public void loadMenu() {
         DefaultTableModel menuTableModel = (DefaultTableModel) menuTable.getModel();
         menuTableModel.setRowCount(0);
-        File file = new File(fileName);
+        File file = new File(MENUFILE);
         try {
             String str;
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -422,7 +423,7 @@ public class ManagerMenu extends javax.swing.JFrame implements Menu {
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         DefaultTableModel menuTableModel = (DefaultTableModel) menuTable.getModel();
         try {
-            File file = new File(fileName);
+            File file = new File(MENUFILE);
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             
@@ -450,7 +451,7 @@ public class ManagerMenu extends javax.swing.JFrame implements Menu {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         
         FileHandling fh = new FileHandling();
-        File file = new File(fileName);
+        File file = new File(MENUFILE);
 
         // Getting user input
         foodID = foodIDTF.getText().toUpperCase();
@@ -488,7 +489,7 @@ public class ManagerMenu extends javax.swing.JFrame implements Menu {
                     DefaultTableModel menuTableModel = (DefaultTableModel) menuTable.getModel();
 
                     // Store inputted data into a String array
-                    String[] data = {foodID, food, price.toString(), type, status};
+                    String[] data = {foodID, food, Double.toString(price), type, status};
 
                     // Add string array data to menu
                     menuTableModel.addRow(data);
@@ -561,8 +562,6 @@ public class ManagerMenu extends javax.swing.JFrame implements Menu {
         typeDDL.setSelectedItem("Select type");
         statusDDL.setSelectedItem("Select type");
     }//GEN-LAST:event_menuTableMouseClicked
-
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

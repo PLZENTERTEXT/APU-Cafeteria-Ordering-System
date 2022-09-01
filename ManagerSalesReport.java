@@ -15,7 +15,6 @@ public class ManagerSalesReport extends javax.swing.JFrame{
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     SalesReportCalculations report = new SalesReportCalculations() {};
-    FileHandling fh = new FileHandling();
     private static Logger logger = LogManager.getLogger();
     
     public ManagerSalesReport(String userID, String userPassword) throws IOException {
@@ -49,7 +48,7 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         custHomeHeader1 = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        custBackBtn = new javax.swing.JButton();
+        mgrBackBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         systemBalanceLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -94,7 +93,7 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         userIDTF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 56, 128, 56));
 
-        jPanel1.add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 17, -1, 124));
+        jPanel1.add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 17, 150, 120));
 
         headerPanel1.setBackground(new java.awt.Color(255, 255, 255));
         headerPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,7 +106,7 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         custHomeHeader1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         headerPanel1.add(custHomeHeader1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 812, 100));
 
-        jPanel1.add(headerPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 17, -1, -1));
+        jPanel1.add(headerPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 17, -1, 120));
 
         contentPanel.setBackground(new java.awt.Color(255, 255, 255));
         contentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -117,16 +116,16 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         contentPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(985, 480, -1, 31));
 
-        custBackBtn.setBackground(new java.awt.Color(0, 48, 73));
-        custBackBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        custBackBtn.setForeground(new java.awt.Color(255, 255, 255));
-        custBackBtn.setText("BACK");
-        custBackBtn.addActionListener(new java.awt.event.ActionListener() {
+        mgrBackBtn.setBackground(new java.awt.Color(0, 48, 73));
+        mgrBackBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        mgrBackBtn.setForeground(new java.awt.Color(255, 255, 255));
+        mgrBackBtn.setText("BACK");
+        mgrBackBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                custBackBtnActionPerformed(evt);
+                mgrBackBtnActionPerformed(evt);
             }
         });
-        contentPanel.add(custBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(865, 408, 100, 56));
+        contentPanel.add(mgrBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(865, 408, 100, 56));
 
         jPanel2.setBackground(new java.awt.Color(244, 244, 244));
         jPanel2.setForeground(new java.awt.Color(244, 244, 244));
@@ -408,12 +407,12 @@ public class ManagerSalesReport extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void custBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custBackBtnActionPerformed
+    private void mgrBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrBackBtnActionPerformed
         ManagerHome mgrBack = new ManagerHome(mgr.getUserID(),mgr.getUserPassword());
         mgrBack.setVisible(true);
         this.dispose();
         logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Home page.");
-    }//GEN-LAST:event_custBackBtnActionPerformed
+    }//GEN-LAST:event_mgrBackBtnActionPerformed
 
     private void dateSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateSearchFieldActionPerformed
 
@@ -522,7 +521,6 @@ public class ManagerSalesReport extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton custBackBtn;
     private javax.swing.JLabel custHomeHeader1;
     private javax.swing.JTextField dateSearchField;
     private javax.swing.JPanel headerPanel1;
@@ -539,6 +537,7 @@ public class ManagerSalesReport extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton mgrBackBtn;
     private javax.swing.JButton printRptBtn;
     private javax.swing.JTable salesTable;
     private javax.swing.JButton searchBtn;

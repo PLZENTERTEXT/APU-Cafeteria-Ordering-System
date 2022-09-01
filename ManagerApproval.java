@@ -16,7 +16,7 @@ public class ManagerApproval extends javax.swing.JFrame {
     
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     FileHandling fh  = new FileHandling();
-    String mgrFile = "mgrAccount.txt";
+    private final String MGRACCFILE = "mgrAccount.txt";
     private static Logger logger = LogManager.getLogger();
 
     public ManagerApproval(String userID, String userPassword) {
@@ -31,11 +31,11 @@ public class ManagerApproval extends javax.swing.JFrame {
     }
     
     //Used to load the mannager accounts table
-    public void loadManagerTable() {
+    private void loadManagerTable() {
         //Creating object for the JTable
         DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
         mgrApprovalTableModel.setRowCount(0); //Setting the row count back to 0
-        File file = new File(mgrFile);
+        File file = new File(MGRACCFILE);
         
         try {
             String line;
@@ -241,7 +241,7 @@ public class ManagerApproval extends javax.swing.JFrame {
         
         //Uses the selected row from the table and stores it in a variable
         managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
-        File file = new File(mgrFile);
+        File file = new File(MGRACCFILE);
         
         //Removes the selected row from the file entirely
         fh.removeLine(file, 0, managerID);
@@ -258,7 +258,7 @@ public class ManagerApproval extends javax.swing.JFrame {
         
         //Uses the selected row from the table and stores it in a variable
         managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
-        File file = new File(mgrFile);
+        File file = new File(MGRACCFILE);
         
         //Rewrites the contents of the file with the new editted line for the manager to be "APPROVED"
         fh.rewriteContent(file, 0, managerID, "APPROVED");

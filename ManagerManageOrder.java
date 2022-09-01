@@ -16,11 +16,11 @@ import org.apache.logging.log4j.Logger;
 
 public class ManagerManageOrder extends javax.swing.JFrame {
 
-    String POfile = "pendingOrders.txt";
-    String COfile = "completedOrders.txt";
-    
     UserRegistrationInfo mgr = new UserRegistrationInfo();
     private static Logger logger = LogManager.getLogger();
+    
+    private final String POFILE = "pendingOrders.txt";
+    private final String COFILE = "completedOrders.txt";
     
     // Create new form "ManagerMenu"
     public ManagerManageOrder(String userID, String userPassword) {
@@ -49,10 +49,10 @@ public class ManagerManageOrder extends javax.swing.JFrame {
     }
 
     // To load the menu by putting everything in pendingOrders.txt to pendingOrdersTable
-    public void loadMenu() {
+    private void loadMenu() {
         DefaultTableModel POTableModel = (DefaultTableModel) pendingOrdersTable.getModel();
         POTableModel.setRowCount(0);
-        File file = new File(POfile);
+        File file = new File(POFILE);
         try {
             String str;
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -295,7 +295,7 @@ public class ManagerManageOrder extends javax.swing.JFrame {
 
     private void orderCompleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCompleteButtonActionPerformed
         DefaultTableModel POTableModel = (DefaultTableModel) pendingOrdersTable.getModel();
-        File POFile = new File(POfile);
+        File POFile = new File(POFILE);
         int row = pendingOrdersTable.getSelectedRow();
         Object[] section = new Object[6];
         
@@ -311,7 +311,7 @@ public class ManagerManageOrder extends javax.swing.JFrame {
         fh.removeLine(POFile, 0, 2, orderID, foodID);
         
         try {
-            File COFile = new File(COfile);
+            File COFile = new File(COFILE);
             String fileData = section[0] + "|" + section[1] + "|" + section[2] + "|" + section[3] + "|" + section[4] + "|" + section[5];
             fh.appendToFile(fileData, COFile);
         } catch (IOException e) {

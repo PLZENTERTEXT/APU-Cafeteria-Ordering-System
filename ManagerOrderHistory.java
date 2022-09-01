@@ -1,6 +1,5 @@
 package General;
 
-import General.UserRegistrationInfo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,12 +8,16 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 
-public class ManagerOrderHistory extends javax.swing.JFrame {
+
+public class ManagerOrderHistory extends javax.swing.JFrame implements OrderHistory {
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
-    String completedOrdersFile = "completedOrders.txt";
+    private final String COFILE = "completedOrders.txt";
+    private static Logger logger = LogManager.getLogger();
     
     public ManagerOrderHistory(String userID, String userPassword) {
         initComponents();
@@ -30,8 +33,55 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
         
         loadOrderHistoryTable();
     }
-
     
+    // Loads the order history of completed orders in the JTable
+    @Override
+    public void loadOrderHistoryTable(){
+        DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
+        File file = new File(COFILE);
+        
+        try {
+            String str;
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            try {
+                while((str = br.readLine()) != null){
+                    // Spliting the data into different section using the | delimeter
+                    String data[] = str.split("\\|");
+                    
+                    // Only adding the users orders in the order history
+                    // Adding the data into the order history table
+                    Double totalPrice;
+                    totalPrice = Double.parseDouble(data[4]) * Integer.parseInt(data[5]);
+                    totalPrice = Math.round(totalPrice * 100.0) / 100.0;
+                    String totalPriceStr;
+                    totalPriceStr = totalPrice.toString();
+                    orderHistoryTableModel.addRow(new Object[]{data[0], data[1], data[2], data[3], 
+                                            data[4], data[5], totalPriceStr, idToDateConversion(data[0])});
+                    
+                }
+                br.close();
+            } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
+            }
+        } catch (FileNotFoundException e) {
+            logger.error("Exception occurred - " + e.toString());
+            JOptionPane.showMessageDialog(null, "Error: File does not exist!");
+        }
+    }
+    
+    // Extracts the date from the order ID and converts it into a date format
+    @Override
+    public String idToDateConversion(String orderID) {
+
+        String day = orderID.substring(0, 2);
+        String month = orderID.substring(2,4);
+        String year = orderID.substring(4,8);         
+        String date = day + "-" + month + "-" + year;
+
+        return date;
+    }
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -190,57 +240,12 @@ public class ManagerOrderHistory extends javax.swing.JFrame {
         ManagerHome mgrBack = new ManagerHome(mgr.getUserID(), mgr.getUserPassword());
         mgrBack.setVisible(true);
         this.dispose();
-        
+        logger.info("User " + mgr.getUserID() + " has attempted to view Customer Home page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 
     private void custOrderHistoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custOrderHistoryTableMouseClicked
 
     }//GEN-LAST:event_custOrderHistoryTableMouseClicked
-
-    private void loadOrderHistoryTable(){
-        DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
-        // menuTableModel.setRowCount(0);
-        File file = new File(completedOrdersFile);
-        
-        try {
-            String str;
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            try {
-                while((str = br.readLine()) != null){
-                    // Spliting the data into different section using the | delimeter
-                    String data[] = str.split("\\|");
-                    
-                    // Only adding the users orders in the order history
-                    // Adding the data into the order history table
-                    Double totalPrice;
-                    totalPrice = Double.parseDouble(data[4]) * Integer.parseInt(data[5]);
-                    totalPrice = Math.round(totalPrice * 100.0) / 100.0;
-                    String totalPriceStr;
-                    totalPriceStr = totalPrice.toString();
-                    orderHistoryTableModel.addRow(new Object[]{data[0], data[1], data[2], data[3], 
-                                            data[4], data[5], totalPriceStr, idToDateConversion(data[0])});
-                    
-                }
-                br.close();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
-            }
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Error: File does not exist!");
-        }
-    }
-    
-    public String idToDateConversion(String orderID) {
-        
-        //Extracts the date from the order ID and converts it to date format
-        String day = orderID.substring(0, 2);
-        String month = orderID.substring(2,4);
-        String year = orderID.substring(4,8);         
-        String date = day + "-" + month + "-" + year;
-
-        return date;
-    }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

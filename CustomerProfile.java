@@ -366,7 +366,7 @@ public class CustomerProfile extends javax.swing.JFrame {
                 Double topUpAmount;
                 topUpAmount = Double.parseDouble(topUpInput.getText());
                 
-                //If the top up amount does not meet the condition an error message is shown
+                // If the top up amount does not meet the condition an error message is shown
                 if (topUpAmount > 100 || topUpAmount < 0){
                     logger.error("Customer " + cust.getUserID() + " has inputted a top up amount outside the range.");
                     JOptionPane.showMessageDialog(null, "Error: Please input an amount between RM 1 and RM 100.");
@@ -374,22 +374,23 @@ public class CustomerProfile extends javax.swing.JFrame {
                     topUpAmount = 0.0;
                 }
                 
-                //Adds the top up amount with the previous value from the line within the text file
+                // Adds the top up amount with the previous value from the line within the text file
                 Double newAmount = topUpAmount + Double.parseDouble(currentBalance.getText().replace("RM ", ""));
+                newAmount = (double) Math.round(newAmount * 100) / 100;
                 
-                //Rewrites the line with the new top up amount back into the text file
+                // Rewrites the line with the new top up amount back into the text file
                 custFile.rewriteContent(file, 0, custID.getText(), String.valueOf(newAmount));
-                logger.info("User " + cust.getUserID() + " has topped up RM" + topUpAmount + "to his/her account. User " 
+                logger.info("User " + cust.getUserID() + " has topped up RM" + topUpAmount + " to his/her account. User " 
                         + cust.getUserID() + " current balance is RM" + newAmount);
             
                 try {
-                    //Stores the line from the customer file 
+                    // Stores the line from the customer file 
                     line = custFile.locateItemInFile(cust.getUserID(), file, 0);
                 } catch (IOException e) {
                     logger.error("Exception occurred - " + e.toString());
                 }
             
-            //Splits the line into multiple sections and sets the current balance text area to the new value 
+            // Splits the line into multiple sections and sets the current balance text area to the new value 
             String [] section = line.split("\\|");
             currentBalance.setText("RM " + section[4]);
             

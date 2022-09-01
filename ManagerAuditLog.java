@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 public class ManagerAuditLog extends javax.swing.JFrame {
 
     UserRegistrationInfo mgr = new UserRegistrationInfo();
-    String auditLogFile = "logs/AuditLogs.log";
+    private final String ALFILE = "logs/AuditLogs.log";
     private static Logger logger = LogManager.getLogger();
     
     public ManagerAuditLog(String userID, String userPassword) {
@@ -41,7 +41,7 @@ public class ManagerAuditLog extends javax.swing.JFrame {
 
     private void loadAuditLogTable(){
         DefaultTableModel auditLogTableModel = (DefaultTableModel) auditLogTable.getModel();
-        File file = new File(auditLogFile);
+        File file = new File(ALFILE);
         
         try {
             String str;
@@ -240,7 +240,7 @@ public class ManagerAuditLog extends javax.swing.JFrame {
         
         // Refreshes the table for the filtered input
         auditLogTableModel.setRowCount(0);
-        File file = new File(auditLogFile);
+        File file = new File(ALFILE);
         String query = filterTF.getText();
         try {
             String str;

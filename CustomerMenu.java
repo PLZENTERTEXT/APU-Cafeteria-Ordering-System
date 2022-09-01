@@ -21,16 +21,10 @@ import org.apache.logging.log4j.Logger;
 public class CustomerMenu extends javax.swing.JFrame implements Menu {
 
     private String foodID;
-    private String food;
-    private double price;
     private int quantity;
     private double total;
     private String orderID;
     public double systemBalance;
-    
-    String menuFile = "menu.txt";
-    String custAccFile = "custAccount.txt";
-    String pendingOrderFile = "pendingOrders.txt";
     
     UserRegistrationInfo cust = new UserRegistrationInfo();
     private static Logger logger = LogManager.getLogger();
@@ -65,16 +59,18 @@ public class CustomerMenu extends javax.swing.JFrame implements Menu {
     }
     
     // Clearing the input for the menu
+    @Override
     public void refreshMenuSelection() {
         custFoodIDTF.setText(null);
         foodQuantitySpinner.setValue(1);
     }
     
     // To load the menu by putting everything in menu.txt to menu table (Only AVAILABLE items)
+    @Override
     public void loadMenu() {
         DefaultTableModel menuTableModel = (DefaultTableModel) custMenuTable.getModel();
         menuTableModel.setRowCount(0);
-        File file = new File(menuFile);
+        File file = new File(MENUFILE);
         
         try {
             String str;
@@ -591,10 +587,6 @@ public class CustomerMenu extends javax.swing.JFrame implements Menu {
                     refreshMenuSelection();                    
                 } else {
                     // Getting certain information based on the user input
-                    food = (String) custMenuTable.getValueAt(custMenuTable.getSelectedRow(), 1);
-                    String strPrice = (String) custMenuTable.getValueAt(custMenuTable.getSelectedRow(), 2);
-                    price = Double.parseDouble(strPrice);
-
                     quantity = (int) foodQuantitySpinner.getValue();
                     
                     int row = custMenuTable.getSelectedRow();       
@@ -658,7 +650,7 @@ public class CustomerMenu extends javax.swing.JFrame implements Menu {
         totalPrice = calculateAndDisplayTotal();
         
         FileHandling fh = new FileHandling();
-        File CAfile = new File(custAccFile);
+        File CAfile = new File(CAFILE);
         String userIDLine = "";
         
         // Finding the line in the file which matches the current user ID
@@ -684,7 +676,7 @@ public class CustomerMenu extends javax.swing.JFrame implements Menu {
             
             // Add the current orders into pendingOrders.txt   
             DefaultTableModel orderItemTableModel = (DefaultTableModel) orderItemTable.getModel();
-            File POfile = new File(pendingOrderFile);
+            File POfile = new File(POFILE);
             
             // Generate the Order ID
             orderID = orderIDGenerator();

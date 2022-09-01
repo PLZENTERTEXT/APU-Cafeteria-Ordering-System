@@ -12,10 +12,9 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-public class CustomerOrderHistory extends javax.swing.JFrame {
+public class CustomerOrderHistory extends javax.swing.JFrame implements OrderHistory {
 
     UserRegistrationInfo cust = new UserRegistrationInfo();
-    String completedOrdersFile = "completedOrders.txt";
     private static Logger logger = LogManager.getLogger();
     
     public CustomerOrderHistory(String userID, String userPassword) {
@@ -24,9 +23,7 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-        cust.setUserID(userID);
-        cust.setUserPassword(userPassword);
-        loadOrderHistoryTable();
+        
         reviewTextArea.setLineWrap(true);
         reviewTextArea.setWrapStyleWord(true);
         
@@ -34,12 +31,15 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
         cust.setUserID(userID);
         cust.setUserPassword(userPassword);
         userIDTF.setText(userID);
+        
+        loadOrderHistoryTable();
     }
     
     // Loads the order history of completed orders in the JTable
-    private void loadOrderHistoryTable(){
+    @Override
+    public void loadOrderHistoryTable(){
         DefaultTableModel orderHistoryTableModel = (DefaultTableModel) custOrderHistoryTable.getModel();
-        File file = new File(completedOrdersFile);
+        File file = new File(COFILE);
         
         try {
             String str;
@@ -72,9 +72,10 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
         }
     }
     
+    // Extracts the date from the order ID and converts it into a date format
+    @Override
     public String idToDateConversion(String orderID) {
         
-        //Extracts the date from the order ID and converts it into a date format
         String day = orderID.substring(0, 2);
         String month = orderID.substring(2,4);
         String year = orderID.substring(4,8);         
@@ -132,7 +133,7 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
             headerPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -313,7 +314,7 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
         userIDTF.setForeground(new java.awt.Color(0, 102, 155));
         userIDTF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         userIDTF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 120, 70));
+        userPanel.add(userIDTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 120, 60));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -334,11 +335,11 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(headerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -358,7 +359,7 @@ public class CustomerOrderHistory extends javax.swing.JFrame {
     private void custBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custBackBtnActionPerformed
         CustomerHome mgrBack = new CustomerHome(cust.getUserID(), cust.getUserPassword());
         mgrBack.setVisible(true);
-        this.dispose();
+        dispose();
         logger.info("User " + cust.getUserID() + " has attempted to view Customer Home page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 

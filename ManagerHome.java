@@ -42,7 +42,7 @@ public class ManagerHome extends javax.swing.JFrame {
         userIDTF = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        custLogoutBtn = new javax.swing.JButton();
+        mgrLogoutBtn = new javax.swing.JButton();
         mgrProfileBtn = new javax.swing.JButton();
         mgrUpdateMenuBtn = new javax.swing.JButton();
         mgrSalesReportBtn = new javax.swing.JButton();
@@ -50,7 +50,7 @@ public class ManagerHome extends javax.swing.JFrame {
         mgrFeedbackBtn = new javax.swing.JButton();
         mgrOrderHistoryBtn = new javax.swing.JButton();
         mgrManageOrderBtn = new javax.swing.JButton();
-        AuditLogBtn = new javax.swing.JButton();
+        mgrAuditLogBtn = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         mgrHomeHeader = new javax.swing.JLabel();
 
@@ -82,13 +82,13 @@ public class ManagerHome extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("SF Pro Text", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
 
-        custLogoutBtn.setBackground(new java.awt.Color(0, 48, 73));
-        custLogoutBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
-        custLogoutBtn.setForeground(new java.awt.Color(255, 255, 255));
-        custLogoutBtn.setText("LOGOUT");
-        custLogoutBtn.addActionListener(new java.awt.event.ActionListener() {
+        mgrLogoutBtn.setBackground(new java.awt.Color(0, 48, 73));
+        mgrLogoutBtn.setFont(new java.awt.Font("SF Pro Text", 1, 14)); // NOI18N
+        mgrLogoutBtn.setForeground(new java.awt.Color(255, 255, 255));
+        mgrLogoutBtn.setText("LOGOUT");
+        mgrLogoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                custLogoutBtnActionPerformed(evt);
+                mgrLogoutBtnActionPerformed(evt);
             }
         });
 
@@ -167,14 +167,14 @@ public class ManagerHome extends javax.swing.JFrame {
             }
         });
 
-        AuditLogBtn.setBackground(new java.awt.Color(0, 48, 73));
-        AuditLogBtn.setFont(new java.awt.Font("SF Pro Text", 1, 24)); // NOI18N
-        AuditLogBtn.setForeground(new java.awt.Color(255, 255, 255));
-        AuditLogBtn.setText("Audit Log");
-        AuditLogBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        AuditLogBtn.addActionListener(new java.awt.event.ActionListener() {
+        mgrAuditLogBtn.setBackground(new java.awt.Color(0, 48, 73));
+        mgrAuditLogBtn.setFont(new java.awt.Font("SF Pro Text", 1, 24)); // NOI18N
+        mgrAuditLogBtn.setForeground(new java.awt.Color(255, 255, 255));
+        mgrAuditLogBtn.setText("Audit Log");
+        mgrAuditLogBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        mgrAuditLogBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AuditLogBtnActionPerformed(evt);
+                mgrAuditLogBtnActionPerformed(evt);
             }
         });
 
@@ -186,7 +186,7 @@ public class ManagerHome extends javax.swing.JFrame {
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(custLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(mgrLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -210,7 +210,7 @@ public class ManagerHome extends javax.swing.JFrame {
                 .addGap(184, 184, 184)
                 .addComponent(mgrAccountApprovalBtn)
                 .addGap(51, 51, 51)
-                .addComponent(AuditLogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mgrAuditLogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contentPanelLayout.setVerticalGroup(
@@ -234,9 +234,9 @@ public class ManagerHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mgrAccountApprovalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AuditLogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mgrAuditLogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
-                .addComponent(custLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mgrLogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -306,12 +306,12 @@ public class ManagerHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void custLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLogoutBtnActionPerformed
+    private void mgrLogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrLogoutBtnActionPerformed
         WelcomePage mgrLogout = new WelcomePage();
         mgrLogout.setVisible(true);
         this.dispose();
         logger.info("Manager " + mgr.getUserID() + " has attempted to view Welcome page.");
-    }//GEN-LAST:event_custLogoutBtnActionPerformed
+    }//GEN-LAST:event_mgrLogoutBtnActionPerformed
 
     private void mgrFeedbackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrFeedbackBtnActionPerformed
         ManagerFeedback mgrFeedback = new ManagerFeedback(mgr.getUserID(), mgr.getUserPassword());
@@ -372,24 +372,24 @@ public class ManagerHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mgrAccountApprovalBtnActionPerformed
 
-    private void AuditLogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuditLogBtnActionPerformed
+    private void mgrAuditLogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrAuditLogBtnActionPerformed
         ManagerAuditLog mgrAuditLog  = new ManagerAuditLog (mgr.getUserID(), mgr.getUserPassword());
         mgrAuditLog.setVisible(true);
         this.dispose();
         logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Audit Log page.");
-    }//GEN-LAST:event_AuditLogBtnActionPerformed
+    }//GEN-LAST:event_mgrAuditLogBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AuditLogBtn;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton custLogoutBtn;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton mgrAccountApprovalBtn;
+    private javax.swing.JButton mgrAuditLogBtn;
     private javax.swing.JButton mgrFeedbackBtn;
     private javax.swing.JLabel mgrHomeHeader;
+    private javax.swing.JButton mgrLogoutBtn;
     private javax.swing.JButton mgrManageOrderBtn;
     private javax.swing.JButton mgrOrderHistoryBtn;
     private javax.swing.JButton mgrProfileBtn;

@@ -147,7 +147,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="custLogoutBtn" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="mgrLogoutBtn" min="-2" pref="95" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
@@ -180,7 +180,7 @@
                       <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
                       <Component id="mgrAccountApprovalBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="AuditLogBtn" min="-2" pref="242" max="-2" attributes="0"/>
+                      <Component id="mgrAuditLogBtn" min="-2" pref="242" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -211,10 +211,10 @@
                       <EmptySpace pref="26" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="mgrAccountApprovalBtn" alignment="3" min="-2" pref="83" max="-2" attributes="0"/>
-                          <Component id="AuditLogBtn" alignment="3" min="-2" pref="83" max="-2" attributes="0"/>
+                          <Component id="mgrAuditLogBtn" alignment="3" min="-2" pref="83" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="custLogoutBtn" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="mgrLogoutBtn" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -234,7 +234,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="custLogoutBtn">
+            <Component class="javax.swing.JButton" name="mgrLogoutBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="49" green="30" red="0" type="rgb"/>
@@ -248,7 +248,7 @@
                 <Property name="text" type="java.lang.String" value="LOGOUT"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="custLogoutBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mgrLogoutBtnActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="mgrProfileBtn">
@@ -375,7 +375,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mgrManageOrderBtnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="AuditLogBtn">
+            <Component class="javax.swing.JButton" name="mgrAuditLogBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="49" green="30" red="0" type="rgb"/>
@@ -390,7 +390,7 @@
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AuditLogBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mgrAuditLogBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

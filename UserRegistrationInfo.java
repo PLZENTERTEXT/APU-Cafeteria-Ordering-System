@@ -1,7 +1,5 @@
 package General;
 
-
-
 public class UserRegistrationInfo {
     
     private String userID;
