@@ -1,5 +1,6 @@
 package General;
 
+import Utilities.UserRegistrationInfo;
 import java.io.IOException;
 import java.util.logging.Level;
 import javax.swing.JFrame;

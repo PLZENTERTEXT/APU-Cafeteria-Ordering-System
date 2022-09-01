@@ -1,6 +1,8 @@
 package General;
 
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -521,7 +523,10 @@ public class ManagerMenu extends javax.swing.JFrame implements Menu {
         
         if (menuTable.getSelectedRowCount() >= 1) {
             menuTableModel.removeRow(menuTable.getSelectedRow());
-        } else if (menuTable.getSelectedRowCount() == 0){
+            logger.error("User " + mgr.getUserID() + " deleted an item from the menu.");
+            JOptionPane.showMessageDialog(null, "Item successfully deleted from menu!");
+            
+        } else if (menuTable.getRowCount() == 0){
             javax.swing.JOptionPane.showMessageDialog(null, "Table is empty!");
         } else {
             javax.swing.JOptionPane.showMessageDialog(null, "No row is selected for deleting!");

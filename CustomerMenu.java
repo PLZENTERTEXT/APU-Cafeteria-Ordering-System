@@ -1,6 +1,8 @@
 package General;
 
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

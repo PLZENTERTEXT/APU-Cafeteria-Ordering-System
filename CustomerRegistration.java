@@ -1,5 +1,8 @@
 package General;
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
+import Utilities.PasswordHashing;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -322,8 +325,8 @@ public class CustomerRegistration extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Error: Please fill out all text fields.");
             }
             
-            //If any the Customer ID is not exactly 8 characters
-            else if (!(cust.getUserID().length() == 8) && validateCustomerID(cust.getUserID()) == false){
+            //If any the Customer ID is not exactly 9 characters or contains "TP", an error message is shown
+            else if (!(cust.getUserID().substring(0,2).equals("TP") && cust.getUserID().length()==8)){
                 logger.error("A user entered an invalid Customer ID.");
                 JOptionPane.showMessageDialog(null, "Error: Please enter a valid Customer ID.");
             }
@@ -355,6 +358,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
             //If all the other conditions are met then the user will be registered successfully
             else {
                 custFile.appendToFile(custRegCredentials, file);
+                JOptionPane.showMessageDialog(null, "Registration successful!");
                 logger.info("User " + cust.getUserID() + " has been registered successfully.");
                 WelcomePage custBack = new WelcomePage();
                 custBack.setVisible(true);
@@ -374,14 +378,6 @@ public class CustomerRegistration extends javax.swing.JFrame {
         logger.info("A user has attempted to view Welcome page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 
-    public static boolean validateCustomerID(String userEmail){
-        String emailRegex = "^TP[0-9]$";
-        Pattern idPattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
-        Matcher idMatcher = idPattern.matcher(userEmail);
-        
-        return idMatcher.find();
-    }
-    
     public static boolean validateCustomerEmail(String userEmail){
         String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
         Pattern emailPattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);

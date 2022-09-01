@@ -1,6 +1,12 @@
-26082022010039|TP060967|KO01|BULGOGI|26-08-2022|bulgogi naisuuu
-26082022010039|TP060967|JP03|MATCHA ICE TEA|26-08-2022|aaaaaaaaaaaaaaaaaaaaaaaaaa matchaaaaaaaaaaa roti canai satu
-26082022010039|TP060967|IT02|LASAGNA|26-08-2022|oui oui
-26082022010039|TP060967|IT01|AGLIO OLIO|26-08-2022|oho oho oho oho oho
-26082022025531|TP060967|JP03|MATCHA ICE TEA|26-08-2022|jo mama
-26082022025531|TP060967|IT02|LASAGNA|26-08-2022|posaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+02092022015849|TP060967|KO01|BULGOGI|02-09-2022|Wow, this is the best bulgogi I've ever had.
+02092022015849|TP060967|JP01|KATSUDON|02-09-2022|Very delicious Katsudon, must recommend.
+02092022015849|TP060967|JP04|YUZU ICE DRINK|02-09-2022|Yuzu ice drink was very refreshing.
+02092022020048|TP060322|IT03|CREAMY LINGUINI|02-09-2022|Creamy linguini was very creamy and good.
+02092022020048|TP060322|TW01|BOBA MILK TEA|02-09-2022|Boba milk tea was quite refreshing. Quite pricey though.
+02092022020235|TP064124|IT01|AGLIO OLIO|02-09-2022|Very tasty aglio olio. 10/10 would recommend.
+02092022020235|TP064124|IT02|LASAGNA|02-09-2022|Lasagna was better than most other places. Highly recommend.
+02092022020325|TP061084|IT01|AGLIO OLIO|02-09-2022|Aglio olio was really tasty. However, there are places that sell better Aglio Olio overall.
+02092022020325|TP061084|IT04|AMERICANO|02-09-2022|Americano was a bit more bitter than I would prefer it to be.
+02092022020606|TP061084|JP01|KATSUDON|02-09-2022|Katsudon was very delicious and filling overall.
+02092022020606|TP061084|TW01|BOBA MILK TEA|02-09-2022|Boba milk tea was very good.
+02092022020717|TP060328|TW01|BOBA MILK TEA|02-09-2022|Boba Milk Tea was very nice. Definitely recommend. 

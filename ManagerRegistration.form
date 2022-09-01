@@ -119,22 +119,22 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="mgrIDField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="mgrIDField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                   <Component id="mgrIDLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="mgrNameLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="mgrNameField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="mgrNameField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="mgrPasswordField" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Component id="mgrPasswordField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                   <Component id="mgrPasswordLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="mgrEmailField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="mgrEmailField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                   <Component id="mgrEmailLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                           </Group>

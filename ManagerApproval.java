@@ -1,5 +1,7 @@
 package General;
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.File;

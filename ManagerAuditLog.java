@@ -1,5 +1,7 @@
 package General;
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

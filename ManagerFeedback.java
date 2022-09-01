@@ -1,5 +1,7 @@
 package General;
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -121,14 +123,14 @@ public class ManagerFeedback extends javax.swing.JFrame {
             headerPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
+                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
                 .addContainerGap())
         );
         headerPanel1Layout.setVerticalGroup(
             headerPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .addComponent(custHomeHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

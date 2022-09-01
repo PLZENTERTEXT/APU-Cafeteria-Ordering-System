@@ -1,5 +1,8 @@
 package General;
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
+import Utilities.PasswordHashing;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

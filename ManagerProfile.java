@@ -1,5 +1,7 @@
 package General;
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
 import java.io.File;
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;

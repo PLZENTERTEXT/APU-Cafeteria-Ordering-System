@@ -1,5 +1,8 @@
 package General;
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
+import Utilities.PasswordHashing;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -172,19 +175,19 @@ public class ManagerRegistration extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mgrIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mgrIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(mgrIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(mgrNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mgrNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mgrNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mgrPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mgrPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(mgrPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mgrEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mgrEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(mgrEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -304,12 +307,12 @@ public class ManagerRegistration extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error: All text fields must be filled out.");
             }
             
-            //If any the Manager ID is not exactly 9 characters
-            else if (!(mgr.getUserID().length() == 9) && validateManagerID(mgr.getUserID()) == false){
-                logger.error("A user entered an invalid Customer ID.");
-                JOptionPane.showMessageDialog(null, "Error: Please enter a valid Customer ID.");
+            //If any the Manager ID is not exactly 9 characters or contains "MGR" error message is shown
+            else if (!(mgr.getUserID().substring(0,3).equals("MGR") && mgr.getUserID().length()==9)){
+                logger.error("A user entered an invalid Manager ID.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter a valid Manager ID.");
             }
-            
+           
             // If the Manager ID exists within the text file, an error message will be shown
             else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), file, 0))){
                 logger.error("A user entered an existing Manager ID.");
@@ -343,6 +346,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
             //If all the other conditions are met then the user will be registered successfully
             else {
                 mgrFile.appendToFile(mgrRegCredentials, file);
+                JOptionPane.showMessageDialog(null, "Registration successful!");
                 logger.info("Manager " + mgr.getUserID() + " has been registered successfully.");
                 WelcomePage mgrBack = new WelcomePage();
                 mgrBack.setVisible(true);
@@ -361,16 +365,7 @@ public class ManagerRegistration extends javax.swing.JFrame {
         this.dispose();
         logger.info("A user has attempted to view Welcome page.");
     }//GEN-LAST:event_mgrBackBtnActionPerformed
-
-     
-     public static boolean validateManagerID(String userEmail){
-        String emailRegex = "^MGR[0-9]$";
-        Pattern idPattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
-        Matcher idMatcher = idPattern.matcher(userEmail);
-        
-        return idMatcher.find();
-    }
-    
+ 
     public static boolean validateManagerEmail(String userEmail){
         String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
         Pattern emailPattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);

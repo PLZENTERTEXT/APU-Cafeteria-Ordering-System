@@ -504,28 +504,16 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace pref="10" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel4" min="-2" pref="140" max="-2" attributes="0"/>
-                                              <Component id="dateSearchField" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="jLabel1" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                                  </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="searchBtn" alignment="0" max="32767" attributes="0"/>
+                              <Component id="printRptBtn" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jLabel4" alignment="0" pref="150" max="32767" attributes="0"/>
+                                  <Component id="dateSearchField" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="printRptBtn" max="32767" attributes="0"/>
-                                      <Component id="searchBtn" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="jLabel1" alignment="1" pref="157" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="29" max="32767" attributes="0"/>
                       </Group>
@@ -540,9 +528,9 @@
                           <Component id="dateSearchField" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
-                          <Component id="searchBtn" min="-2" pref="47" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="searchBtn" min="-2" pref="47" max="-2" attributes="0"/>
+                          <EmptySpace pref="18" max="32767" attributes="0"/>
                           <Component id="printRptBtn" min="-2" pref="47" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>

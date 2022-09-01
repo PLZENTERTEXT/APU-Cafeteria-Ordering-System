@@ -1,5 +1,7 @@
 package General;
 
+import Utilities.FileHandling;
+import Utilities.UserRegistrationInfo;
 import java.io.File;
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
@@ -380,14 +382,16 @@ public class CustomerProfile extends javax.swing.JFrame {
                 
                 // Rewrites the line with the new top up amount back into the text file
                 custFile.rewriteContent(file, 0, custID.getText(), String.valueOf(newAmount));
-                logger.info("User " + cust.getUserID() + " has topped up RM" + topUpAmount + " to his/her account. User " 
+                logger.info("User " + cust.getUserID() + " has topped up RM" + topUpAmount + " to their account. User " 
                         + cust.getUserID() + " current balance is RM" + newAmount);
+                JOptionPane.showMessageDialog(null, "Top up successful! RM" + topUpAmount + " has been added to your account.");
             
                 try {
                     // Stores the line from the customer file 
                     line = custFile.locateItemInFile(cust.getUserID(), file, 0);
                 } catch (IOException e) {
                     logger.error("Exception occurred - " + e.toString());
+                    JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
                 }
             
             // Splits the line into multiple sections and sets the current balance text area to the new value 

@@ -1,5 +1,6 @@
 package General;
 
+import Utilities.UserRegistrationInfo;
 import javax.swing.JFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,7 +43,6 @@ public class CustomerHome extends javax.swing.JFrame {
         userIDTF = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1080, 640));
 
         jPanel1.setBackground(new java.awt.Color(244, 244, 244));
 
@@ -126,7 +126,7 @@ public class CustomerHome extends javax.swing.JFrame {
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addGap(277, 277, 277)
                 .addComponent(jLabel2)
-                .addGap(61, 61, 61)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(custOrderHistoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
