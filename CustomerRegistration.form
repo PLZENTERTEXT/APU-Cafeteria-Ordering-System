@@ -64,7 +64,7 @@
                   <Component id="headerPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="contentPanel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="80" max="32767" attributes="0"/>
+                  <EmptySpace pref="75" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -128,22 +128,22 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="custIDField" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="custIDField" min="-2" pref="36" max="-2" attributes="0"/>
                                   <Component id="custIDLabel" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="custNameLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="custNameField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="custNameField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="custPasswordField" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Component id="custPasswordField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                   <Component id="custPasswordLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="custEmailField" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="custEmailField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                   <Component id="custEmailLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                           </Group>

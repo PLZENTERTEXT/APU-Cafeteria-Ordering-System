@@ -7,6 +7,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class CustomerRegistration extends javax.swing.JFrame {
@@ -80,7 +82,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
         custPasswordField.setBackground(new java.awt.Color(255, 255, 255));
         custPasswordField.setForeground(new java.awt.Color(0, 0, 0));
         custPasswordField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        custPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
+        custPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         custPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custPasswordFieldActionPerformed(evt);
@@ -89,7 +91,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
         custEmailField.setBackground(new java.awt.Color(255, 255, 255));
         custEmailField.setForeground(new java.awt.Color(0, 0, 0));
-        custEmailField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
+        custEmailField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         custEmailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custEmailFieldActionPerformed(evt);
@@ -107,7 +109,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
         custNameField.setBackground(new java.awt.Color(255, 255, 255));
         custNameField.setForeground(new java.awt.Color(0, 0, 0));
-        custNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(244, 244, 244))); // NOI18N
+        custNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(244, 244, 244))); // NOI18N
         custNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custNameFieldActionPerformed(evt);
@@ -186,19 +188,19 @@ public class CustomerRegistration extends javax.swing.JFrame {
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(custIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(custIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(custIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(custNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(custNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(custNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(custPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(custPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(custPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(custEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(custEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(custEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(39, 39, 39)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -251,7 +253,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
                 .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -320,10 +322,28 @@ public class CustomerRegistration extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Error: Please fill out all text fields.");
             }
             
-            // If the manager ID exists within the text file, an error message will be shown
+            //If any the Customer ID is not exactly 8 characters
+            else if (!(cust.getUserID().length() == 8) && validateCustomerID(cust.getUserID()) == false){
+                logger.error("A user entered an invalid Customer ID.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter a valid Customer ID.");
+            }
+            
+            // If the Cusotmer ID exists within the text file, an error message will be shown
             else if (!"NA".equals(custFile.locateItemInFile(cust.getUserID(), file, 0))){
                 logger.error("A user entered an existing Customer ID.");
                 JOptionPane.showMessageDialog(null, "Error: Customer ID already exists.");
+            }
+            
+            // If the Customer Password does not meet the set range
+            else if (custPasswordField.getText().length() < 6 || custPasswordField.getText().length() > 20){
+                logger.error("A user entered an invalid password.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter a password between 6 and 20 characters in length.");
+            }
+
+            //If the user entered an invalid email format, an error message will be shown
+            else if(validateCustomerEmail(cust.getUserEmail()) == false){
+                logger.error("A user entered an invalid email format.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter a valid email address.");
             }
 
             //If the user entered an existing email within the text file, an error message will be shown
@@ -354,6 +374,22 @@ public class CustomerRegistration extends javax.swing.JFrame {
         logger.info("A user has attempted to view Welcome page.");
     }//GEN-LAST:event_custBackBtnActionPerformed
 
+    public static boolean validateCustomerID(String userEmail){
+        String emailRegex = "^TP[0-9]$";
+        Pattern idPattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
+        Matcher idMatcher = idPattern.matcher(userEmail);
+        
+        return idMatcher.find();
+    }
+    
+    public static boolean validateCustomerEmail(String userEmail){
+        String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        Pattern emailPattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
+        Matcher emailMatcher = emailPattern.matcher(userEmail);
+        
+        return emailMatcher.find();
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;

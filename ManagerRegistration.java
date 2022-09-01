@@ -3,6 +3,8 @@ package General;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.swing.JFrame;
@@ -301,16 +303,41 @@ public class ManagerRegistration extends javax.swing.JFrame {
                 logger.error("A user did not enter all data fields.");
                 JOptionPane.showMessageDialog(null, "Error: All text fields must be filled out.");
             }
-            // If the manager ID exists within the text file, an error message will be shown
+            
+            //If any the Manager ID is not exactly 9 characters
+            else if (!(mgr.getUserID().length() == 9) && validateManagerID(mgr.getUserID()) == false){
+                logger.error("A user entered an invalid Customer ID.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter a valid Customer ID.");
+            }
+            
+            // If the Manager ID exists within the text file, an error message will be shown
             else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserID(), file, 0))){
                 logger.error("A user entered an existing Manager ID.");
                 JOptionPane.showMessageDialog(null, "Error: Manager ID already exists.");
+            }
+            
+            // If the Manager Password does not meet the set range
+            else if (mgrPasswordField.getText().length() < 6 || mgrPasswordField.getText().length() > 20){
+                logger.error("A user entered an invalid password.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter a password between 6 and 20 characters in length.");
+            }
+            
+            //If the user entered an invalid email format, an error message will be shown
+            else if(validateManagerEmail(mgr.getUserEmail()) == false){
+                logger.error("A user entered an invalid email format.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter a valid email address.");
             }
             
             //If the user entered an existing email within the text file, an error message will be shown
             else if (!"NA".equals(mgrFile.locateItemInFile(mgr.getUserEmail(), file, 3))){
                 logger.error("A user entered an existing Email.");
                 JOptionPane.showMessageDialog(null, "Error: Manager Email already exists.");
+            }
+            
+            //If the user entered an invalid email format, an error message will be shown
+            else if(validateManagerEmail(mgr.getUserEmail()) == false){
+                logger.error("A user entered an invalid email format.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter a valid email address.");
             }
             
             //If all the other conditions are met then the user will be registered successfully
@@ -335,6 +362,22 @@ public class ManagerRegistration extends javax.swing.JFrame {
         logger.info("A user has attempted to view Welcome page.");
     }//GEN-LAST:event_mgrBackBtnActionPerformed
 
+     
+     public static boolean validateManagerID(String userEmail){
+        String emailRegex = "^MGR[0-9]$";
+        Pattern idPattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
+        Matcher idMatcher = idPattern.matcher(userEmail);
+        
+        return idMatcher.find();
+    }
+    
+    public static boolean validateManagerEmail(String userEmail){
+        String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        Pattern emailPattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
+        Matcher emailMatcher = emailPattern.matcher(userEmail);
+        
+        return emailMatcher.find();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel headerPanel;
