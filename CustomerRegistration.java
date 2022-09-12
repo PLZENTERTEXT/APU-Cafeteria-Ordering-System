@@ -304,7 +304,8 @@ public class CustomerRegistration extends javax.swing.JFrame {
         cust.setUserID(custIDField.getText().toUpperCase());
         cust.setUserName(custNameField.getText().toUpperCase());
         try {
-            cust.setUserPassword(password.toHexString(password.getSHA(String.valueOf(custPasswordField.getPassword()))));
+            cust.setUserPassword(password.toHexString(
+                    password.getSHA(String.valueOf(custPasswordField.getPassword()))));
         } catch (NoSuchAlgorithmException e) {
             logger.error("Exception occurred - " + e.toString());
         }
@@ -340,7 +341,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
             // If the Customer Password does not meet the set range
             else if (custPasswordField.getText().length() < 6 || custPasswordField.getText().length() > 20){
                 logger.error("A user entered an invalid password.");
-                JOptionPane.showMessageDialog(null, "Error: Please enter a password between 6 and 20 characters in length.");
+                JOptionPane.showMessageDialog(null, "Error: Please enter a password \nbetween 6 and 20 characters in length.");
             }
 
             //If the user entered an invalid email format, an error message will be shown

@@ -298,33 +298,45 @@ public class ManagerManageOrder extends javax.swing.JFrame {
     private void orderCompleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCompleteButtonActionPerformed
         DefaultTableModel POTableModel = (DefaultTableModel) pendingOrdersTable.getModel();
         File POFile = new File(POFILE);
-        int row = pendingOrdersTable.getSelectedRow();
-        Object[] section = new Object[6];
         
-        // Getting the data from pendingOrdersTable
-        for (int col = 0; col < POTableModel.getColumnCount(); col++) {
-            section[col] = POTableModel.getValueAt(row,col);
+        if (pendingOrdersTable.getSelectedRowCount() >= 1) {
+            
+            int row = pendingOrdersTable.getSelectedRow();
+            Object[] section = new Object[6];
+
+            // Getting the data from pendingOrdersTable
+            for (int col = 0; col < POTableModel.getColumnCount(); col++) {
+                section[col] = POTableModel.getValueAt(row,col);
+            }
+
+            String orderID = String.valueOf(section[0]);
+            String foodID = String.valueOf(section[2]);
+
+            // Remove the line in pendingOrders.txt
+            FileHandling fh = new FileHandling();
+            fh.removeLine(POFile, 0, 2, orderID, foodID);
+
+            try {
+                // Add the line to completedOrders.txt
+                File COFile = new File(COFILE);
+                String fileData = section[0] + "|" + section[1] + "|" + section[2] + "|" + section[3] + "|" + section[4] + "|" + section[5];
+                fh.appendToFile(fileData, COFile);
+            } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
+                throw new IllegalArgumentException("File does not exist!");
+            }
+
+            // Reloading the table
+            loadMenu();
+
+            JOptionPane.showMessageDialog(null, "Order ID " + orderID + " with Food ID " + foodID + " has been marked as completed!");
+            logger.info("Order ID " + orderID + " with Food ID " + foodID + " has been marked as completed by Manager " + mgr.getUserID() + ".");
+            
+        } else if (pendingOrdersTable.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Table is empty!");
+        } else {
+            JOptionPane.showMessageDialog(null, "No row is selected for completion!");
         }
-        
-        String orderID = String.valueOf(section[0]);
-        String foodID = String.valueOf(section[2]);
-        
-        FileHandling fh = new FileHandling();
-        fh.removeLine(POFile, 0, 2, orderID, foodID);
-        
-        try {
-            File COFile = new File(COFILE);
-            String fileData = section[0] + "|" + section[1] + "|" + section[2] + "|" + section[3] + "|" + section[4] + "|" + section[5];
-            fh.appendToFile(fileData, COFile);
-        } catch (IOException e) {
-            logger.error("Exception occurred - " + e.toString());
-            throw new IllegalArgumentException("File does not exist!");
-        }
-        
-        // Reloading the table
-        loadMenu();
-        
-        logger.info("Order ID " + orderID + " with Food ID " + foodID + " has been marked completed by Manager " + mgr.getUserID() + ".");
     }//GEN-LAST:event_orderCompleteButtonActionPerformed
 
     

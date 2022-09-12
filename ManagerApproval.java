@@ -51,10 +51,12 @@ public class ManagerApproval extends javax.swing.JFrame {
                     mgrApprovalTableModel.addRow(new Object[] {data[0], data[1], data[3], data[4]});
                 }
                 br.close();
-            } catch (IOException ex) {
+            } catch (IOException e) {
+                logger.error("Exception occurred - " + e.toString());
                 JOptionPane.showMessageDialog(null, "Error: File cannot be read.");
             }            
         }catch (FileNotFoundException e){
+            logger.error("Exception occurred - " + e.toString());
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
     }
@@ -241,33 +243,54 @@ public class ManagerApproval extends javax.swing.JFrame {
         DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
         String managerID;
         
-        //Uses the selected row from the table and stores it in a variable
-        managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
-        File file = new File(MGRACCFILE);
+        if (mgrApprovalTable.getSelectedRowCount() >= 1) {
+            
+            // Uses the selected row from the table and stores it in a variable
+            managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
+            File file = new File(MGRACCFILE);
+
+            // Removes the selected row from the file entirely
+            fh.removeLine(file, 0, managerID);
+
+            // Loads the manager table again
+            loadManagerTable();
         
-        //Removes the selected row from the file entirely
-        fh.removeLine(file, 0, managerID);
+            JOptionPane.showMessageDialog(null, "Manager " + managerID + " has been rejected successfully.");
+            logger.info("Manager " + mgr.getUserID() + " has rejected Manager " + managerID + ".");
+            
+        } else if (mgrApprovalTable.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Table is empty!");
+        } else {
+            JOptionPane.showMessageDialog(null, "No row is selected for rejection!");
+        }
         
-        //Loads the manager table again
-        loadManagerTable();
-        logger.info("Manager " + mgr.getUserID() + " has rejected Manager " + managerID + ".");
     }//GEN-LAST:event_mgrRejectBtnActionPerformed
 
     //Edits the managers approval status to "APPROVED"
     private void mgrApprovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrApprovalBtnActionPerformed
         DefaultTableModel mgrApprovalTableModel = (DefaultTableModel) mgrApprovalTable.getModel();
         String managerID;
+        if (mgrApprovalTable.getSelectedRowCount() >= 1) {
+            
+           // Uses the selected row from the table and stores it in a variable
+            managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
+            File file = new File(MGRACCFILE);
+
+            // Rewrites the contents of the file with the new editted line for the manager to be "APPROVED"
+            fh.rewriteContent(file, 0, managerID, "APPROVED");
+
+            // Loads the manager table again
+            loadManagerTable();
         
-        //Uses the selected row from the table and stores it in a variable
-        managerID = mgrApprovalTableModel.getValueAt(mgrApprovalTable.getSelectedRow(),0).toString();
-        File file = new File(MGRACCFILE);
+            JOptionPane.showMessageDialog(null, "Manager " + managerID + " has been approved successfully.");
+            logger.info("Manager " + mgr.getUserID() + " has approved Manager " + managerID + ".");
+            
+        } else if (mgrApprovalTable.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Table is empty!");
+        } else {
+            JOptionPane.showMessageDialog(null, "No row is selected for approval!");
+        }
         
-        //Rewrites the contents of the file with the new editted line for the manager to be "APPROVED"
-        fh.rewriteContent(file, 0, managerID, "APPROVED");
-        
-        //Loads the manager table again
-        loadManagerTable();
-        logger.info("Manager " + mgr.getUserID() + " has approved Manager " + managerID + ".");
     }//GEN-LAST:event_mgrApprovalBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

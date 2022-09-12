@@ -509,10 +509,8 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="searchBtn" alignment="0" max="32767" attributes="0"/>
                               <Component id="printRptBtn" alignment="0" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jLabel4" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  <Component id="dateSearchField" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel4" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="dateSearchField" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel1" alignment="1" pref="157" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="29" max="32767" attributes="0"/>

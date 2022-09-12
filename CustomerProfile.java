@@ -369,38 +369,40 @@ public class CustomerProfile extends javax.swing.JFrame {
                 topUpAmount = Double.parseDouble(topUpInput.getText());
                 
                 // If the top up amount does not meet the condition an error message is shown
-                if (topUpAmount > 100 || topUpAmount < 0){
+                if (topUpAmount > 100 || topUpAmount < 1){
                     logger.error("Customer " + cust.getUserID() + " has inputted a top up amount outside the range.");
                     JOptionPane.showMessageDialog(null, "Error: Please input an amount between RM 1 and RM 100.");
                     topUpInput.setText("");
                     topUpAmount = 0.0;
                 }
                 
-                // Adds the top up amount with the previous value from the line within the text file
-                Double newAmount = topUpAmount + Double.parseDouble(currentBalance.getText().replace("RM ", ""));
-                newAmount = (double) Math.round(newAmount * 100) / 100;
-                
-                // Rewrites the line with the new top up amount back into the text file
-                custFile.rewriteContent(file, 0, custID.getText(), String.valueOf(newAmount));
-                logger.info("User " + cust.getUserID() + " has topped up RM" + topUpAmount + " to their account. User " 
-                        + cust.getUserID() + " current balance is RM" + newAmount);
-                JOptionPane.showMessageDialog(null, "Top up successful! RM" + topUpAmount + " has been added to your account.");
-            
-                try {
-                    // Stores the line from the customer file 
-                    line = custFile.locateItemInFile(cust.getUserID(), file, 0);
-                } catch (IOException e) {
-                    logger.error("Exception occurred - " + e.toString());
-                    JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+                else{
+                    // Adds the top up amount with the previous value from the line within the text file
+                    Double newAmount = topUpAmount + Double.parseDouble(currentBalance.getText().replace("RM ", ""));
+                    newAmount = (double) Math.round(newAmount * 100) / 100;
+
+                    // Rewrites the line with the new top up amount back into the text file
+                    custFile.rewriteContent(file, 0, custID.getText(), String.valueOf(newAmount));
+                    logger.info("User " + cust.getUserID() + " has topped up RM" + topUpAmount + " to their account. User " 
+                            + cust.getUserID() + " current balance is RM" + newAmount);
+                    JOptionPane.showMessageDialog(null, "Top up successful! RM" + topUpAmount + " has been added to your account.");
+
+                    try {
+                        // Stores the line from the customer file 
+                        line = custFile.locateItemInFile(cust.getUserID(), file, 0);
+                    } catch (IOException e) {
+                        logger.error("Exception occurred - " + e.toString());
+                        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+                    }
+
+                    // Splits the line into multiple sections and sets the current balance text area to the new value 
+                    String [] section = line.split("\\|");
+                    currentBalance.setText("RM " + section[4]);
+
+                    //Resets the top up input text field to blank again
+                    topUpInput.setText("");
                 }
-            
-            // Splits the line into multiple sections and sets the current balance text area to the new value 
-            String [] section = line.split("\\|");
-            currentBalance.setText("RM " + section[4]);
-            
-            //Resets the top up input text field to blank again
-            topUpInput.setText("");
-        
+
         }catch (NumberFormatException e){
             logger.error("Exception occurred - " + e.toString());
             JOptionPane.showMessageDialog(null, "Error: Please input a valid amount to top up.");

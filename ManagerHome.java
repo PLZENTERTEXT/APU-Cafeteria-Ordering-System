@@ -374,10 +374,15 @@ public class ManagerHome extends javax.swing.JFrame {
     }//GEN-LAST:event_mgrAccountApprovalBtnActionPerformed
 
     private void mgrAuditLogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mgrAuditLogBtnActionPerformed
-        ManagerAuditLog mgrAuditLog  = new ManagerAuditLog (mgr.getUserID(), mgr.getUserPassword());
-        mgrAuditLog.setVisible(true);
-        this.dispose();
-        logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Audit Log page.");
+        if (mgr.getUserID().equals("admin")){
+            ManagerAuditLog mgrAuditLog  = new ManagerAuditLog (mgr.getUserID(), mgr.getUserPassword());
+            mgrAuditLog.setVisible(true);
+            this.dispose();
+            logger.info("Manager " + mgr.getUserID() + " has attempted to view Manager Audit Log page.");
+        } else{
+            logger.info("Manager " + mgr.getUserID() + " that did not have admin level access has attempted to view Manager Account Approval page.");
+            JOptionPane.showMessageDialog(null, "Page requires admin level access.");
+        }
     }//GEN-LAST:event_mgrAuditLogBtnActionPerformed
 
 

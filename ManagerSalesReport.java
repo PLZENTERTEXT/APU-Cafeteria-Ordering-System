@@ -498,6 +498,9 @@ public class ManagerSalesReport extends javax.swing.JFrame{
                 // Add the total row
                 salesTableModel.addRow(new Object[] {"", "", "", ""});
                 salesTableModel.addRow(new Object[] {"Total Sales", "", "", totalSalesAmountLabel.getText()});
+                salesTableModel.addRow(new Object[] {"System Balance", "", "", systemBalanceLabel.getText()});
+                salesTableModel.addRow(new Object[] {"Total Orders", "", "", totalOrdersLabel.getText()});
+                salesTableModel.addRow(new Object[] {"Total Customers", "", "", totalCustomersLabel.getText()});
                 
                 // Print the table as a report
                 salesTable.print(JTable.PrintMode.FIT_WIDTH, header, null); 
